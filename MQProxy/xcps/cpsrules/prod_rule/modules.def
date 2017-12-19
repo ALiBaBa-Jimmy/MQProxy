@@ -1,0 +1,42 @@
+########################################################################
+#      Directory, Makefile and Objects definitions for modules         #
+#      Created by                                                      #
+#      Created time:                                                   #
+########################################################################
+
+#Common directory
+DIR_COMMON              = $(SRC_ROOT)/common
+
+DIR_BUILD               = $(SRC_ROOT)/build
+OBJS_BUILD              = $(OBJS_DIR)/build
+
+#Common Platform System modules
+
+
+#Protocol modules
+DIR_PROTOCOL		      = $(SRC_ROOT)/protocol
+
+DIR_PR_SCTP		      = $(SRC_ROOT)/protocol/sctp
+MAK_PR_SCTP         =$(DIR_PR_SCTP)/makefile
+OBJ_PR_SCTP     		=$(OBJS_DIR)/protocol/sctp/sctp.o
+
+DIR_PR_SM_SCTP		  = $(SRC_ROOT)/protocol/tri_sm/sb
+MAK_PR_SM_SCTP      =$(DIR_PR_SM_SCTP)/makefile
+OBJ_PR_SM_SCTP     	=$(OBJS_DIR)/protocol/tri_sm/sctp/smsb.o
+
+
+DIR_PR_TRICM		    = $(SRC_ROOT)/protocol/tri_cm
+MAK_PR_TRICM        =$(DIR_PR_TRICM)/makefile
+OBJ_PR_TRICM     		=$(OBJS_DIR)/protocol/tri_cm/tri_cm.o
+
+DIR_PR_TRISM		    = $(SRC_ROOT)/protocol/tri_sm
+MAK_PR_TRISM        =$(DIR_PR_TRISM)/makefile
+OBJ_PR_TRISM     		=$(OBJS_DIR)/protocol/tri_sm/tri_sm.o
+
+
+
+
+
+
+
+

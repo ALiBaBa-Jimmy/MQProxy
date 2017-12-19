@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<MODULES> 
+  <ConnectServerCfg>
+	<LocalIp>172.16.8.158</LocalIp>
+	<LocalPort>13200</LocalPort>
+	<HostIp>172.16.20.55</HostIp>
+	<HostPort>12200</HostPort>
+	<UserName>system</UserName>
+	<Password>mcwill0987</Password>
+	<ClientID>agent01_win32</ClientID>
+  </ConnectServerCfg>
+</MODULES>

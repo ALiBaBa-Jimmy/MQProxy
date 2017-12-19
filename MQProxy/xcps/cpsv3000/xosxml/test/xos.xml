@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="GB2312"?>
+<MODULES>
+
+	<MEMORY_POOL>
+	  	<MEMORY_SIZE num = "300000" index="5" >32    </MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "100000" index="6" >64    </MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "50000" index="7" >128   </MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "50000" index="8" >256   </MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "8000" index="9" >512   </MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "5000" index="10">1024  </MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "1000" index="11">2048  </MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "1000" index="12">4096  </MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "2000"  index="13">8192  </MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "50"  index="14">16384  </MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "50"  index="15">32768  </MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "30"  index="16">65536  </MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "50" index="17">131072</MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "2" index="18">262144</MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "2" index="19">524288</MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "5"  index="20">1048576</MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "1"  index="21">2097152</MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "1"  index="22">4194304</MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "5"  index="23">8388608</MEMORY_SIZE>
+	  	<MEMORY_SIZE num = "2"  index="24">16777216</MEMORY_SIZE>
+	  	
+	  	</MEMORY_POOL>
+
+  <MODULE name="XOS"> 
+  	<PID>990</PID>
+	<IP port="1024">192.168.0.1</IP>
+  </MODULE>
+
+  <MODULE name="SSI">
+  	<PID>99901</PID>
+	<IP port="1024">192.168.0.2</IP>
+  </MODULE>
+
+  <XPMS> 
+	  <HBLOCALIP hb="3" port="9002">169.0.196.132</HBLOCALIP>
+  </XPMS>
+  
+  <ATT_SERVER>
+    <MAX_CON_NUM>16</MAX_CON_NUM>
+  	<IP port="1025">192.168.0.122</IP>  	
+  </ATT_SERVER>
+
+  <TELNET_SERVER>
+    <MAX_CON_NUM>2</MAX_CON_NUM>
+  	<IP port="5001">0</IP>  	
+  </TELNET_SERVER>
+
+	<MEM_CFG>
+		<MEM_BAD>
+			<ENABLE_BOOT>1</ENABLE_BOOT>
+			<LOG_STACK_NUM>5</LOG_STACK_NUM>
+		</MEM_BAD>
+	</MEM_CFG>
+	
+  <NTP_SERVER>
+  	<IP>192.168.0.1</IP>
+  </NTP_SERVER>
+  
+  <NTLGENCFG>
+    <MAXUDPLINK>500</MAXUDPLINK>         
+    <MAXTCPCLILINK>500</MAXTCPCLILINK> 
+    <MAXTCPSERVLINK>100</MAXTCPSERVLINK>          
+    <FDSPERTHRPOLLING>256</FDSPERTHRPOLLING>
+  </NTLGENCFG>
+    <LOGCFG>
+		<!--NFSSERVER IP地址-->
+		<NFSSERVER>169.0.199.42</NFSSERVER> 
+		<!--NFS刷新时间间隔-->
+		<NFSTIMEOUT>9</NFSTIMEOUT>
+		<!--挂接NFS远端目录-->
+		<REMOTEDIR>/home/nfs</REMOTEDIR>
+		<!--NFS对应的本地目录节点-->
+		<LOCALDIR>/nsf1</LOCALDIR>
+		<!--NFS对应的本地地址-->
+		<LOCALIP>169.0.199.161</LOCALIP>
+		<USERID> </USERID>
+		<!--LOG日志文件大小-->
+		<LOGSIZE>2</LOGSIZE>
+		<!--本地备份日志文件大小-->
+		<BAKLOGSIZE>1</BAKLOGSIZE>
+		<ENABLEFTP>0</ENABLEFTP>
+		<!--FTP日志文件地址-->
+		<IP port="21">169.0.198.96</IP>
+		<!--FTP登陆用户名-->
+		<USERNAME>xinwei</USERNAME>
+		<!--FTP登陆口令-->
+		<USERKEY>xinwei</USERKEY>
+		<!--FTP日志存放相对路径-->
+		<REMOTELOGPATH>log</REMOTELOGPATH>
+  </LOGCFG>
+    <LOGSERV>
+	  <IP port="9999">169.0.198.96</IP>
+  </LOGSERV>
+   
+</MODULES>

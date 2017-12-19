@@ -1,0 +1,14 @@
+PL_ERR:{2015-09-28 10:06:37,sprhdboam,(null),90}FID_Tsk_AgDB: DbInitConnection error,nRet=-1,user=hlr3000_udc,connstring=ora11g_172.16.10.215
+
+PL_ERR:{2015-09-28 10:06:37,agentdbtask,(null),203}FID_Tsk_AgDB: init Db connection Error.
+
+PL_ERR:{2015-09-28 10:06:37,agentdbtask,(null),173}FID_Tsk_AgDB: DbInitDataHandler error.
+
+PL_EXP:{2015-09-28 10:06:37,agentdbtask,(null),52}FID_Tsk_AgDB: DbInitData return XERROR.
+
+PL_LOG:{2015-09-28 10:06:37,mqttcomfun,(null),419}FID_Tsk_MQTT: parse mqttcfg.xml file End
+
+PL_ERR:{2015-09-28 10:06:37,agenthdb_api,(null),530}FID_Tsk_AgDB: configure statement is NULL,error!
+
+PL_ERR:{2015-09-28 10:06:37,agentdb_api,(null),412}FID_Tsk_MQTT: DbCmSubscriber0QueryByCondition return 1407
+

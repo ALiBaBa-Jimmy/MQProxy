@@ -1,0 +1,13 @@
+#diameter envionment setting
+
+export PROJ_PATH=`pwd`
+export ACE_ROOT=$PROJ_PATH/ACE_wrappers 
+echo ACE_ROOT=$ACE_ROOT
+ 
+export LD_LIBRARY_PATH=$ACE_ROOT/lib:$LD_LIBRARY_PATH 
+echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+
+
+
+
+

@@ -1,0 +1,114 @@
+########################################################################
+#                 Rule file for Trillium SSI                           #
+#                 Created by    wulei                                  #
+#                 Created time:                                        #
+########################################################################
+
+#######################################################
+##define the directory for searching ssi header files##
+#######################################################
+TRI_SM_DIR = $(PRTL_SRC)/tri_sm
+TRI_CM_DIR = $(PRTL_SRC)/tri_cm
+
+SSI_ROOT = $(TRI_CM_DIR)/ssi
+SSI_PRODUCT_INC = $(SSI_ROOT)/bdy/inc
+
+ifeq ($(MAKE_PLATFORM), VXWORKS)
+SSI_OSDEP_INC = $(SSI_ROOT)/os/vw/inc
+else
+ifeq ($(MAKE_PLATFORM), WIN32)
+SSI_OSDEP_INC = $(SSI_ROOT)/os/win/inc
+else
+SSI_OSDEP_INC = $(SSI_ROOT)/os/mt/inc
+endif
+endif
+
+CMIF_INC = -I$(TRI_CM_DIR)/if/inc
+CMLIB_INC = -I$(TRI_CM_DIR)/lib/inc
+
+#VW_INC is used for creating depend files by Tornado tool
+VW_INC = -I$(SSI_PRODUCT_INC) -I$(SSI_ROOT)/os/vw/inc
+
+#including all directories  
+TRI_SSI_INC = -I$(SSI_PRODUCT_INC) -I$(SSI_OSDEP_INC) $(CMIF_INC) $(CMLIB_INC)
+
+
+#######################################################
+################  define compiling flags###############
+#######################################################
+
+#define compiling flags for OS
+
+######## 由于与make_win32.rule(47行)中重复，故去掉宏DWIN32 ###### 
+###### 原：SS_ENV = -DWIN32 -DANSI -DNS -DSS_OLD_THREAD #########
+#################################################################
+ifeq ($(MAKE_PLATFORM), WIN32)
+SS_ENV = -DANSI -DNS -DSS_OLD_THREAD
+#SS_RULE = -DSS -DWIN32_LEAN_AND_MEAN -DNOGDI
+SS_RULE = -DSS
+
+else
+ifeq ($(MAKE_PLATFORM), VXWORKS)
+SS_ENV = -DI86HM -DANSI #-DUNIX  /* weigy comment for VOID definition conflict in envdep.h */
+SS_RULE = -DSS -DSS_VW
+else
+ifeq ($(MAKE_PLATFORM), SOLARIS)
+ifeq ($(COMPILER_TYPE), CC)
+SS_ENV = -DUNIX -DPROC_SPARC -DANSI
+SS_RULE = -DSS -DSS_MT -DSTDIO_INCLD -DSUNOS -D_REENTRANT -D_POSIX_C_SOURCE=199309L -D__EXTENSIONS__
+else
+SS_ENV = -DUNIX -DPROC_SPARC -DANSI
+SS_RULE = -DSS -DSS_MT -DSTDIO_INCLD -DSUNOS -D_REENTRANT -D_POSIX_C_SOURCE=199309L -D__EXTENSIONS__
+endif
+else
+ifeq ($(MAKE_PLATFORM), LINUX)
+SS_ENV = -DUNIX -DANSI -DSS_MT
+SS_RULE = -DSS -DSS_LINUX -DSUNOS -DI86HM -DSTDIO_INCLD -D_REENTRANT -D_POSIX_C_SOURCE=199309L -D__EXTENSIONS__
+endif
+endif
+endif
+endif
+
+#define compiling flags for SSI features
+FUNCTION = -DSS_DRVR_SUPPORT -DNOFILESYS #-DSS_RTR_SUPPORT 
+
+GENRULE = -DCMFILE_REORG_1 -DCONSTDIO -DDEBUGNOEXIT
+
+#If we use CLI, the CONSOLE will be used.
+ifeq ($(SSI_WITH_CLI_ENABLED), 1)
+GENRULE += -DCONRD -DSSI_WITH_CLI_ENABLED
+endif
+
+ifeq ($(DEBUG), 1)
+GENRULE += -DDEBUG
+endif
+
+ifeq ($(DEBUGP), 1)
+GENRULE += -DDEBUGP
+endif
+
+ifdef SS_SINGLE_THREADED
+GENRULE += -DSS_SINGLE_THREADED
+endif
+
+ifeq ($(CP_MASS_MEM),1)
+GENRULE += -DCP_MASS_MEM
+endif
+
+#including all compiling flags  
+TRI_OS_FLAGS = $(SS_ENV) $(SS_RULE) $(FUNCTION) $(GENRULE)
+
+#VW_FLAGS is used for creating depend files by Tornado tool
+VW_FLAGS = -DUNIX -DI86HM -DANSI -DSS -DSS_VW $(FUNCTION) $(GENRULE)
+
+
+#######################################################
+##including the definitions for all protocols #########
+#######################################################
+ifdef PRODUCT
+	include $(TRI_CM_DIR)/tri_macs/product.rul
+else
+exit_to_setenv:
+	@echo Must define PRODUCT!
+endif
+

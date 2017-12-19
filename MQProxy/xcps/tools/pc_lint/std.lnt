@@ -1,0 +1,10 @@
+//-DCPU=PPC860
+.\co-msc60.lnt
+.\lib-win.lnt 
+.\lib-w32.lnt
+.\lib-wnt.lnt
+.\lib-stl.lnt
+.\options.lnt  
+-si4 -sp4
+
+.\path.lnt

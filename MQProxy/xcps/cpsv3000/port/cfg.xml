@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<System>
+    <Global>
+        <ModuleInitTimeout>300</ModuleInitTimeout>
+        <ModuleFailReset>1</ModuleFailReset>
+        <ModuleCpuBind>1,2</ModuleCpuBind>
+    </Global>
+
+    <Module_A>
+        <Name>XOS INIT</Name>
+        <ModuleId>11</ModuleId>
+        <TaskCount>2</TaskCount>
+        <HeapSize>2048</HeapSize>
+        <StackSize>65535</StackSize>
+        <MsgQueNum>2048</MsgQueNum>
+        <InitTimeout>300</InitTimeout>
+        <ObjectFileName>wintest.o</ObjectFileName>
+        <ObjectFilePath>.</ObjectFilePath>
+        <EntryFunc>XOS_Init</EntryFunc>
+        <CpuBind></CpuBind>
+    </Module_A>
+
+    <Module_C>
+        <Name>Tsk_CLI</Name>
+        <ModuleId>13</ModuleId>
+        <TaskCount>1</TaskCount>
+        <HeapSize>2048</HeapSize>
+        <StackSize>65535</StackSize>
+        <MsgQueNum>2048</MsgQueNum>
+        <InitTimeout>300</InitTimeout>
+        <ObjectFileName>wintest.o</ObjectFileName>
+        <ObjectFilePath>.</ObjectFilePath>
+        <EntryFunc>XOS_FIDCLI</EntryFunc>
+        <CpuBind></CpuBind>
+    </Module_C>
+
+    <Module_D>
+        <Name>Tsk_TIME</Name>
+        <ModuleId>14</ModuleId>
+        <TaskCount>1</TaskCount>
+        <HeapSize>2048</HeapSize>
+        <StackSize>65535</StackSize>
+        <MsgQueNum>2048</MsgQueNum>
+        <InitTimeout>300</InitTimeout>
+        <ObjectFileName>wintest.o</ObjectFileName>
+        <ObjectFilePath>.</ObjectFilePath>
+        <EntryFunc>XOS_FIDTIME</EntryFunc>
+        <CpuBind></CpuBind>
+    </Module_D>
+
+    <Module_E>
+        <Name>Tsk_NTL</Name>
+        <ModuleId>15</ModuleId>
+        <TaskCount>1</TaskCount>
+        <HeapSize>2048</HeapSize>
+        <StackSize>65535</StackSize>
+        <MsgQueNum>2048</MsgQueNum>
+        <InitTimeout>300</InitTimeout>
+        <ObjectFileName>wintest.o</ObjectFileName>
+        <ObjectFilePath>.</ObjectFilePath>
+        <EntryFunc>XOS_FIDNTL</EntryFunc>
+        <CpuBind></CpuBind>
+    </Module_E>
+
+    <Module_H>
+        <Name>TASK TELNETD</Name>
+        <ModuleId>18</ModuleId>
+        <TaskCount>1</TaskCount>
+        <HeapSize>2048</HeapSize>
+        <StackSize>65535</StackSize>
+        <MsgQueNum>2048</MsgQueNum>
+        <InitTimeout>300</InitTimeout>
+        <ObjectFileName>wintest.o</ObjectFileName>
+        <ObjectFilePath>.</ObjectFilePath>
+        <EntryFunc>XOS_FIDTELNETD</EntryFunc>
+        <CpuBind></CpuBind>
+    </Module_H>
+
+    <Module_I>
+        <Name>Tsk_TRACE</Name>
+        <ModuleId>19</ModuleId>
+        <TaskCount>1</TaskCount>
+        <HeapSize>2048</HeapSize>
+        <StackSize>65535</StackSize>
+        <MsgQueNum>2048</MsgQueNum>
+        <InitTimeout>300</InitTimeout>
+        <ObjectFileName>wintest.o</ObjectFileName>
+        <ObjectFilePath>.</ObjectFilePath>
+        <EntryFunc>XOS_FIDTRACE</EntryFunc>
+        <CpuBind></CpuBind>
+    </Module_I>
+
+    <Module_J>
+        <Name>Tsk_LOG</Name>
+        <ModuleId>20</ModuleId>
+        <TaskCount>1</TaskCount>
+        <HeapSize>2048</HeapSize>
+        <StackSize>65535</StackSize>
+        <MsgQueNum>2048</MsgQueNum>
+        <InitTimeout>300</InitTimeout>
+        <ObjectFileName>wintest.o</ObjectFileName>
+        <ObjectFilePath>.</ObjectFilePath>
+        <EntryFunc>XOS_FIDLOG</EntryFunc>
+        <CpuBind></CpuBind>
+    </Module_J>
+
+    <Module_K>
+        <Name>Tsk_FTP</Name>
+        <ModuleId>21</ModuleId>
+        <TaskCount>1</TaskCount>
+        <HeapSize>2048</HeapSize>
+        <StackSize>65535</StackSize>
+        <MsgQueNum>2048</MsgQueNum>
+        <InitTimeout>300</InitTimeout>
+        <ObjectFileName>wintest.o</ObjectFileName>
+        <ObjectFilePath>.</ObjectFilePath>
+        <EntryFunc>XOS_FIDFTP</EntryFunc>
+        <Parameter>            
+            <Para1>1</Para1>   
+        </Parameter>
+        <CpuBind></CpuBind>
+    </Module_K>
+	
+    <Module_TA>
+		<Name>Tsk_TA</Name>
+		<ModuleId>24</ModuleId>
+		<TaskCount>1</TaskCount>
+		<HeapSize>2048</HeapSize>
+		<StackSize>65535</StackSize>
+		<InitTimeout>300</InitTimeout>
+		<ObjectFileName>wintest.o</ObjectFileName>
+		<ObjectFilePath>.</ObjectFilePath>
+		<EntryFunc>XOS_FIDTA</EntryFunc>
+	</Module_TA>
+	
+    <Module_L>
+        <Name>Tsk_NTPC</Name>
+        <ModuleId>22</ModuleId>
+        <TaskCount>1</TaskCount>
+        <HeapSize>2048</HeapSize>
+        <StackSize>65535</StackSize>
+        <MsgQueNum>2048</MsgQueNum>
+        <InitTimeout>300</InitTimeout>
+        <ObjectFileName>wintest.o</ObjectFileName>
+        <ObjectFilePath>.</ObjectFilePath>
+        <EntryFunc>XOS_FIDNTPC</EntryFunc>
+        <Parameter>
+            <Para1>168.0.27.50</Para1> 
+        </Parameter>
+        <CpuBind></CpuBind>
+    </Module_L>
+
+    <Module_M>
+        <Name>MOD Notice</Name>
+        <ModuleId>23</ModuleId>
+        <TaskCount>1</TaskCount>
+        <HeapSize>2048</HeapSize>
+        <StackSize>65535</StackSize>
+        <MsgQueNum>2048</MsgQueNum>
+        <InitTimeout>300</InitTimeout>
+        <ObjectFileName>wintest.o</ObjectFileName>
+        <ObjectFilePath>.</ObjectFilePath>
+        <EntryFunc>XOS_ModNotice</EntryFunc>
+        <CpuBind></CpuBind>
+    </Module_M>
+</System>

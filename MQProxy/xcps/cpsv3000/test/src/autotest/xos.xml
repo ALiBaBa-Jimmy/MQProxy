@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<MODULES>
+  <!--内存池配置-->
+  <MEMORY_POOL>
+    <MEMORY_SIZE num="300000" index="5">32    </MEMORY_SIZE>
+    <MEMORY_SIZE num="100000" index="6">64    </MEMORY_SIZE>
+    <MEMORY_SIZE num="50000" index="7">128   </MEMORY_SIZE>
+    <MEMORY_SIZE num="50000" index="8">256   </MEMORY_SIZE>
+    <MEMORY_SIZE num="8000" index="9">512   </MEMORY_SIZE>
+    <MEMORY_SIZE num="5000" index="10">1024  </MEMORY_SIZE>
+    <MEMORY_SIZE num="1000" index="11">2048  </MEMORY_SIZE>
+    <MEMORY_SIZE num="1000" index="12">4096  </MEMORY_SIZE>
+    <MEMORY_SIZE num="2000" index="13">8192  </MEMORY_SIZE>
+    <MEMORY_SIZE num="50" index="14">16384  </MEMORY_SIZE>
+    <MEMORY_SIZE num="50" index="15">32768  </MEMORY_SIZE>
+    <MEMORY_SIZE num="30" index="16">65536  </MEMORY_SIZE>
+    <MEMORY_SIZE num="50" index="17">131072</MEMORY_SIZE>
+    <MEMORY_SIZE num="2" index="18">262144</MEMORY_SIZE>
+    <MEMORY_SIZE num="2" index="19">524288</MEMORY_SIZE>
+    <MEMORY_SIZE num="5" index="20">1048576</MEMORY_SIZE>
+    <MEMORY_SIZE num="1" index="21">2097152</MEMORY_SIZE>
+    <MEMORY_SIZE num="1" index="22">4194304</MEMORY_SIZE>
+    <MEMORY_SIZE num="5" index="23">8388608</MEMORY_SIZE>
+    <MEMORY_SIZE num="2" index="24">16777216</MEMORY_SIZE>
+  </MEMORY_POOL>
+  	<TIMER> 
+        <maxnum>10000</maxnum>  	<!--最大定时器数量-->
+	</TIMER> 
+
+  <!--telnet server-->
+  <TELNET_SERVER>
+    <!--telnet 客户端数量-->
+    <MAX_CON_NUM>2</MAX_CON_NUM>
+    <!--telnet 服务端IP与端口-->
+    <IP port="5001">0</IP>
+  </TELNET_SERVER>
+  <!--内存检测-->
+  <MEM_CFG>
+    <MEM_BAD>
+      <!--是否开启内存检测-->
+      <ENABLE_BOOT>1</ENABLE_BOOT>
+      <!--打印栈的深度-->
+      <LOG_STACK_NUM>5</LOG_STACK_NUM>
+    </MEM_BAD>
+  </MEM_CFG>
+  <!--网络时间同步协议-->
+  <NTP_SERVER>
+    <!--时间同步服务器-->
+    <IP>192.168.0.1</IP>
+  </NTP_SERVER>
+  <NTLGENCFG>
+    <MAXUDPLINK>500</MAXUDPLINK>
+    <MAXTCPCLILINK>500</MAXTCPCLILINK>
+    <MAXTCPSERVLINK>100</MAXTCPSERVLINK>
+    <MAXSCTPCLILINK>256</MAXSCTPCLILINK>
+    <MAXSCTPSERVLINK>128</MAXSCTPSERVLINK>
+    <FDSPERTHRPOLLING>256</FDSPERTHRPOLLING>
+  </NTLGENCFG>
+  <!--日志模块-->
+  <LOGCFG>
+
+    <!--是否开启远程日志服务-->
+    <ENABLEREMOTE  t="ORG_ID" op="&lt;= &lt;&lt;&&&2&#&gt&apos;&quot;&amp;&amp&#60;&#62;&#39;&#34;&#38;&#x3c;&#x3e;&#x27;&#x22;&#x26;&#x3C;&#x3E;" value="&lt;&lt&&&#&2">0</ENABLEREMOTE>
+    <!--远程服务地址-->
+    <LOG_SERVER>127.0.0.1</LOG_SERVER>
+    <!--服务服务端口-->
+    <LOG_TCP_PORT>19999</LOG_TCP_PORT>
+    <!--本地端口-->
+    <LOCAL_TCP_PORT>19998</LOCAL_TCP_PORT>
+    <!--流量控制, 每2秒日志数量; 如果为0，表示不进行流量控制;控制检测粒度为单个日志-->
+    <LOG_FLOW>0</LOG_FLOW>
+  </LOGCFG>
+</MODULES>

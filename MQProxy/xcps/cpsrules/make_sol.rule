@@ -1,0 +1,158 @@
+########################################################################
+#                                                                      #
+#       Makefile rules file                                            #
+#                                                                      #
+#       All the makefile in sub directory must be included this file   #
+#       to get rules to make.                                          #
+#                                                                      #
+########################################################################
+
+
+########################################################################
+# general definitions
+########################################################################
+
+# CPU should be defined outside of this file
+TOOL            = gnu
+OPTIMIZE        = 0
+
+#DEBUG          =	#不定义的话默认是0，在这里定义的话会把在.bat中定义的覆盖掉
+#WARNING		   	=	#同上
+#TEST_DEBUG     = 1
+
+########################################################################
+# Option flags definitions
+#	MPC8240 does not need any CC_ARCH_SPEC definitions
+########################################################################
+
+ifeq ($(CPU),I80486)
+  CC_ARCH_SPEC     = 
+#-m486 
+else
+  CC_ARCH_SPEC     = 
+#-mpentium 
+endif
+
+CC_COMPILER	   = #-ansi 
+C++_COMPILER	   = -DRW_MULTI_THREAD -D_REENTRANT -fno-operator-names #-ansi	#不去掉的话 //要改成/**/的形式
+
+ifndef XOS_GCC_VER
+ifeq ($(OPTIMIZE), 1)
+  CC_OPTIM         = -O3 -fvolatile
+else
+  CC_OPTIM         = -fvolatile
+endif
+endif
+
+ifeq ($(WARNING),1)	#一般选用此项
+  CC_WARNINGS	 = -Wall
+  C++_WARNINGS     = -Wall
+else
+  CC_WARNINGS	   = -w
+  C++_WARNINGS     = -w
+endif
+
+CC_INCLUDE       = -I. $(FAMILY_HEAD_DIR) $(EXTRA_INCLUDE) $(TRI_SSI_INC)	#包含的头文件路径
+
+CC_INCLUDE += $(XOS_INC)
+
+ifeq ($(CM_OAM_SUPPORT),1)
+	  CC_INCLUDE += $(CM_OAM_INC)
+endif
+
+CC_DEFINES	= -DCPU=$(CPU) $(TRI_OS_FLAGS) $(EXTRA_DEFINE) -DSOLARIS $(XOS_DEFINES)
+
+#CC_DEFINES += $(XOS_INC)
+
+
+DEP_INCLUDE     = -I. $(FAMILY_HEAD_DIR) $(EXTRA_INCLUDE) $(TRI_SSI_INC) 	#头文件目录
+
+DEP_INCLUDE += $(XOS_INC)
+
+ifeq ($(CM_OAM_SUPPORT),1)
+	  DEP_INCLUDE += $(CM_OAM_INC)
+endif
+
+DEP_DEFINES     = -DCPU=$(CPU) $(TRI_OS_FLAGS) $(EXTRA_DEFINE) -DSOLARIS $(XOS_DEFINES) #编译宏
+
+
+
+ifneq ("$(PRODUCT)","")
+  CC_DEFINES   += -D$(PRODUCT) -DCP_PRODUCT=$(PRODUCT)
+  DEP_DEFINES  += -D$(PRODUCT) -DCP_PRODUCT=$(PRODUCT)
+endif
+ifneq ("$(FEATURES)","")
+	ALL_FEATURE   = $(subst +, ,$(FEATURES))
+        CC_DEFINES   += $(foreach EACH_FEATURE,$(ALL_FEATURE),-D$(EACH_FEATURE))
+		DEP_DEFINES  += $(foreach EACH_FEATURE,$(ALL_FEATURE),-D$(EACH_FEATURE))
+endif
+ifeq ($(TEST_DEBUG),1)
+  CC_DEFINES   += -DTEST_DEBUG=$(TEST_DEBUG)
+  DEP_DEFINES  += -DTEST_DEBUG=$(TEST_DEBUG)
+endif
+
+ifeq ($(DEBUG), 1)
+  CC_DEBUG        = -g
+  CC_DEFINES   += -DDEBUG
+else
+  CC_DEBUG        =
+endif
+
+CFLAGS          = $(CC_ARCH_SPEC) $(CC_COMPILER) $(CC_OPTIM) $(CC_WARNINGS) \
+                  $(CC_INCLUDE) $(CC_DEFINES) $(CC_DEBUG) $(ADDED_CFLAGS) \
+                  $(CC_SOFT_FLOAT)
+
+C++FLAGS        = $(CC_ARCH_SPEC) $(C++_COMPILER) $(CC_OPTIM) $(C++_WARNINGS) \
+                  $(CC_INCLUDE) $(CC_DEFINES) $(CC_DEBUG) $(ADDED_C++FLAGS) \
+                  $(CC_SOFT_FLOAT) $(ADDED_CFLAGS) 
+
+########################################################################
+# toolchain binaries
+########################################################################
+
+CC                 = gcc -c -fno-operator-names -fPIC -DWSSI_UNIX
+DEP_CC = gcc -MM
+
+CXX                = CC -c #-KPIC
+LD                 = ld
+AS            =
+
+MD		        = #md
+RM		        = 
+ECHO		    	= echo
+
+CP                 = cp
+MV                 = mv
+MAKE            = make
+
+########################################################################
+# implicit rules definitions
+########################################################################
+
+..s.o:
+	@ -$(RM) $@
+	$(AS) -o $@ $<
+	
+%.o: %.c
+	@ -$(RM) $@
+	$(CC) $(CFLAGS) -c $<
+
+%.o: %.cpp
+	@ -$(RM) $@
+	$(CXX) $(C++FLAGS) -c $<
+	
+%.o: %.cxx
+	@ -$(RM) $@
+	$(CXX) $(C++FLAGS) -c $<
+	
+%.d: %.c
+	@ -$(RM) $@
+	gcc -MM $(CFLAGS) $< > $@
+	
+%.d: %.cpp
+	@ -$(RM) $@
+	gcc -MM $(C++FLAGS) $< > $@	
+	
+%.d: %.cxx
+	@ -$(RM) $@
+	gcc -MM $(C++FLAGS) $< > $@	

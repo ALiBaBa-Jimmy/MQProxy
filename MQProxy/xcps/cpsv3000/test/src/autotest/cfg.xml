@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<System>
+        <Global>
+            <ModuleInitTimeout>300</ModuleInitTimeout>
+            <ModuleFailReset>1</ModuleFailReset>
+        </Global>
+
+    	<Module_A>
+			<Name>XOS INIT</Name>
+			<ModuleId>11</ModuleId>
+			<TaskCount>2</TaskCount>
+			<HeapSize>2048</HeapSize>
+			<StackSize>65535</StackSize>
+			<InitTimeout>300</InitTimeout>
+			<ObjectFileName>wintest.o</ObjectFileName>
+	 		<ObjectFilePath>.</ObjectFilePath>
+	 		<EntryFunc>XOS_Init</EntryFunc>
+    	</Module_A>
+    	
+    	 	<Module_C>
+			<Name>Tsk_CLI</Name>
+			<ModuleId>13</ModuleId>
+			<TaskCount>1</TaskCount>
+			<HeapSize>2048</HeapSize>
+			<StackSize>65535</StackSize>
+			<InitTimeout>300</InitTimeout>
+			<ObjectFileName>wintest.o</ObjectFileName>
+	 		<ObjectFilePath>.</ObjectFilePath>
+	 		<EntryFunc>XOS_FIDCLI</EntryFunc>
+	 	 	</Module_C>
+	 	 	
+	 	 	<Module_D>
+			<Name>Tsk_TIME</Name>
+			<ModuleId>14</ModuleId>
+			<TaskCount>1</TaskCount>
+			<HeapSize>2048</HeapSize>
+			<StackSize>65535</StackSize>
+			<InitTimeout>300</InitTimeout>
+			<ObjectFileName>wintest.o</ObjectFileName>
+	 		<ObjectFilePath>.</ObjectFilePath>
+	 		<EntryFunc>XOS_FIDTIME</EntryFunc>
+	 	 	</Module_D>
+	 	 	
+	 	 	<Module_E>
+			<Name>Tsk_NTL</Name>
+			<ModuleId>15</ModuleId>
+			<TaskCount>1</TaskCount>
+			<HeapSize>2048</HeapSize>
+			<StackSize>65535</StackSize>
+			<InitTimeout>300</InitTimeout>
+			<ObjectFileName>wintest.o</ObjectFileName>
+	 		<ObjectFilePath>.</ObjectFilePath>
+	 		<EntryFunc>XOS_FIDNTL</EntryFunc>
+	 		</Module_E>
+	 				 	 	
+	 	 	<Module_H>
+			<Name>TASK TELNETD</Name>
+			<ModuleId>18</ModuleId>
+			<TaskCount>1</TaskCount>
+			<HeapSize>2048</HeapSize>
+			<StackSize>65535</StackSize>
+			<InitTimeout>300</InitTimeout>
+			<ObjectFileName>wintest.o</ObjectFileName>
+	 		<ObjectFilePath>.</ObjectFilePath>
+	 		<EntryFunc>XOS_FIDTELNETD</EntryFunc>
+	 	 	</Module_H>
+	 	 		 	 	
+	 	 	<Module_I>
+			<Name>Tsk_TRACE</Name>
+			<ModuleId>19</ModuleId>
+			<TaskCount>1</TaskCount>
+			<HeapSize>2048</HeapSize>
+			<StackSize>65535</StackSize>
+			<InitTimeout>300</InitTimeout>
+			<ObjectFileName>wintest.o</ObjectFileName>
+	 		<ObjectFilePath>.</ObjectFilePath>
+	 		<EntryFunc>XOS_FIDTRACE</EntryFunc>
+	 	 	</Module_I>
+	 	 		 	 	
+    		<Module_J>
+			<Name>Tsk_LOG</Name>
+			<ModuleId>20</ModuleId>
+			<TaskCount>1</TaskCount>
+			<HeapSize>2048</HeapSize>
+			<StackSize>65535</StackSize>
+			<InitTimeout>300</InitTimeout>
+			<ObjectFileName>wintest.o</ObjectFileName>
+	 		<ObjectFilePath>.</ObjectFilePath>
+	 		<EntryFunc>XOS_FIDLOG</EntryFunc>
+	 	 	</Module_J>
+	 	 	
+	 	 	<Module_K>
+            <Name>Tsk_FTP</Name>
+            <ModuleId>21</ModuleId>
+            <TaskCount>1</TaskCount>
+            <HeapSize>2048</HeapSize>
+            <StackSize>65535</StackSize>
+            <InitTimeout>300</InitTimeout>
+            <ObjectFileName>wintest.o</ObjectFileName>
+            <ObjectFilePath>.</ObjectFilePath>
+            <EntryFunc>XOS_FIDFTP</EntryFunc>
+        </Module_K>
+		
+		    	<Module_TA>
+		<Name>Tsk_TA</Name>
+		<ModuleId>26</ModuleId>
+		<TaskCount>1</TaskCount>
+		<HeapSize>2048</HeapSize>
+		<StackSize>65535</StackSize>
+		<InitTimeout>300</InitTimeout>
+		<ObjectFileName>wintest.o</ObjectFileName>
+		<ObjectFilePath>.</ObjectFilePath>
+		<EntryFunc>XOS_FIDTA</EntryFunc>
+	</Module_TA>
+	
+		<Module_M>
+            <Name>SctpCliTest</Name>
+            <ModuleId>23</ModuleId>
+            <TaskCount>1</TaskCount>
+            <HeapSize>2048</HeapSize>
+            <StackSize>65535</StackSize>
+            <InitTimeout>300</InitTimeout>
+            <ObjectFileName>wintest.o</ObjectFileName>
+            <ObjectFilePath>.</ObjectFilePath>
+            <EntryFunc>SctpCliTest</EntryFunc>
+        </Module_M> 
+		
+		<Module_N>
+            <Name>SctpSerTest</Name>
+            <ModuleId>24</ModuleId>
+            <TaskCount>1</TaskCount>
+            <HeapSize>2048</HeapSize>
+            <StackSize>65535</StackSize>
+            <InitTimeout>300</InitTimeout>
+            <ObjectFileName>wintest.o</ObjectFileName>
+            <ObjectFilePath>.</ObjectFilePath>
+            <EntryFunc>SctpSerTest</EntryFunc>
+        </Module_N> 
+		
+		<Module_O>
+            <Name>LogCliTest</Name>
+            <ModuleId>25</ModuleId>
+            <TaskCount>1</TaskCount>
+            <HeapSize>2048</HeapSize>
+            <StackSize>65535</StackSize>
+            <InitTimeout>300</InitTimeout>
+            <ObjectFileName>wintest.o</ObjectFileName>
+            <ObjectFilePath>.</ObjectFilePath>
+            <EntryFunc>LogCliTest</EntryFunc>
+        </Module_O> 
+
+		<ModuleTaSer>
+        <Name>Tsk_TASER</Name>
+        <ModuleId>142</ModuleId>
+        <TaskCount>1</TaskCount>
+        <HeapSize>2048</HeapSize>
+        <StackSize>65535</StackSize>
+        <InitTimeout>300</InitTimeout>
+        <ObjectFileName>wintest.o</ObjectFileName>
+        <ObjectFilePath>.</ObjectFilePath>
+        <EntryFunc>TaSerTest</EntryFunc>
+    	</ModuleTaSer>
+		
+		<ModuleTaCli>
+        <Name>Tsk_TACLI</Name>
+        <ModuleId>143</ModuleId>
+        <TaskCount>1</TaskCount>
+        <HeapSize>2048</HeapSize>
+        <StackSize>65535</StackSize>
+        <InitTimeout>300</InitTimeout>
+        <ObjectFileName>wintest.o</ObjectFileName>
+        <ObjectFilePath>.</ObjectFilePath>
+        <EntryFunc>TaCliTest</EntryFunc>
+    	</ModuleTaCli>
+
+	 	 	<Module_Z>
+			<Name>MOD Notice</Name>
+			<ModuleId>134</ModuleId>
+			<TaskCount>1</TaskCount>
+			<HeapSize>2048</HeapSize>
+			<StackSize>65535</StackSize>
+			<InitTimeout>300</InitTimeout>
+			<ObjectFileName>wintest.o</ObjectFileName>
+	 		<ObjectFilePath>.</ObjectFilePath>
+	 		<EntryFunc>XOS_ModNotice</EntryFunc>
+	 	 	</Module_Z> 	 
+
+</System>

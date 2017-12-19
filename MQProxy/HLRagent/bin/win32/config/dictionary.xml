@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "../config/dictionary.dtd">
+<dictionary>
+  <!-- ************************* Vendors **************************** -->
+  <vendor id="61" name="Xinwei Co,Ltd"/>
+  <!-- *********************** End Vendors ************************** -->
+  
+  <!-- ***************** Base Protocol Definition ******************* -->
+  <base uri="ftp://ftp.ietf.org/internet-drafts/draft-ietf-aaa-diameter-08.txt">
+  
+    <!-- ************************ Datatype ************************ -->
+    <typedefn type-name="Any"/>
+    <typedefn type-name="OctetString"/>
+    <typedefn type-name="UTF8String" type-parent="OctetString"/>
+    <typedefn type-name="Address" type-parent="OctetString"/>
+    <typedefn type-name="DiameterIdentity" type-parent="OctetString"/>
+    <typedefn type-name="DiameterURI" type-parent="UTF8String"/>
+    <typedefn type-name="IPFilterRule" type-parent="OctetString"/>
+    <typedefn type-name="QOSFilterRule" type-parent="OctetString"/>
+    <typedefn type-name="Integer32"/>
+    <typedefn type-name="Integer64"/>
+    <typedefn type-name="Unsigned32"/>
+    <typedefn type-name="Unsigned64"/>
+    <typedefn type-name="Time" type-parent="Unsigned32"/>
+    <typedefn type-name="Enumerated" type-parent="Unsigned32"/>
+    <!-- *********************** End Datatype ********************** -->
+    
+    <!-- ***************** DIAMETER BASE PROTOCOL AVPS ************** -->
+    <avp name="AVP" code="0">
+      <type type-name="Any"/>
+    </avp>
+    <avp name="Acct-Interim-Interval" code="482" mandatory="must"	may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Accounting-Realtime-Required" code="483" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Acct-Multi-Session-Id" code="50" mandatory="must" protected="may" may-encrypt="yes">
+      <type type-name="UTF8String"/>
+    </avp>
+    <avp name="Accounting-Record-Number" code="485" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Accounting-Record-Type" code="480" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+      <enum name="Event Record" code="1"/>
+      <enum name="Start Record" code="2"/>
+      <enum name="Interim Record" code="3"/>
+      <enum name="Stop Record" code="4"/>
+    </avp>
+    <avp name="Accounting-Session-Id" code="44" mandatory="must" protected="may" may-encrypt="yes">
+      <type type-name="OctetString" content-length="10"/>
+    </avp>
+    <avp name="Accounting-Sub-Session-Id" code="287" mandatory="must" protected="may" may-encrypt="yes">
+      <type type-name="Unsigned64"/>
+    </avp>
+    <avp name="Acct-Application-Id" code="259" mandatory="must" protected="mustnot" may-encrypt="no">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Alternate-Peer" code="275" mandatory="must" protected="mustnot" may-encrypt="no">
+      <type type-name="DiameterIdentity"/>
+    </avp>
+    <avp name="Auth-Application-Id" code="258" mandatory="must" protected="mustnot" may-encrypt="no">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Auth-Type" code="274" mandatory="must" protected="mustnot" may-encrypt="no">
+      <type type-name="Unsigned32"/>
+      <enum name="Authenticate Only" code="1"/>
+      <enum name="Authorize Only" code="2"/>
+      <enum name="Authorize Authenticate" code="3"/>
+    </avp>
+    <avp name="Authorization-Lifetime" code="291" mandatory="must" may-encrypt="no">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Auth-Grace-Period" code="276" mandatory="must" may-encrypt="no">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Auth-Session-State" code="277" mandatory="must" may-encrypt="no">
+      <type type-name="Enumerated"/>
+      <enum name="State Maintained" code="0"/>
+      <enum name="No State Maintained" code="1"/>
+    </avp>
+    <avp name="Class" code="25">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Destination-Host" code="293" mandatory="must" protected="mustnot" may-encrypt="no">
+      <type type-name="DiameterIdentity"/>
+    </avp>
+    <avp name="Destination-Realm" code="283" mandatory="must" protected="mustnot" may-encrypt="no">
+      <type type-name="DiameterIdentity"/>
+    </avp>
+    <avp name="Disconnect-Cause" code="273" mandatory="must" protected="mustnot" may-encrypt="no">
+      <type type-name="Unsigned32"/>
+      <enum name="Rebooting" code="0"/>
+      <enum name="Busy" code="2"/>
+      <enum name="Do not want to talk to you" code="3"/>
+    </avp>
+    <avp name="Error-Message" code="281" mandatory="mustnot" protected="may" may-encrypt="no">
+      <type type-name="UTF8String"/>
+    </avp>
+    <avp name="Error-Reporting-Host" code="294" mandatory="must" protected="mustnot" may-encrypt="no">
+      <type type-name="DiameterIdentity"/>
+    </avp>
+    <avp name="Event-Timestamp" code="55" mandatory="must" protected="may" may-encrypt="no">
+      <type type-name="Time"/>
+    </avp>
+    <avp name="Firmware-Revision" code="267" mandatory="mustnot" protected="mustnot" may-encrypt="no">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Host-IP-Address" code="257" mandatory="must" protected="mustnot" may-encrypt="no">
+      <type type-name="Address"/>
+    </avp>
+    <avp name="Inband-Security-Id" code="299" mandatory="must" protected="mustnot" may-encrypt="no">
+      <type type-name="Enumerated"/>
+      <enum name="No Security" code="0"/>
+      <enum name="TLS Security" code="1"/>
+    </avp>
+    <avp name="Multi-Round-Time-Out" code="272" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Origin-Host" code="264" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="DiameterIdentity"/>
+    </avp>
+    <avp name="Origin-Realm" code="296" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="DiameterIdentity"/>
+    </avp>
+    <avp name="Origin-State-Id" code="278" mandatory="must" protected="mustnot">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Product-Name" code="269" mandatory="mustnot" may-encrypt="no" protected="mustnot">
+      <type type-name="UTF8String"/>
+    </avp>
+    <avp name="Proxy-Host" code="280" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="DiameterIdentity"/>
+    </avp>
+    <avp name="Proxy-State" code="33" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Proxy-Info" code="284" mandatory="must" may-encrypt="no" protected="mustnot">
+      <grouped>
+	      <required>
+	        <avprule name="Proxy-Host" maximum="1" minimum="1"/>
+	        <avprule name="Proxy-State" maximum="1" minimum="1"/>
+        </required>
+	      <optional>
+	        <avprule name="AVP"/>
+        </optional>
+      </grouped>
+    </avp>
+    <avp name="Redirect-Host" code="292" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="DiameterURI"/>
+    </avp>
+    <avp name="Redirect-Host-Usage" code="261" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="Unsigned32"/>
+      <enum name="Don't Care" code="0"/>
+      <enum name="All Session" code="1"/>
+      <enum name="All Realm" code="2"/>
+      <enum name="Realm and Application" code="3"/>
+      <enum name="All Application" code="4"/>
+      <enum name="All Host" code="5"/>
+    </avp>
+    <avp name="Redirect-Max-Cache-Time" code="262" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Result-Code" code="268" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Route-Record" code="282" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="DiameterIdentity"/>
+    </avp>
+    <avp name="Session-Id" code="263" mandatory="must" protected="mustnot">
+      <type type-name="UTF8String"/>
+    </avp>
+    <avp name="Session-Timeout" code="27">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Session-Binding" code="270" mandatory="must" protected="mustnot">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Session-Server-Failover" code="271" mandatory="must" protected="mustnot">
+      <type type-name="Unsigned32"/>
+      <enum name="Refuse Service" code="0"/>
+      <enum name="Try Again" code="1"/>
+      <enum name="Allow Service" code="2"/>
+      <enum name="Try Again / Allow Service" code="3"/>
+    </avp>
+    <avp name="Source-Route" code="286" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="DiameterIdentity"/>
+    </avp>
+    <avp name="Supported-Vendor-Id" code="265" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Termination-Cause" code="295" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="Unsigned32"/>
+      <enum name="Logout" code="1"/>
+      <enum name="Service Not Provided" code="2"/>
+      <enum name="Bad Answer" code="3"/>
+      <enum name="Administrative" code="4"/>
+      <enum name="Link Broken" code="5"/>
+    </avp>
+    <avp name="SUID" code="1" mandatory="must">
+      <type type-name="UTF8String"/>
+    </avp>
+    <avp name="Vendor-Id" code="266" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Vendor-Specific-Application-Id" code="260"	 mandatory="must" may-encrypt="no" protected="mustnot">
+      <grouped>
+        <fixed>
+          <avprule name="Vendor-Id" minimum="1"/>
+        </fixed>
+        <required>
+          <avprule name="Auth-Application-Id" maximum="1"/>
+          <avprule name="Acct-Application-Id" maximum="1"/>
+        </required>
+      </grouped>
+    </avp>
+    <avp name="Auth-Request-Type" code="274" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="Enumerated"/>
+      <enum name="AUTHENTICATE_ONLY" code="1"/>
+      <enum name="AUTHORIZE_ONLY" code="2"/>
+      <enum name="AUTHORIZE_AUTHENTICATE" code="3"/>
+    </avp>
+    <avp name="Re-Auth-Request-Type" code="285" mandatory="must" may-encrypt="no" protected="must">
+      <type type-name="Enumerated"/>
+      <enum name="AUTHORIZE_ONLY" code="0"/>
+      <enum name="AUTHORIZE_AUTHENTICATE" code="1"/>
+    </avp>
+
+    <avp name="Failed-AVP" code="279" mandatory="must">
+      <grouped>
+        <optional>
+	        <avprule name="AVP" minimum="1"/>
+        </optional>
+      </grouped>
+    </avp>
+    <avp name="Experimental-Result-Code" code="298" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Experimental-Result" code="297">
+      <grouped>
+        <required>
+	        <avprule name="Vendor-Id"/>
+	        <avprule name="Experimental-Result-Code"/>
+        </required>
+      </grouped>
+    </avp>
+    <avp name="Example-AVP" code="999999" mandatory="mustnot">
+      <grouped>
+        <required>
+	        <avprule name="Origin-Host"/>
+	        <avprule name="Host-IP-Address"/>
+        </required>
+      </grouped>
+    </avp>
+    <avp name="Example-URI" code="999998" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="DiameterURI"/>
+    </avp>
+    <avp name="Example-IPFilterRule" code="999997" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="IPFilterRule"/>
+    </avp>
+    <avp name="Test-Avp" code="999996" mandatory="must" may-encrypt="no" protected="mustnot">
+      <type type-name="OctetString"/>
+    </avp>
+    <!-- ************** END DIAMETER BASE PROTOCOL AVPS ************* -->
+
+    <!-- *********************** Commands *************************** -->
+    <!-- Diameter Base Protocol Command Codes -->
+    <command name="PROXYABLE-ERROR" code="0" pbit="1">
+      <answerrules>
+        <fixed>
+          <avprule name="Session-Id" maximum="1"/>
+        </fixed>
+        <required>
+          <avprule name="Origin-Host" maximum="1" minimum="1"/>
+          <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+          <avprule name="Result-Code" maximum="1" minimum="1"/>
+        </required>
+        <optional>
+          <avprule name="Origin-State-Id" maximum="1" minimum="1"/>
+          <avprule name="Error-Reporting-Host" maximum="1"/>
+	        <avprule name="Redirect-Host"/>
+	        <avprule name="Redirect-Host-Usage" maximum="1"/>
+          <avprule name="Proxy-Info" maximum="1"/>
+          <avprule name="AVP"/>
+        </optional>
+      </answerrules>
+    </command>
+    <command name="NON-PROXYABLE-ERROR" code="0">
+      <answerrules>
+        <fixed>
+          <avprule name="Session-Id" maximum="1"/>
+        </fixed>
+        <required>
+          <avprule name="Origin-Host" maximum="1" minimum="1"/>
+          <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+          <avprule name="Result-Code" maximum="1" minimum="1"/>
+        </required>
+        <optional>
+          <avprule name="Origin-State-Id" maximum="1"/>
+          <avprule name="Error-Reporting-Host" maximum="1"/>
+          <avprule name="Proxy-Info" maximum="1"/>
+          <avprule name="Redirect-Host"/>
+          <avprule name="Redirect-Host-Usage" maximum="1"/>
+          <avprule name="AVP"/>
+        </optional>
+      </answerrules>
+    </command>
+    <command name="Abort-Session" code="274" pbit="1">
+      <requestrules>
+        <fixed>
+	        <avprule name="Session-Id" maximum="1" minimum="1"/>
+        </fixed>
+        <required>
+          <avprule name="Origin-Host" maximum="1" minimum="1"/>
+          <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+	        <avprule name="Destination-Realm" maximum="1" minimum="1"/>
+	        <avprule name="Destination-Host" maximum="1" minimum="1"/>
+	        <avprule name="Auth-Application-Id" maximum="1" minimum="1"/>
+        </required>
+        <optional>
+	        <avprule name="SUID" maximum="1"/>
+	        <avprule name="Origin-State-Id" maximum="1"/>
+	        <avprule name="AVP"/>
+	        <avprule name="Proxy-Info"/>
+	        <avprule name="Route-Record"/>
+        </optional>
+      </requestrules>
+      <answerrules>
+        <fixed>
+	        <avprule name="Session-Id" maximum="1" minimum="1"/>
+	      </fixed>
+        <required>
+	        <avprule name="Result-Code" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+	      </required>
+        <optional>
+	        <avprule name="SUID" maximum="1"/>
+	        <avprule name="Origin-State-Id" maximum="1"/>
+	        <avprule name="Error-Message" maximum="1"/>
+	        <avprule name="Error-Reporting-Host" maximum="1"/>
+	        <avprule name="Failed-AVP"/>
+	        <avprule name="Redirect-Host"/>
+	        <avprule name="Redirect-Host-Usage" maximum="1"/>
+	        <avprule name="Proxy-Info"/>
+	        <avprule name="AVP"/>
+        </optional>
+      </answerrules>
+    </command>
+    <command name="Capabilities-Exchange" code="257">
+      <requestrules>
+        <required>
+	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+	        <avprule name="Host-IP-Address" minimum="1"/>
+	        <avprule name="Vendor-Id" maximum="1" minimum="1"/>
+	        <avprule name="Product-Name" maximum="1" minimum="1"/>
+	      </required>
+        <optional>
+	        <avprule name="Origin-State-Id" maximum="1"/>
+	        <avprule name="Supported-Vendor-Id"/>
+	        <avprule name="Auth-Application-Id"/>
+	        <avprule name="Acct-Application-Id"/>
+	        <avprule name="Vendor-Specific-Application-Id"/>
+	        <avprule name="Firmware-Revision" maximum="1"/>
+	        <avprule name="Inband-Security-Id" maximum="1"/>
+	        <avprule name="AVP"/>
+        </optional>
+      </requestrules>
+      <answerrules>
+        <required>
+	        <avprule name="Result-Code" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+	        <avprule name="Host-IP-Address" minimum="1"/>
+	        <avprule name="Vendor-Id" maximum="1" minimum="1"/>
+	        <avprule name="Product-Name" maximum="1" minimum="1"/>
+	      </required>
+        <optional>
+	        <avprule name="Origin-State-Id" maximum="1"/>
+	        <avprule name="Error-Message" maximum="1"/>
+	        <avprule name="Failed-AVP"/>
+	        <avprule name="Supported-Vendor-Id"/>
+	        <avprule name="Auth-Application-Id"/>
+	        <avprule name="Inband-Security-Id"/>
+	        <avprule name="Acct-Application-Id"/>
+	        <avprule name="Vendor-Specific-Application-Id"/>
+	        <avprule name="Firmware-Revision" maximum="1"/>
+	        <avprule name="AVP"/>
+        </optional>
+      </answerrules>
+    </command>
+    <command name="Device-Watchdog" code="280">
+      <requestrules>
+        <required>
+	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+	      </required>
+        <optional>
+	        <avprule name="Origin-State-Id" maximum="1"/>
+        </optional>
+      </requestrules>
+      <answerrules>
+        <required>
+	        <avprule name="Result-Code" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+	      </required>
+        <optional>
+	        <avprule name="Error-Message" maximum="1"/>
+	        <avprule name="Failed-AVP"/>
+	        <avprule name="Origin-State-Id" maximum="1"/>
+        </optional>
+      </answerrules>
+    </command>
+
+    <command name="Disconnect-Peer" code="282">
+      <requestrules>
+        <required>
+	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+	        <avprule name="Disconnect-Cause" maximum="1" minimum="1"/>
+	      </required>
+      </requestrules>
+      <answerrules>
+        <required>
+	        <avprule name="Result-Code" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+	      </required>
+        <optional>
+	        <avprule name="Error-Message" maximum="1"/>
+	        <avprule name="Failed-AVP"/>
+        </optional>
+      </answerrules>
+    </command>
+
+    <command name="Re-Auth" code="258">
+      <requestrules>
+        <fixed>
+	        <avprule name="Session-Id" maximum="1" minimum="1"/>
+	      </fixed>
+        <required>
+	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+	        <avprule name="Destination-Realm" maximum="1" minimum="1"/>
+	        <avprule name="Destination-Host" maximum="1" minimum="1"/>
+	        <avprule name="Auth-Application-Id" maximum="1" minimum="1"/>
+	        <avprule name="Re-Auth-Request-Type" maximum="1" minimum="1"/>
+	      </required>
+        <optional>
+	        <avprule name="SUID" maximum="1"/>
+	        <avprule name="Origin-State-Id" maximum="1"/>
+	        <avprule name="Proxy-Info"/>
+	        <avprule name="Route-Record"/>
+	        <avprule name="AVP"/>
+        </optional>
+      </requestrules>
+      <answerrules>
+        <fixed>
+	        <avprule name="Session-Id" maximum="1" minimum="1"/>
+	      </fixed>
+        <required>
+	        <avprule name="Result-Code" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+	      </required>
+        <optional>
+	        <avprule name="SUID" maximum="1"/>
+	        <avprule name="Origin-State-Id" maximum="1"/>
+	        <avprule name="Error-Message" maximum="1"/>
+	        <avprule name="Error-Reporting-Host" maximum="1"/>
+	        <avprule name="Failed-AVP"/>
+	        <avprule name="Redirect-Host"/>
+	        <avprule name="Redirect-Host-Usage" maximum="1"/>
+	        <avprule name="Redirect-Max-Cache-Time" maximum="1"/>
+	        <avprule name="Proxy-Info"/>
+	        <avprule name="AVP"/>
+        </optional>
+      </answerrules>
+    </command>
+    <command name="Session-Termination" code="275">
+      <requestrules>
+        <fixed>
+          <avprule name="Session-Id" maximum="1" minimum="1"/>
+        </fixed>
+        <required>
+          <avprule name="Origin-Host" maximum="1" minimum="1"/>
+          <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+          <avprule name="Destination-Realm" maximum="1" minimum="1"/>
+          <avprule name="Auth-Application-Id" maximum="1" minimum="1"/>
+          <avprule name="Termination-Cause" maximum="1" minimum="1"/>
+	      </required>
+        <optional>
+	        <avprule name="SUID" maximum="1"/>
+	        <avprule name="Destination-Host" maximum="1"/>
+	        <avprule name="Class"/>
+	        <avprule name="Origin-State-Id" maximum="1"/>
+	        <avprule name="Proxy-Info"/>
+	        <avprule name="Route-Record"/>
+	        <avprule name="AVP"/>
+        </optional>
+      </requestrules>
+      <answerrules>
+        <fixed>
+	        <avprule name="Session-Id" maximum="1" minimum="1"/>
+	      </fixed>
+        <required>
+	        <avprule name="Result-Code" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+	      </required>
+        <optional>
+	        <avprule name="SUID" maximum="1"/>
+	        <avprule name="Class"/>
+	        <avprule name="Error-Message" maximum="1"/>
+	        <avprule name="Error-Reporting-Host" maximum="1"/>
+	        <avprule name="Failed-AVP"/>
+	        <avprule name="Origin-State-Id" maximum="1"/>
+	        <avprule name="Redirect-Host"/>
+	        <avprule name="Redirect-Host-Usage" maximum="1"/>
+	        <avprule name="Redirect-Max-Cache-Time" maximum="1"/>
+	        <avprule name="Proxy-Info"/>
+	        <avprule name="AVP"/>
+        </optional>
+      </answerrules>
+    </command>
+
+    <!-- ********************** End Commands ************************ -->
+  </base>
+  <!-- ************* TEST APPLICATION ************* --> 
+  <application id="10000" name="Test-BWT"
+    uri="ftp://ftp.ietf.org/internet-drafts/draft-ietf-aaa-eap-03.txt">
+    <command name="Test-Auth" code="300">
+      <requestrules>
+        <fixed>
+	        <avprule name="Session-Id" maximum="1" minimum="1"/>
+      	</fixed>
+        <required>
+	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+	        <avprule name="Destination-Realm" maximum="1" minimum="1"/>
+	      </required>
+        <optional>
+  	      <avprule name="Destination-Host" maximum="1"/>
+	        <avprule name="Test-Avp" maximum="1"/>
+	        <avprule name="Proxy-Info"/>
+	        <avprule name="Route-Record"/>
+	        <avprule name="AVP"/>
+        </optional>
+      </requestrules>
+      <answerrules>
+        <fixed>
+      	  <avprule name="Session-Id" maximum="1" minimum="1"/>
+      	</fixed>
+        <required>
+	        <avprule name="Result-Code" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+	      </required>
+        <optional>
+      	  <avprule name="Auth-Session-State" maximum="1"/>
+      	  <avprule name="Authorization-Lifetime" maximum="1"/>
+	        <avprule name="Auth-Grace-Period" maximum="1"/>
+	        <avprule name="Session-Timeout" maximum="1"/>
+	        <avprule name="Error-Message" maximum="1"/>
+	        <avprule name="Error-Reporting-Host" maximum="1"/>
+	        <avprule name="Failed-AVP"/>
+	        <avprule name="Redirect-Host"/>
+	        <avprule name="Redirect-Host-Usage" maximum="1"/>
+	        <avprule name="Redirect-Max-Cache-Time" maximum="1"/>
+	        <avprule name="Proxy-Info"/>
+	        <avprule name="AVP"/>
+        </optional>
+      </answerrules>
+    </command>
+  </application>
+</dictionary>

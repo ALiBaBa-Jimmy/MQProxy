@@ -1,0 +1,5 @@
+#!/bin/bash
+path=$PWD
+export XOS_PATH_ENV=$path/xostest
+ulimit -c unlimited
+$path/xostest

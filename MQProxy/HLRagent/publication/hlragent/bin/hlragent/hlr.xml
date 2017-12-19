@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<MODULES> 
+  <ConnectServerCfg>
+  	<LocalIp>127.0.0.1</LocalIp>
+	<LocalPort>9887</LocalPort>
+	<HlrIp>127.0.0.1</HlrIp>
+	<HlrPort>9888</HlrPort>
+  </ConnectServerCfg>
+</MODULES>

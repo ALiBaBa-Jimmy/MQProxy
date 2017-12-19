@@ -1,0 +1,287 @@
+########################################################################
+#                                                                      #
+#        Makefile rules file for windows                               #
+#                                                                      #
+#        All the makefiles in sub directories must include this file   #
+#        to get rules to make.                                         #
+#                                                                      #
+#                                                                      # 
+########################################################################
+
+
+########################################################################
+# general definitions
+########################################################################
+#include $(XCPS_ROOT)/app_common/xcps.dir
+ifndef RULES_ROOT
+RULES_ROOT	=	$(CPS_ROOT)/cpsrules
+endif
+
+ifndef XCPS_ROOT
+XCPS_ROOT=$(CPS_ROOT)
+endif
+
+V3000_ROOT  = $(XCPS_ROOT)/cpsv3000
+XOS_PORT    = $(V3000_ROOT)/port
+XOS_BDY     = $(V3000_ROOT)/bdy
+XOS_OS      = $(V3000_ROOT)/os
+XOS_HA	    = $(V3000_ROOT)/ha
+
+ifeq ($(MAKE_PLATFORM), VXWORKS)
+XOS_OSDEP_INC = -I$(XOS_OS)/vxworks/inc
+else
+ifeq ($(MAKE_PLATFORM), WIN32)
+XOS_OSDEP_INC = -I$(XOS_OS)/win32/inc
+else
+ifeq ($(MAKE_PLATFORM), SOLARIS)
+XOS_OSDEP_INC = -I$(XOS_OS)/solaris/inc
+else
+XOS_OSDEP_INC = -I$(XOS_OS)/linux/inc
+endif
+endif
+endif
+
+# 这里将根目录先添加进来，后续将去掉个子目录的包含
+XOS_INC = -I$(V3000_ROOT) -I$(XOS_BDY)/inc -I$(V3000_ROOT)/common $(XOS_OSDEP_INC) -I$(V3000_ROOT)/xosxml/inc -I$(XOS_HA)/inc
+
+ifndef XOS_ST_TEST
+XOS_INC += -I$(XOS_PORT)
+endif
+
+XOS_VW_INC = -I$(XOS_OS)/vxworks/inc
+
+ifdef XOS_ST_TEST
+XOS_INC += -I$(ST_ROOT)/st/inc -I$(ST_ROOT)/autotest -I$(ST_ROOT)/ut -I$(ST_ROOT)/port #-I$(XOS_PORT)
+endif
+
+ifdef NEED_OAM
+include $(XCPS_ROOT)/app_common/xcps.dir
+XOS_INC	+= -I$(APP_COMMON) \
+           -I$(APP_COMMON)/oam/common \
+           -I$(AGENT_ROOT)/oam/common \
+           -I$(AGENT_ROOT)/common/inc \
+           -I$(AGENT_ROOT)/fm/inc \
+           -I$(AGENT_ROOT)/sa/inc \
+           -I$(AGENT_ROOT)/samp/inc
+endif
+   
+#######################################################
+################  define compiling flags###############
+#######################################################
+
+####  XOS Function Selection ####
+XOS_FUNCTION = 
+
+###定义XOS_FD_SETSIZE在各个平台的值
+ifeq ($(MAKE_PLATFORM), LINUX)
+ifeq ($(BIG_POLLING_FD_SETSIZE), 1)
+XOS_FUNCTION += -DXOS_FDSET
+###如果需要扩大fd，则修改以下值
+XOS_FUNCTION += -DXOS_MAX_FD=4096
+
+XOS_FUNCTION += -DXOS_FD_SETSIZE=XOS_MAX_FD
+else
+XOS_FUNCTION += -DXOS_FD_SETSIZE=1024
+endif
+
+####是否要使用gcov
+ifeq ($(XOS_ENABLE_GCOV), 1)
+XOS_FUNCTION += -DXOS_ENABLE_GCOV
+endif
+
+else
+ifeq ($(MAKE_PLATFORM), WIN32)
+XOS_FUNCTION += -DFD_SETSIZE=1024
+else
+ifeq ($(MAKE_PLATFORM), VXWORKS)
+XOS_FUNCTION += -DFD_SETSIZE=1024
+endif
+endif
+endif
+
+ifeq ($(XOS_MDLMGT), 1)
+XOS_FUNCTION += -DXOS_MDLMGT
+endif
+
+ifeq ($(XOS_DEBUG), 1)
+XOS_FUNCTION += -DXOS_DEBUG
+endif
+
+ifeq ($(XOS_TELNETD), 1)
+XOS_FUNCTION += -DXOS_TELNETD
+endif
+
+ifeq ($(XOS_TRACE_AGENT), 1)
+XOS_FUNCTION += -DXOS_TRACE_AGENT
+export XOS_SCTP=1
+endif
+
+ifeq ($(XOS_TELNETS), 1)
+XOS_FUNCTION += -DXOS_TELNETS
+endif
+
+ifeq ($(XOS_ModMem_Check), 1)
+XOS_FUNCTION += -DXOS_ModMem_Check
+endif
+
+ifeq ($(XOS_EW_START), 1)
+XOS_FUNCTION += -DXOS_EW_START
+endif
+
+ifeq ($(XOS_NEED_MAIN), 1)
+XOS_FUNCTION += -DXOS_NEED_MAIN
+XOS_FUNCTION += -DXOS_NEED_CHK
+endif
+
+ifeq ($(XOS_NEED_OLDTIMER), 1)
+XOS_FUNCTION += -DXOS_NEED_OLDTIMER
+endif
+
+ifeq ($(XOS_BFD_215),1)
+XOS_FUNCTION += -DXOS_BFD_215
+endif
+
+ifeq ($(XOS_TSP),1)
+XOS_FUNCTION += -DXOS_TSP
+endif
+
+ifeq ($(XOS_BIG_EN),1)
+XOS_FUNCTION += -DXOS_BIG_EN
+endif
+
+ifeq ($(XOS_TIMER_FOURFUNC), 1)
+XOS_FUNCTION += -DXOS_TIMER_FOURFUNC
+endif
+
+ifeq ($(XOS_HIGHTIMER), 1)
+EXTRA_DEFINE += -DXOS_HIGHTIMER
+endif
+
+ifeq ($(XOS_HASH_DEBUG), 1)
+EXTRA_DEFINE += -DXOS_HASH_DEBUG
+endif
+
+ifeq ($(XOS_ARRAY_DEBUG), 1)
+EXTRA_DEFINE += -DXOS_ARRAY_DEBUG
+endif
+
+ifeq ($(INPUT_PAR_CHECK), 1)
+EXTRA_DEFINE += -DINPUT_PAR_CHECK
+endif
+
+ifeq ($(XOS_NOTC_MEM), 1)
+EXTRA_DEFINE += -DXOS_NOTC_MEM
+endif
+
+ifeq ($(XOS_MSGMEM_TRACE), 1)
+EXTRA_DEFINE += -DXOS_MSGMEM_TRACE
+endif
+
+ifeq ($(XOS_FTP_CLIENT), 1)
+XOS_FUNCTION += -DXOS_FTP_CLIENT
+endif
+
+ifeq ($(XOS_IPC_MGNT), 1)
+XOS_FUNCTION += -DXOS_IPC_MGNT
+ifeq ($(XOS_IPCTEST), 1)
+XOS_FUNCTION += -DXOS_IPCTEST
+endif
+endif
+
+ifeq ($(XOS_VTA), 1)
+XOS_FUNCTION += -DXOS_VTA
+endif
+
+
+
+##### XOS Test macro ##########
+ifdef TCN_BM_TEST
+XOS_FUNCTION += -DTCN_BM_TEST
+endif
+
+ifdef XOS_ST_TEST
+XOS_FUNCTION += -DXOS_ST_TEST
+endif
+
+ifdef XOS_MEM_ERROR
+EXTRA_DEFINE += -DXOS_MEM_ERROR
+endif
+
+ifdef XOS_MSGPRINT_DEBUG
+XOS_FUNCTION += -DXOS_MSGPRINT_DEBUG
+endif
+
+ifdef XOS_ST_WRITE_LOG
+EXTRA_DEFINE += -DXOS_ST_WRITE_LOG
+endif
+
+ifdef MEM_FID_DEBUG
+XOS_FUNCTION += -DMEM_FID_DEBUG
+endif
+
+ifeq ($(XOS_SCTP), 1)
+XOS_FUNCTION += -DXOS_SCTP
+endif
+
+ifeq ($(XOS_LONG_SLEEP), 1)
+XOS_FUNCTION += -DXOS_LONG_SLEEP
+endif
+
+# add 64 define
+ifeq ($(CPU), x86_64)
+XOS_FUNCTION += -DXOS_ARCH_64
+# add by fulixong,for compile sip protocol on 64bit linux system
+XOS_FUNCTION += -DBIT_64 -DALIGN_64BIT
+endif
+
+### 引入应用部分的rule #####
+ifdef EXT_RULE_FILE
+include $(EXT_RULE_FILE)
+endif
+
+
+####  XOS OS Selection ####
+ifeq ($(MAKE_PLATFORM), WIN32)
+XOS_OS_FLAG = -DXOS_WIN32
+else
+ifeq ($(MAKE_PLATFORM), LINUX)
+XOS_OS_FLAG = -DXOS_LINUX
+else
+ifeq ($(MAKE_PLATFORM), SOLARIS)
+XOS_OS_FLAG = -DXOS_SOLARIS
+else
+ifeq ($(MAKE_PLATFORM), VXWORKS)
+XOS_OS_FLAG = -DXOS_VXWORKS
+endif
+endif
+endif
+endif
+
+### SXC define######
+ifeq ($(SS_COMPILE_MP), 1)
+SXC_DEF_FLAG = -DSS_COMPILE_MP
+endif
+
+ifeq ($(MAKE_SXC_LINUX), 1)
+SXC_DEF_FLAG += -DMAKE_SXC_LINUX
+endif
+
+#including all compiling flags  
+XOS_DEFINES = $(XOS_OS_FLAG) $(XOS_FUNCTION) $(SXC_DEF_FLAG)
+
+#XOS_DEP_FLAGS is used for creating depend files by Tornado tool
+ifeq ($(MAKE_PLATFORM), WIN32)
+XOS_DEP_FLAGS = -DXOS_VXWORKS $(XOS_FUNCTION) 
+else
+ifeq ($(MAKE_PLATFORM), LINUX)
+XOS_DEP_FLAGS = -DXOS_VXWORKS $(XOS_FUNCTION) 
+else
+ifeq ($(MAKE_PLATFORM), SOLARIS)
+XOS_DEP_FLAGS = -DXOS_VXWORKS $(XOS_FUNCTION) 
+else
+ifeq ($(MAKE_PLATFORM), VXWORKS)
+XOS_DEP_FLAGS = -DXOS_VXWORKS $(XOS_FUNCTION) 
+endif
+endif
+endif
+endif

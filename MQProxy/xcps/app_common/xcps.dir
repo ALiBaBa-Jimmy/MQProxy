@@ -1,0 +1,6 @@
+V3000_ROOT=$(XCPS_ROOT)/cpsv3000
+APP_COMMON=$(XCPS_ROOT)/app_common
+SRC_CPPFRM_ROOT=$(XCPS_ROOT)/app_common/cppfrm
+CMM_SAAP=$(XCPS_ROOT)/app_common/saap
+XOS_LIB_ROOT=$(OBJS_DIR)/xcps/cpsv3000
+XOS_GPROF = $(V3000_ROOT)/gprof

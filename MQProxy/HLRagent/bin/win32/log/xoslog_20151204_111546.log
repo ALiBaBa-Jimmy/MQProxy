@@ -1,0 +1,5 @@
+PL_ERR:{2015-12-04 11:15:55,dbservicemysql,193}Unknown_FID[0]:(::D)---Error:mysql_query is error! Can't connect to MySQL server on 'localhost' (0)
+PL_ERR:{2015-12-04 11:16:13,sprhdboam,(null),260}FID_Tsk_AgDB: DbInitConnection error,nRet=1402,ip=
+
+PL_ERR:{2015-12-04 11:16:19,agentdbtask,(null),205}FID_Tsk_AgDB: init Db connection Error.
+

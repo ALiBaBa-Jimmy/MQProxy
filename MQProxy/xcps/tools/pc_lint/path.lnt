@@ -1,0 +1,37 @@
+-dPROJECT_PATH=.\ran_oam\
+-iC:\"Program Files"\"Microsoft Visual Studio"\VC98\Include\
+-iC:\"Program Files (x86)\Microsoft Visual Studio 9.0"\VC\include\
+-iC:\"Program Files (x86)\Microsoft SDKs"\Windows\v5.0\Include
+
+-i..\..\..\cpsv3000\xosxml\inc
+-i..\..\..\cpsv3000\bdy\inc
+-i..\..\..\cpsv3000\common
+-i..\..\..\cpsv3000\os\win32\inc
+-i..\..\..\cpsv3000\port
+
+
+
++libclass(all)
+
+-w2
+-wlib(0)
+
+
+-dWIN32
+-d_DEBUG
+-dXOS_WIN32
+-dXOS_MDLMGT
+-dXOS_NEED_MAIN
+-dXOS_FTP_CLIENT
+-dHAVE_WINDOWS_H
+-dXOS_EW_START
+-dMEM_FID_DEBUG
+-dXOS_NOTC_MEM
+-dXOS_TELNETD
+-dXOS_DEBUG
+-dXOS_ModMem_Check
+-dXOS_NEED_CHK
+-dXOS_HIGHTIMER
+-d_WINDOWS
+-dXOS_TRACE_AGENT
+

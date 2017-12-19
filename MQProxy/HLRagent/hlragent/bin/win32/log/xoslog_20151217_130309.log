@@ -1,0 +1,6 @@
+PL_LOG:{2015-12-17 13:03:10,agentdbtask,(null),218}FID_Tsk_AgDB: init All Db connection succefully.
+
+PL_LOG:{2015-12-17 13:03:10,mqttcomfun,(null),424}FID_Tsk_MQTT: parse mqttcfg.xml file End
+
+PL_ERR:{2015-12-17 13:05:33,mqtttask,(null),380}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+

@@ -1,0 +1,14 @@
+os.o: \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/os/linux/src/os.c \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/common/xostrace.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/common/xosos.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/common/xosencap.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/os/linux/inc/linos.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/common/xostype.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/bdy/inc/xosmmgt.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/common/xostype.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/common/xosfilesys.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/bdy/inc/clishell.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/bdy/inc/cliconfig.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/bdy/inc/xoscfg.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/common/xosencap.h

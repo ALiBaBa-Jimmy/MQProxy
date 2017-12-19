@@ -1,0 +1,85 @@
+#!/bin/bash
+#
+# stbcd	This shell script takes care of starting and stopping
+#		the HLRagent service
+#
+# chkconfig: 2345 98 20
+# description:	HLRagent server.
+# processname: HLRagent
+# Source function library.
+
+
+
+#. /etc/sysconfig/network
+. /etc/profile
+. /etc/HLRagent_profile
+
+cd $HLRAGENT_PATH
+
+
+
+
+
+start()
+{
+	
+	echo "Starting HLRagent service..."   	
+      	pid=`ps -ef | grep hlragent.out | grep -v grep | awk '{print $2}'`
+     	if [ -z "$pid" ]; then			
+			${HLRAGENT_PATH}/start.sh>>/dev/null;
+	      	echo "Done."
+      	else
+      		echo "Already started."
+      	fi
+      	
+}
+
+stop()
+{
+	
+     	
+     	echo "Stopping HLRagent service..."
+     	pid=`ps -ef | grep hlragent.out | grep -v grep | awk '{print $2}'`
+     	if [ -n "$pid" ]; then
+  		ps -ef | grep hlragent.out | grep -v grep | awk '{print $2}'| xargs kill -9
+	fi
+     	echo "Done."
+}
+ 
+restart()
+{
+    stop
+    start
+}
+
+
+status()
+{
+	pid=`ps -ef | grep hlragent.out | grep -v grep | awk '{print $2}'`
+	if  [ -n "$pid" ]; then
+		echo "HLRagent is running ($pid)."  
+	else 
+		echo "HLRagent is not running."   
+	fi
+}
+
+# See how we were called.
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    restart
+    ;;
+  status)
+    status
+    ;;	
+  *)
+    echo $"Usage: $0 {start|stop|restart|status}"
+    exit 1
+esac
+
+exit $?

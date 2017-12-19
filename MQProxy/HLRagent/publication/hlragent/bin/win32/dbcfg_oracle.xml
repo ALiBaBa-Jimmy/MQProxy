@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<MODULES> 
+  <DB_CFG1>
+  	<USER>hlr3000_udc</USER>
+  	<PASSWORD>hlr3000</PASSWORD>  	
+    <CONNSTRING>ora11g_172.16.10.215</CONNSTRING>
+  	<USER_alias>hlr3000_udc</USER_alias>
+  	<PASSWORD_alias>hlr3000</PASSWORD_alias>  	
+    <CONNSTRING_alias>ora11g_172.16.10.215</CONNSTRING_alias>	
+  </DB_CFG1>
+</MODULES>

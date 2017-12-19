@@ -1,0 +1,38 @@
+PL_LOG:{2015-12-04 16:26:16,agentdbtask,(null),218}FID_Tsk_AgDB: init All Db connection succefully.
+
+PL_LOG:{2015-12-04 16:26:16,mqttcomfun,(null),404}FID_Tsk_MQTT: parse mqttcfg.xml file End
+
+PL_ERR:{2015-12-04 16:26:21,mqtttask,(null),374}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-12-04 16:26:26,mqtttask,(null),374}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-12-04 16:26:31,mqtttask,(null),374}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-12-04 16:26:34,mysqldb_api,(null),102}FID_Tsk_AgHLR:  return 1405
+
+PL_ERR:{2015-12-04 16:26:36,mqtttask,(null),374}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-12-04 16:26:41,mqtttask,(null),374}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-12-04 16:26:46,mqtttask,(null),374}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-12-04 16:26:51,mqtttask,(null),374}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-12-04 16:26:56,mqtttask,(null),374}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-12-04 16:27:01,mqtttask,(null),374}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-12-04 16:27:06,mqtttask,(null),374}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-12-04 16:27:11,mqtttask,(null),374}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-12-04 16:27:16,mqtttask,(null),374}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-12-04 16:27:21,mqtttask,(null),374}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-12-04 16:27:26,mqtttask,(null),374}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-12-04 16:27:31,mqtttask,(null),374}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-12-04 16:27:36,mqtttask,(null),374}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+

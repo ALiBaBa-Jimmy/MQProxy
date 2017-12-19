@@ -1,0 +1,8 @@
+PL_ERR:{2015-10-26 18:50:27,sprhdboam,(null),90}FID_Tsk_AgDB: DbInitConnection error,nRet=-1,user=hlr3000_udc,connstring=ora11g_172.16.10.215
+
+PL_ERR:{2015-10-26 18:50:27,agentdbtask,(null),203}FID_Tsk_AgDB: init Db connection Error.
+
+PL_ERR:{2015-10-26 18:50:27,agentdbtask,(null),173}FID_Tsk_AgDB: DbInitDataHandler error.
+
+PL_EXP:{2015-10-26 18:50:27,agentdbtask,(null),52}FID_Tsk_AgDB: agent Connect to Oracle Db failed.
+

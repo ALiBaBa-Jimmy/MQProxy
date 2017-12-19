@@ -1,0 +1,82 @@
+2015-04-03 sundongkai
+添加控制台打印ifc信息的相关函数
+
+Feature:功能改进
+Description:增加内存数据库初始化
+Reviewer:luhaiyan
+
+
+2014-12-05 sundongkai
+修改.\bin\linux\script\create_ehss.sql
+
+2014-11-27 白亮
+s6a中plmn长度由4修改为3
+
+
+2014-11-08 卢海燕 
+1.修改script 下的脚本表和字段都为小写，解决linux下mysql区分大小写的问题 
+2.配合ehssdb拆分成ehssdb、ehssmdb、ehssharddb 修改makefile
+
+2014-11-07 lixia 
+1.修改ehssfe/src/ehssoam/eHssOamCli.c 中对号码前缀，和imsi号码前缀的增删改查操作时取参数长度的处理
+2、product.xml的修改
+
+
+2014-11-06 luhaiyan 
+1.修改ehssfe/ehssoam解决oam注册的时候注册不成功的问题
+2.修改ehssfe/ehssdiamua，cfg.xml解决修改查询链路信息产生core文件的问题
+
+
+
+2014-11-06 sundongkai
+ehsssmu模块修改无线语音模块，imsi模块
+
+2014-11-05  bailiang
+ehssfe中增加hssdb命令，查看imsi和msisdn信息
+
+2014-11-04 luhaiyan
+修改脚本将初始化脚本提出到init_ehss.sql 
+ehssfe\bin\linux\script\create_ehss.sql
+ehssfe\bin\linux\script\init_ehss.sql 
+ehssfe\bin\linux\script\install.sh 
+
+
+2014-11-05 lixia
+ehssfe/src/ehssdiamua/src/diameter_ua_main.cpp
+ehssfe/src/ehssdiamua/src/diameter_ua_xos.cpp
+ehssfe/src/ehssoam/src/eHssOamTask.c
+修改diamua初始化时，不再初始化协议栈。增加错误日志打印
+
+
+
+2014-11-04 bailiang
+增加SMU模块发送CLB模块的结构体
+在eHssMAndHdbPuiBusiness.cpp中增加QryPuiBizInfo函数：查询一次数据库,利用map查找业务码
+修改product.xml，将鉴权模块的个数由16修改为5
+
+2014-11-04 lixia
+修改eHssOamTask.c，增加从配置文件读取是否支持stcp协议的标示。并配置该标识到diamua模块。
+修改eHssOamCli.c，修改imsi配置不正确的问题
+
+2014-11-04 luhaiyan
+eHssOamTask.c增加一个编译宏USE_XOS_OAM屏蔽在window下向eHSS注册
+
+2014-11-04 bailiang
+common模块
+ehssdb模块
+ehssfe模块
+ehssfebes6a模块
+增加smu模块发送CL消息处理，取代DS消息
+
+
+2014-11-03 lixia
+1、更新ehssfe/src/ehssoam/src/eHssOamCli.c
+   修改说明：
+   （1）修改cli命令对软参的增删改查操作
+   
+
+
+
+2014-08-09 luhaiyan
+1.获取新的xos，搭建hss架构
+

@@ -1,0 +1,30 @@
+#ifndef __DIAM_ROUTE_DEFINE_H__
+#define __DIAM_ROUTE_DEFINE_H__
+
+typedef enum
+{
+    HANDER_LOCAL,
+    HANDER_PROXY,
+    HANDER_ERROR,
+    HANDER_MAX
+} HANDER_TYPE;
+
+typedef enum
+{
+    ROUTENODE_LOCAL,
+    ROUTENODE_FORWARK,
+    ROUTENODE_ROUTE,
+    ROUTENODE_REJECT,
+    ROUTENODE_MAX
+} ROUTE_NODE;
+
+typedef enum
+{
+    ROUTE_SUCCESS,
+    ROUTE_FAILED,
+    ROUTE_NEXT_CHAIN
+} RouteResult;
+
+#endif //__DIAM_ROUTE_DEFINE_H__
+
+

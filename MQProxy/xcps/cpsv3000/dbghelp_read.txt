@@ -1,0 +1,13 @@
+32位环境：
+xp
+vc6.0  dbghelp.lib 不能使用dbghelp.dll
+vs2008 dbghelp.lib 必须使用dgbhelp.dll
+
+win7
+vc6.0 编译器不兼容。
+vs2008 dbghelp.lib
+
+64位环境：
+win7
+vc6.0 编译不兼容。
+vs2008  dbghelp_64.lib

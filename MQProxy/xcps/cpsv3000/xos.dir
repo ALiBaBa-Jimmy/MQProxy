@@ -1,0 +1,47 @@
+ifndef RULES_ROOT
+RULES_ROOT	=	$(CPS_ROOT)/cpsrules
+endif
+
+
+XOS_PORT	=	$(V3000_ROOT)/port
+
+XOS_BDY	= $(V3000_ROOT)/bdy
+
+XOS_OS	=	$(V3000_ROOT)/os
+
+XOS_XML = $(V3000_ROOT)/xosxml
+XOS_XML_INC = $(V3000_ROOT)/xosxml/inc
+
+XOS_UDT = $(V3000_ROOT)/udt
+
+XOS_TEST = $(V3000_ROOT)/test
+
+XOS_GPROF = $(V3000_ROOT)/gprof
+
+XOS_HA	= $(V3000_ROOT)/ha
+
+#XOS_TST	=	$(SRC_ROOT)/xwhx_cps_testcode/cps_cs/cpsv3000
+
+ifndef OBJTYPE
+ifeq ($(MAKE_PLATFORM), WIN32)
+OBJTYPE=lib
+else
+ifeq ($(MAKE_PLATFORM), LINUX)
+OBJTYPE=a
+else
+ifeq ($(MAKE_PLATFORM), SOLARIS)
+OBJTYPE=a
+else
+ifeq ($(MAKE_PLATFORM), VXWORKS)
+OBJTYPE=out
+endif
+endif
+endif
+endif
+endif  #OBJTYPE
+
+                                               
+                                               
+                                               
+                                               
+                                               

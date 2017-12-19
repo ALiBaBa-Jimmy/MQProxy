@@ -1,0 +1,1 @@
+@..\lint-nt.exe -i..\ std env-si cps.lnt >cps_result.txt

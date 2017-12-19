@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<MODULES> 
+  <ConnectServerCfg>
+	<HostIp>172.16.8.236</HostIp>
+	<HostPort>12200</HostPort>
+	<UserName>system</UserName>
+	<Password>mcwill0987</Password>
+	<ClientID>agent01</ClientID>
+  </ConnectServerCfg>
+  <AllSubscriberInfo>
+	  <SubscriberInfo>
+		<TopicName>hlr</TopicName>
+	  </SubscriberInfo>
+  </AllSubscriberInfo>
+</MODULES>

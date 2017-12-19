@@ -1,0 +1,123 @@
+                                makefile的使用
+				       
+
+1 将库上%CPS_ROOT%\cpsrules目录下(下面的子目录可以不要)的rule文件放一份在本地( 在 xcps_v3000_dev\xcps 目录下).
+
+
+
+2 环境变量的设置
+
+2.1 win32下的设置:
+
+    win32下的编译是执行xosmake.bat,需要设置的内容如下:
+
+    SET SRC_ROOT=D:\MyTest												这个是你的根目录(必须在其它目录的上层)
+    set CPS_ROOT=D:\MyTest\xcps_v3000_dev\xcps		平台的根目录（即cpsrules和cpsv3000的上一层目录）
+    set WIND_BASE=C:\Tornado_202					        设置Tornado的路径，最好是2.02版本(2.0版的话要加几个文件)
+    set MICR_BASE=C:\Progra~1\Micros~3		        VC的路径
+    SET OBJS_DIR=%V3000_ROOT%\obj									生成目标文件的路径(平台是默认放在“cpsv3000\obj”下)
+
+
+2.2 linux下的设置：
+
+    执行%CPS_ROOT%\cpsv3000下的 setenv(source ./setenv)定义一些环境变量,其内容如下:
+
+    export MAKE_PLATFORM=LINUX
+    export MICR_BASE=/usr
+    export SRC_ROOT=/home/went/mytest
+    export CPS_ROOT=/home/went/mytest/xcps_v3000_dev/xcps
+    export OBJS_DIR=$V3000_ROOT/obj
+    export ENABLE_PR_XOS_OUT=xoslin
+    export WARNING=0
+
+    其中要设置的内容如下:
+    SRC_ROOT		        你本地的根目录，必须在其它目录的上层,
+    CPS_ROOT						平台的根目录（即cpsrules和cpsv3000的上一层目录）
+    OBJS_DIR		        要生成的目标文件的存放路径,若有问题可以填绝对路径(平台是默认放在“cpsv3000\obj”下),
+    WARNING			        //告警设置,值为1的话可以成功打出数以K计的Warning,
+    ENABLE_PR_XOS_OUT	  //平台要生成的测试可执行文件的名称,
+
+
+2.3 solaris下的设置:
+
+    执行%CPS_ROOT%\cpsv3000下的 solenv 定义环境变量,其内容如下:
+
+    MAKE_PLATFORM=SOLARIS
+    MICR_BASE=/usr
+    SRC_ROOT=/export/home/went/mytest
+    CPS_ROOT=/export/home/went/mytest/xcps_v3000_dev/xcps
+    OBJS_DIR=$V3000_ROOT/obj
+    ENABLE_PR_XOS_OUT=xossol
+    WARNING=0
+    export MAKE_PLATFORM MICR_BASE SRC_ROOT CPS_ROOT OBJS_DIR ENABLE_PR_XOS_OUT
+    export WARNING
+
+    需要设置的环境变量同 linux ,只是这里要先定义变量再"export".
+
+
+2.4 vxwork下的设置
+
+    1）直接用tornado进行编译,在工程建好后;    
+    在 'workspace' 窗口的 'builds' 栏的 'properties' 中的 'C/C++ compiler'栏中
+    加入你的头文件路径和编译宏( -ansi 的选项最好去掉,要不//会报错);
+    
+    2）用makefile编译
+    基本同 win32 ，执行 vxmake.bat ,需要设置的内容如下:
+    SET SRC_ROOT=D:\MyTest												这个是你的根目录(必须在其它目录的上层)
+    set CPS_ROOT=D:\MyTest\xcps_v3000_dev\xcps		平台的根目录（即cpsrules和cpsv3000的上一层目录）
+    set WIND_BASE=C:\Tornado2.2										设置 Tormado 的路径（最好是2.2版本，因为现在很多 drv 只有2.2才支持）
+    SET CPU=PPC603																CPU类型，比如 PPC603 PPC604 PPC860
+    set TORNADO=T22																Tornado的版本，目前支持2.2版本
+    SET OBJS_DIR=%V3000_ROOT%\obj									生成目标文件的路径(平台是默认放在“cpsv3000\obj”下)
+    
+
+
+
+3. 编译
+
+    在设置好环境变量后就可以开始编译了;
+    （注：想加入某个 编译宏 ，可以通过设置相应的环境变量来达成；
+      EX： 想加入编译宏 XOS_NEED_MAIN ，就设置相应的环境变量 XOS_NEED_MAIN=1，
+      这里并不对环境变量的值进行判断，只要定义了环境变量就加入相应的编译宏）
+
+3.1 win32的编译是在DOS提示符下进到 cpsv3000/port 目录下执行批处理文件 xosmake.bat;
+    
+    生成平台库文件是执行 "xosmake lib",相应的清除目标文件时执行 "xosmake clean";
+    生成平台测试桩可执行文件是运行 "xosmake exe",相应的清除目标文件时执行 "xosmake cleanexe";
+
+    
+3.2 linux下的编译:
+    
+    进到相应的目录下执行 "make" (这里生成平台库文件的makefile是xcps/cpsv3000下的makefile,成功的话生成xos.a).
+    生成平台测试桩的可执行文件,可以在 cpsv3000/port目录下执行 "make -f xos_exe.mak";
+
+3.3 solaris下的编译:
+    
+    同linux;
+    
+3.4 vxworks下的编译:
+
+    1）在tornado2.2下直接编译;
+    
+    2）同 win32，
+    在DOS命令行下执行 "vxmake lib" 生成库文件；
+    执行 "vxmake exe" 生成平台测试桩可执行文件；
+    
+    注：目前要在板上运行，
+        可以在板子加载好"核文件(vxWorks)"后，再把我们用 makefile 编好的文件 download 到板子上就行了；
+        还有一种方法是在编"核文件"的工程中加入平台的最终目标文件一起编译；
+    
+        
+   
+
+注:1、这里存在一个小小的问题.就是执行 "setenv"或"solenv" 设置环境变量可能会失败,原因是我们用的编辑器可能和 vi 有差异;
+      目前我的解决方法是:把那些export定义环境变量的语句直接拷贝粘贴到linux命令行下运行;
+      
+   2、生成可执行文件，
+      (这个可执行文件只是用来演示XOS平台用，并不正式向外提供，
+      当然你可以参考此生成可执行文件的makefile <----> xos_exe.mak )
+
+   3、大家在创建目录时一定要注意大小写(最好统一用小写)。
+   
+   4、现在很多应用可能要用到 xosport.c 中的配置和main函数，这时在引用平台makefile时不再是 cpsv3000下的"makefile"，
+      而应引用 cpsv3000/port 下的 xos_op.mak 

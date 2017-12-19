@@ -1,0 +1,49 @@
+#!/bin/bash
+
+export MAKE_PLATFORM=LINUX
+export PRODUCT=XW_SS
+
+
+if [ "$HOSTTYPE" = "x86_64" ];
+then
+   echo "x86_64"
+   export CPU=x86_64
+else
+   echo "i686"
+   export CPU=i686
+fi
+
+export MICR_BASE=/usr
+export SRC_ROOT=$PWD/..
+echo "current SRC_ROOT=$SRC_ROOT"
+
+#export MEM_FID_DEBUG=1
+export XCPS_ROOT=$SRC_ROOT
+export V3000_ROOT=$XCPS_ROOT/cpsv3000
+export RULES_ROOT=$XCPS_ROOT/cpsrules
+
+export OBJS_DIR=$V3000_ROOT/obj/linux
+mkdir -p $OBJS_DIR
+
+export ENABLE_PR_XOS_OUT=xoslin
+export WARNING=1
+export DEBUG=1
+export OBJTYPE=a
+export XOS_NEED_MAIN=1
+export XOS_MDLMGT=1
+export XOS_TELNETD=1
+export XOS_ModMem_Check=1
+export XOS_HASH_DEBUG=1
+export XOS_ARRAY_DEBUG=1
+export INPUT_PAR_CHECK=1
+export XOS_ENABLE_GPROF=0
+export XOS_UDT_MODULE=0
+export XOS_ENABLE_GCOV=0
+export XOS_NEED_IPC=0
+export XOS_TRACE_AGENT=1
+
+export XOS_FTP_CLIENT=1
+export BIG_POLLING_FD_SETSIZE=1
+export XOS_EW_START=1
+export XOS_SCTP=1
+#export XOS_LONG_SLEEP=1

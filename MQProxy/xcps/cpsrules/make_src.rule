@@ -1,0 +1,228 @@
+########################################################################
+#        Rule file for SRC_TYPE makefile                               #
+#        Created by                                                    #
+#        Created time:                                                 #
+########################################################################
+
+.PHONY:output local
+default : local
+output : $(PRODUCT_NAME)
+#产生makefile文件的路径，去掉最后一个“/”
+#makefile文件放在src目录的上一层
+MAKEFILE_DIR        = $(subst /?,,$(dir $(subst \,/,$(MAKEFILE_NAME)))?)
+#产生目标文件的存放路径
+OBJ_DIR             = $(subst $(SRC_ROOT),$(OBJS_DIR),$(MAKEFILE_DIR))
+
+#去掉源文件的根路径，去掉"/"，获得相对路径名的列表
+EACH_DIR            = $(subst /, ,$(subst $(SRC_ROOT),,$(MAKEFILE_DIR)))
+#根据路径，算出inc目录的包含列表
+ifneq "$(word 6,$(EACH_DIR))" ""
+FAMILY_HEAD_DIR += -I$(SRC_ROOT)/$(word 1,$(EACH_DIR))/$(word 2,$(EACH_DIR))/$(word 3,$(EACH_DIR))/$(word 4,$(EACH_DIR))/$(word 5,$(EACH_DIR))/$(word 6,$(EACH_DIR))/inc
+endif
+ifneq "$(word 5,$(EACH_DIR))" ""
+FAMILY_HEAD_DIR += -I$(SRC_ROOT)/$(word 1,$(EACH_DIR))/$(word 2,$(EACH_DIR))/$(word 3,$(EACH_DIR))/$(word 4,$(EACH_DIR))/$(word 5,$(EACH_DIR))/inc
+endif
+ifneq "$(word 4,$(EACH_DIR))" ""
+FAMILY_HEAD_DIR += -I$(SRC_ROOT)/$(word 1,$(EACH_DIR))/$(word 2,$(EACH_DIR))/$(word 3,$(EACH_DIR))/$(word 4,$(EACH_DIR))/inc
+endif
+ifneq "$(word 3,$(EACH_DIR))" ""
+FAMILY_HEAD_DIR += -I$(SRC_ROOT)/$(word 1,$(EACH_DIR))/$(word 2,$(EACH_DIR))/$(word 3,$(EACH_DIR))/inc
+endif
+ifneq "$(word 2,$(EACH_DIR))" ""
+FAMILY_HEAD_DIR += -I$(SRC_ROOT)/$(word 1,$(EACH_DIR))/$(word 2,$(EACH_DIR))/inc
+endif
+ifneq "$(word 1,$(EACH_DIR))" ""
+FAMILY_HEAD_DIR += -I$(SRC_ROOT)/$(word 1,$(EACH_DIR))/inc
+endif
+FAMILY_HEAD_DIR += -I$(MAKEFILE_DIR)
+
+ifeq "$(SRCS)" ""
+local:
+	@echo Nothing to make,exit normal!
+else
+#将源文件名中的“\”替换为“/”
+SRC                 = $(subst \,/,$(SRCS))
+#去掉源文件名的扩展名（比如.c），再去掉目录，留下纯文件名
+OBJ                 = $(notdir $(basename $(SRC)))
+#基于纯源文件名，得到所有目标文件名
+OBJS	              = $(foreach OBJ_FILE,$(OBJ),$(OBJ_FILE).o)
+
+
+ifeq ("$(MAKE_PLATFORM)", "LINUX")
+#对于非Vxwroks系统，直接使用目标文件目录下生成的depend文件###
+  C_SRC   = $(filter %.c,$(SRC))
+  CPP_SRC = $(filter %.cpp,$(SRC))
+
+  C_DEPEND     = $(OBJ_DIR)/c_depend
+  CPP_DEPEND   = $(OBJ_DIR)/cpp_depend
+else
+ifeq ("$(MAKE_PLATFORM)", "VXWORKS")
+#1.filter:保留源文件列表中的c文件；2. 去掉扩展名；3、去掉目录，留下纯文件名；4、基于文件名列表，产生.d文件列表
+   DEPENDS = $(foreach OBJ_FILE,$(notdir $(basename $(filter %.c %.cxx %.cpp %.cc,$(SRC)))),$(OBJ_FILE).d)
+#基于depend文件名列表，加上目标文件目录，产生带目录的depend文件名列表。
+   DEPEND_FILE_LST     = $(foreach EACH_DEP,$(DEPENDS),$(OBJ_DIR)/$(EACH_DEP))
+else
+   DEPEND              = $(OBJ_DIR)/depend
+endif
+endif
+
+#是否支持GPROF
+ifeq ($(MAKE_PLATFORM), LINUX)
+	ifeq ($(XOS_ENABLE_GPROF),1)
+	  EXTRA_DEFINE += -DXOS_ENABLE_GPROF -pg
+	endif
+endif
+
+#是否支持内存堆栈跟踪
+ifeq ($(XOS_VX_PPC860),1)
+	EXTRA_DEFINE += -DXOS_VX_PPC860
+endif
+
+ifeq ($(XOS_T22),1)
+	EXTRA_DEFINE += -DXOS_T22
+endif
+	
+ifeq ($(MAKE_PLATFORM), WIN32)
+#DEP_FLAGS = -MM，用于生成一个依赖关系；sort进行排序并去掉相同的单词。######
+   DEP_FLAGS:=$(sort $(DEP_FLAGS))
+#头文件目录   
+   DEP_INCLUDE:=$(sort $(DEP_INCLUDE))
+#编译宏   
+   DEP_DEFINES:=$(sort $(DEP_DEFINES))
+#基于源文件，检查是否需要更新depend   
+   $(DEPEND) : $(SRCS)
+#@用于不显示命令；如果目标目录不存在，则创建目录
+		@IF NOT EXIST $(subst /,\,$(OBJ_DIR)) (mkdir $(subst /,\,$(OBJ_DIR)))
+#输出depend
+		$(DEP_CC) $(DEP_FLAGS) $(DEP_INCLUDE) $(DEP_DEFINES) $(SRCS) > $(DEPEND)
+#取产品名的后缀，如果是.o则按lib方式链接
+   ifeq ($(suffix $(PRODUCT_NAME) hacks), .o)
+      $(PRODUCT_NAME) : $(OBJS)
+			$(LD) -lib /nologo /out:"$(PRODUCT_NAME)" $(OBJS) $(LIB_OBJS)
+   else
+#如果是exe则链接成exe文件   
+      ifeq ($(suffix $(PRODUCT_NAME) hacks), .exe)
+         $(PRODUCT_NAME) : $(OBJS)
+				$(LD) $(LINK_FLAGS) /out:"$(PRODUCT_NAME)" $(OBJS) $(LIB_OBJS) $(LINK_LIBS)
+      else
+         exit_to_setenv:
+				@echo error suffix of Product Name!
+      endif
+   endif
+
+else
+ifeq ($(MAKE_PLATFORM), SOLARIS)
+  $(DEPEND) : $(SRCS)
+		@-mkdir -m 700 -p $(OBJ_DIR)
+		$(DEP_CC) $(DEP_FLAGS) $(DEP_INCLUDE) $(DEP_DEFINES) $(SRCS) > $(DEPEND)
+   
+   ifeq ($(COMPILER_TYPE), CC)
+   ifeq ($(suffix $(PRODUCT_NAME) hacks), .exe)
+     $(PRODUCT_NAME) : $(OBJS)
+		cc -o $@ $(LIB_OBJS) $(OBJS) -lpthread -lrt -lc -lcurses -lsocket -lnsl
+		@echo make $@ ok!!!
+   else
+   ifeq ($(suffix $(PRODUCT_NAME) hacks), .so)
+     $(PRODUCT_NAME) : $(OBJS)
+        cc -G -o $@ $(LIB_OBJS) $(OBJS) -lpthread -lrt -lc -lcurses -lsocket -lnsl -R /usr/lib/lwp
+	    #LD_LIBRARY_PATH=\$(OBJS_DIR)\protocols\tri_cm:$(LD_LIBRARY_PATH); export LD_LIBRARY_PATH
+   else   
+     $(PRODUCT_NAME) : $(OBJS)
+		@ -$(RM) $@
+		$(LD) -r -o $@ $(LIB_OBJS) $(OBJS)
+		@echo make $@ ok!!!
+   endif					
+   endif   
+   else
+   ifeq ($(suffix $(PRODUCT_NAME) hacks), .exe)
+     $(PRODUCT_NAME) : $(OBJS)
+		gcc -o $@ $(LIB_OBJS) $(OBJS) -lpthread -lrt -lc -lcurses -lsocket -lnsl
+		@echo make $@ ok!!!
+   else
+   ifeq ($(suffix $(PRODUCT_NAME) hacks), .so)
+     $(PRODUCT_NAME) : $(OBJS)
+		gcc -fPIC -shared -o $@ $(LIB_OBJS) $(OBJS) -lpthread -lrt -lc -lcurses -lsocket -lnsl -R /usr/lib/lwp
+		#LD_LIBRARY_PATH=\$(OBJS_DIR)\protocols\tri_cm:$(LD_LIBRARY_PATH); export LD_LIBRARY_PATH
+   else   
+     $(PRODUCT_NAME) : $(OBJS)
+		$(LD) -r -o $@ $(LIB_OBJS) $(OBJS)
+		@echo make $@ ok!!!
+   endif					
+   endif
+   endif
+  $(OBJS):$(SRCS)
+		$(CC) $(CC_INCLUDE) $(CFLAGS) $(EXTRA_DEFINE) $(SRCS)
+
+else
+ifeq ($(MAKE_PLATFORM), LINUX)
+    $(C_DEPEND): $(C_SRC)
+		@-mkdir -m 700 -p $(OBJ_DIR)
+		$(DEP_CC) $(DEP_FLAGS) $(DEP_INCLUDE) $(DEP_DEFINES) $(C_SRC) > $@ 2>/dev/null
+    $(CPP_DEPEND): $(CPP_SRC)
+		@-mkdir -m 700 -p $(OBJ_DIR)
+		$(DEP_CPP) $(DEP_FLAGS) $(DEP_INCLUDE) $(DEP_DEFINES) $(CPP_SRC) > $@ 2>/dev/null
+   
+   ifeq ($(suffix $(PRODUCT_NAME) hacks), .exe)
+     $(PRODUCT_NAME) : $(OBJS)
+		$(CC) -o $@ $(LIB_OBJS) $(OBJS) -lpthread -lrt -lc -lcurses -lsocket -lnsl -rdynamic
+		@echo make $@ ok!!!
+   else
+   ifeq ($(suffix $(PRODUCT_NAME) hacks), .so)
+     $(PRODUCT_NAME) : $(OBJS)
+		gcc -fPIC -shared -o $@ $(LIB_OBJS) $(OBJS) -lpthread -lrt -lc -lcurses -lnsl -rdynamic 
+		#LD_LIBRARY_PATH=\$(OBJS_DIR)\protocols\tri_cm:$(LD_LIBRARY_PATH); export LD_LIBRARY_PATH
+   else   
+     $(PRODUCT_NAME) : $(OBJS)
+		@ -$(RM) $@
+		$(LD) -r -o $@ $(LIB_OBJS) $^
+		@echo make $@ ok!!!
+   endif
+   endif
+else	#####vX
+  $(PRODUCT_NAME) :$(DEPENDS) $(OBJS) $(LIB_OBJS)
+		@ -$(RM) $@
+		$(LD) -o $@ $(LIB_OBJS) $(OBJS)
+		@IF exist $@ (@echo make $@ ok!!!) else (@echo make $@ failure!!!)
+endif
+endif
+endif
+
+#编译源文件
+ifeq ($(MAKE_PLATFORM),SOLARIS)
+local:
+	@-mkdir -m 700 -p $(OBJ_DIR)
+	$(MAKE) -C $(OBJ_DIR) -f $(MAKEFILE_NAME) output
+else
+ifeq ($(MAKE_PLATFORM),LINUX)
+local:
+	@-mkdir -m 700 -p $(OBJ_DIR)
+	$(MAKE) -C $(OBJ_DIR) -f $(MAKEFILE_NAME) output
+else #####vX
+local:
+	@IF NOT EXIST $(subst /,\,$(OBJ_DIR)) (mkdir $(subst /,\,$(OBJ_DIR)))
+	$(MAKE) -C $(OBJ_DIR) -f $(MAKEFILE_NAME) output
+endif
+endif
+
+########################################################################
+# include depend
+########################################################################
+#-表示忽略错误
+ifeq ("$(MAKE_PLATFORM)", "LINUX") ########
+   -include $(C_DEPEND) $(CPP_DEPEND)
+else
+ifeq "$(MAKE_PLATFORM)" "VXWORKS"
+   -include $(DEPEND_FILE_LST)
+else
+   -include $(DEPEND)
+endif
+endif
+endif
+########################################################################
+#   the following two targets used to clean intermediate files         #
+########################################################################
+.PHONY:clean cleanobj
+clean :
+	@-$(RM) $(foreach OBJ_FILE,$(OBJ),$(OBJ_DIR)/$(OBJ_FILE).o) $(OBJ_DIR)/$(PRODUCT_NAME) $(foreach OBJ_FILE,$(OBJ),$(OBJ_DIR)/$(OBJ_FILE).d)
+cleanobj :
+	@-$(RM) $(foreach OBJ_FILE,$(OBJ),$(OBJ_DIR)/$(OBJ_FILE).o) $(OBJ_DIR)/$(PRODUCT_NAME)

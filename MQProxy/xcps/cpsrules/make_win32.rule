@@ -1,0 +1,163 @@
+########################################################################
+#                                                                      #
+#      Makefile rules file for windows                                 #
+#                                                                      #
+#      All the makefiles in sub directories must include this file     #
+#      to get rules to make.                                           #
+#																	                                     #
+########################################################################
+
+
+########################################################################
+# general definitions
+########################################################################
+
+# CPU should be defined outside of this file
+TOOL            = gnu
+#DEBUG           = 1
+OPTIMIZE        = 0
+
+ifndef CC_COMPILER
+CC_COMPILER	    = -D_DEBUG -D_MBCS /nologo /MTd /Gm /GX /FD /Yd /c
+endif
+
+C++_COMPILER	= $(CC_COMPILER)
+
+ifeq ($(OPTIMIZE), 1)
+  CC_OPTIM      = /O1
+else
+  CC_OPTIM      = /Od
+endif
+
+CC_WARNINGS	    = /W3
+
+C++_WARNINGS    = /W3
+
+#CC_INCLUDE   = -I$(MICR_BASE)/VC98/INCLUDE $(FAMILY_HEAD_DIR) \
+#								$(TRI_SSI_INC) $(EXTRA_INCLUDE) 
+
+
+CC_INCLUDE   = -I$(MICR_BASE)/VC98/INCLUDE \
+               $(TRI_SSI_INC) $(EXTRA_INCLUDE) 
+
+CC_INCLUDE += $(XOS_INC)
+
+								
+ifeq ($(CM_OAM_SUPPORT),1)
+	  CC_INCLUDE += $(CM_OAM_INC)
+endif
+
+
+CC_DEFINES	    = -DCPU=$(CPU) -DWIN32 $(EXTRA_DEFINE) $(TRI_OS_FLAGS) $(XOS_DEFINES)
+
+#DEP_INCLUDE     = -I$(WIND_BASE)/target/h -I$(WIND_BASE)/target/h/snmp \
+#                  $(FAMILY_HEAD_DIR) $(TRI_SSI_INC) $(EXTRA_INCLUDE) $(VW_INC)  $(XOS_VW_INC)
+
+DEP_INCLUDE     = -I$(WIND_BASE)/target/h -I$(WIND_BASE)/target/h/snmp \
+                  $(TRI_SSI_INC) $(EXTRA_INCLUDE) $(VW_INC)  $(XOS_VW_INC)
+                  
+DEP_INCLUDE += $(XOS_INC)
+
+								
+ifeq ($(CM_OAM_SUPPORT),1)
+	  DEP_INCLUDE += $(CM_OAM_INC)
+endif
+                 
+DEP_DEFINES     = -DCPU=$(CPU) -DVXWORKS $(USERDEP_DEF) $(VW_FLAGS) $(XOS_DEP_FLAGS) $(EXTRA_DEFINE)
+
+ifneq ("$(PRODUCT)","")
+  CC_DEFINES   += -D$(PRODUCT)
+  DEP_DEFINES  += -D$(PRODUCT)
+endif
+
+ifneq ("$(FEATURES)","")
+	ALL_FEATURE=$(subst +, ,$(FEATURES))
+  CC_DEFINES   += $(foreach EACH_FEATURE,$(ALL_FEATURE),-D$(EACH_FEATURE))
+  DEP_DEFINES  += $(foreach EACH_FEATURE,$(ALL_FEATURE),-D$(EACH_FEATURE))
+endif
+
+ifeq ($(TEST_DEBUG),1)
+  CC_DEFINES   += -DTEST_DEBUG=$(TEST_DEBUG)
+  DEP_DEFINES  += -DTEST_DEBUG=$(TEST_DEBUG)
+endif
+
+ifeq ($(DEBUG), 1)
+  CC_DEBUG        = /Od /Zi /GZ	-DDEBUG
+  CC_DEFINES   += -DDEBUG
+else
+  CC_DEBUG        =
+endif
+
+CFLAGS          = $(CC_ARCH_SPEC) $(CC_OPTIM) $(CC_WARNINGS) \
+                  $(CC_INCLUDE) $(CC_DEFINES)  $(ADDED_CFLAGS) \
+                  $(CC_SOFT_FLOAT) $(CC_COMPILER) $(CC_DEBUG)
+
+C++FLAGS        = $(CC_ARCH_SPEC) $(C++_COMPILER) $(CC_OPTIM) $(C++_WARNINGS) \
+                  $(CC_INCLUDE) $(CC_DEFINES) $(CC_DEBUG) $(ADDED_C++FLAGS) \
+                  $(CC_SOFT_FLOAT)
+
+#自动找寻源文件中包含的头文件，并生成一个依赖关系，但不包含标准库的头文件
+DEP_FLAGS = -MM
+
+DEP_OUTPUT = > $@
+
+LINK_FLAGS = /nologo /DEBUG /DEBUGTYPE:BOTH /incremental:no /machine:I386 /FORCE:MULTIPLE 
+#LINK_LIBS_PATH=$(SRC_ROOT)/protocol/tri_cm/ssi/winlib/
+
+LINK_LIBS = $(LINK_LIBS_PATH)kernel32.lib \
+            $(LINK_LIBS_PATH)user32.lib \
+            $(LINK_LIBS_PATH)gdi32.lib \
+            $(LINK_LIBS_PATH)winspool.lib \
+            $(LINK_LIBS_PATH)comdlg32.lib \
+            $(LINK_LIBS_PATH)advapi32.lib \
+            $(LINK_LIBS_PATH)shell32.lib \
+            $(LINK_LIBS_PATH)ole32.lib \
+            $(LINK_LIBS_PATH)oleaut32.lib \
+            $(LINK_LIBS_PATH)uuid.lib \
+            odbc32.lib \
+            odbccp32.lib \
+            $(LINK_LIBS_PATH)ws2_32.lib  \
+            $(LINK_LIBS_PATH)winmm.lib 
+ifeq ($(XOS_MDLMGT), 1)
+LINK_LIBS += $(LINK_LIBS_PATH)imagehlp.lib
+endif
+            
+LINK_OUT =
+
+########################################################################
+# toolchain binaries
+########################################################################
+DEP_CC = cc386
+
+CC = cl
+CXX = cl
+LD = link.exe
+AS              = ml
+
+MD		        = md
+RM		        = vxrm
+MV		        = move
+ECHO		    = echo
+CP	    	    = copy
+MAKE            = make
+
+
+########################################################################
+# implicit rules definitions
+########################################################################
+
+..s.o:
+	@ $(RM) $@
+	$(AS) /Fo$(basename $(@F)).o $<
+	
+%.o: %.c
+	@ -$(RM) $@
+	$(CC) $(CFLAGS) /Fo$(basename $(@F)).o $<
+
+%.o: %.cpp
+	@ -$(RM) $@
+	$(CXX) $(C++FLAGS) /Fo$(basename $(@F)).o $<
+	
+%.o: %.cxx
+	@ $(RM) $@
+	$(CXX) $(C++FLAGS) /Fo$(basename $(@F)).o $<

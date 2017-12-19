@@ -1,0 +1,64 @@
+#!/bin/bash
+
+echo "*******build_lnx BUILD_MODULE_NAME=${BUILD_MODULE_NAME}********"
+export LIB_MODULE_NAME=${BUILD_MODULE_NAME}
+#export BUILD_MODULE_OUTPUT=$PRG_ROOT/bin/linux/${BUILD_MODULE_NAME} 
+export BUILD_MODULE_OUTPUT=$PRG_ROOT/bin/linux/hlragent.out
+export INCLUDE_DIR=$PRG_ROOT/include/${BUILD_MODULE_NAME}
+
+#============ 工程相关目录和参数 =============
+echo PRG_ROOT=$PRG_ROOT
+echo SRC_ROOT=$SRC_ROOT
+echo OBJS_DIR=$OBJS_DIR
+echo BIN_DIR=$BIN_DIR
+echo BIN_LINUX_DIR=$BIN_LINUX_DIR
+echo BUILD_DIR=$BUILD_DIR
+
+
+
+echo $MAKE_PLATFORM
+echo PRG_ROOT = $PRG_ROOT
+echo COMMON_DIR = $COMMON_DIR
+echo INCLUDE_DIR = $INCLUDE_DIR
+echo AGENT_INC=$AGENT_INC
+echo SPRFEBESP_INCLUDE_ROOT=$SPRFEBESP_INCLUDE_ROOT
+echo BUILD_MODULE_OUTPUT=$BUILD_MODULE_OUTPUT
+echo DIAMETER_LIB_ROOT=$DIAMETER_LIB_ROOT
+echo IMPORT_ROOT/diameter/bin/linux=$IMPORT_ROOT/diameter/bin/linux
+echo ++++++++++++++++++++++++++PARENT_PRG_ROOT=$PARENT_PRG_ROOT++++++++++++++++++++++++++
+echo ++++++++++++++++++++++++++XCPS_ROOT=$XCPS_ROOT++++++++++++++++++++++++++
+
+
+#============ copy common to local proj=============
+cp -rf $COMMON_DIR/common/ $SRC_ROOT 
+#============ 编译$LIB_MODULE_NAME=============
+
+if [ "$OBJS_DIR" != "" ];then	
+  rm -rf $OBJS_DIR/${BUILD_MODULE_NAME}/*
+fi
+
+if [ "$BIN_LINUX_DIR" != "" ];then	
+  rm -rf $BIN_LINUX_DIR/${BUILD_MODULE_NAME}
+ fi
+
+if [ "$PUBLISTH_ROOT" != "" ];then	
+  rm -rf $PUBLISTH_ROOT/${BUILD_MODULE_NAME}
+fi
+
+
+echo ===========PRINT MAKEFILE==========
+echo SRC_ROOT=$SRC_ROOT
+echo COMMON_MAK_FILE=$SRC_ROOT/common/makefile 
+echo DIAMS6A_MAK_FILE=$SRC_ROOT/diams6a/makefile 
+echo BUILD_MODULE_NAME_MAK_FILE=$SRC_ROOT/$BUILD_MODULE_NAME/makefile
+echo RULES_ROOT=$RULES_ROOT 
+echo ACE_INCLUDE_ROOT=$ACE_INCLUDE_ROOT
+echo INCLUDE_DIR=$INCLUDE_DIR
+echo XCPS_INCLUDE_ROOT=$XCPS_INCLUDE_ROOT
+echo 
+echo ===========PRINT MAKEFILE==========
+make -C $OBJS_DIR -f $SRC_ROOT/${BUILD_MODULE_NAME}.mak
+
+
+
+echo ===========Build $LIB_MODULE_NAME over==========

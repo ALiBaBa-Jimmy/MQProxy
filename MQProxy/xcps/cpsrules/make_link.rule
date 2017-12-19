@@ -1,0 +1,262 @@
+########################################################################
+#      Rule file for LINK_TYPE makefile                                 #
+#      Created by                                                      #
+#      Created time:                                                   #
+########################################################################
+.PHONY:output local recursion 
+default : local
+output :  recursion $(PRODUCT_NAME)
+
+#根据环境变量XOS_LINUX_SCTP的定义，判断是否需要链接sctp动态库
+ifeq ("$(XOS_SCTP)","1")
+  ifeq ($(CPU), i686)
+    SYS_LIBS += $(V3000_ROOT)/libsctp/linux/libsctp32.a
+  endif
+  ifeq ($(CPU), x86_64)
+    SYS_LIBS += $(V3000_ROOT)/libsctp/linux/libsctpx86_64.a
+endif
+endif
+
+MAKEFILE_DIR        = $(subst /?,,$(dir $(subst \,/,$(MAKEFILE_NAME)))?)
+OBJ_DIR             = $(subst $(SRC_ROOT),$(OBJS_DIR),$(MAKEFILE_DIR))
+
+#对于exe输出，则按exe方式链接，否则按.o方式连接
+ifeq ("$(MAKE_PLATFORM)", "WIN32")
+  ifeq ($(suffix $(PRODUCT_NAME) hacks), .exe)
+       $(PRODUCT_NAME) : $(OBJS)
+			$(LD) $(LINK_FLAGS) /out:"$(PRODUCT_NAME)" $(LIB_OBJS) $(OBJS) $(LINK_LIBS)
+  else
+          $(PRODUCT_NAME) : $(OBJS)
+			$(LD) -lib /nologo /out:"$(PRODUCT_NAME)" $(LIB_OBJS) $(OBJS)
+  endif
+endif
+
+ifeq ("$(MAKE_PLATFORM)", "VXWORKS")
+ifneq "$(OBJS)" ""
+ifeq ($(suffix $(PRODUCT_NAME) hacks), .exe) ####vX
+     $(PRODUCT_NAME) : $(OBJS)
+	$(AR) crus $@ $(LIB_OBJS) $(OBJS)
+#	@echo ++++++++++++++++++++++++++++++ .exe
+else
+     $(PRODUCT_NAME) : $(OBJS)
+#	$(LD) -N -r -o $@ $(OBJS) $(LIB_OBJS)
+			@ -$(RM) $@
+
+# add support c++ static init 2012.06.15
+    ifeq ($(suffix $(PRODUCT_NAME) hacks), .out)
+		$(NM) $(OBJS)  | wtxtcl %WIND_BASE%\host\src\hutils\munch.tcl > xos_ctdt.c
+		$(CC) -c xos_ctdt.c
+		$(LD) -o $@ $(LIB_OBJS) $(OBJS) xos_ctdt.o
+    else
+		$(LD) -o $@ $(LIB_OBJS) $(OBJS)
+    endif
+endif
+else
+     $(PRODUCT_NAME) : $(OBJS)
+			@echo OBJS not define,and not link each module to a single object!!!?????
+endif
+endif
+
+ifeq ("$(MAKE_PLATFORM)", "SOLARIS")
+ifneq "$(OBJS)" ""
+   ifeq ("$(COMPILER_TYPE)", "CC")
+       ifeq ($(suffix $(PRODUCT_NAME) hacks), .exe)
+         $(PRODUCT_NAME) : $(OBJS)
+		   cc -o $@ $(LIB_OBJS) $(OBJS) $(EXTRA_DEFINE) -lpthread -ldl -lrt -lc -lcurses -lsocket -lnsl -R /usr/lib/lwp
+       else
+           ifeq ($(suffix $(PRODUCT_NAME) hacks), .so)
+             $(PRODUCT_NAME) : $(OBJS)
+		       cc -G -o $@ $(LIB_OBJS) $(OBJS) -lpthread -ldl -lrt -lc -lcurses -lsocket -lnsl -R /usr/lib/lwp
+	           #LD_LIBRARY_PATH=\$(OBJS_DIR)\protocols\tri_cm:$(LD_LIBRARY_PATH); export LD_LIBRARY_PATH
+           else
+             $(PRODUCT_NAME) : $(OBJS)
+		     $(LD) -r -o $@ $(LIB_OBJS) $(OBJS)
+           endif
+       endif
+   else
+       ifeq ($(suffix $(PRODUCT_NAME) hacks), .exe)
+              	     		ifeq ($(XOS_MDLMGT), 1)
+                         $(PRODUCT_NAME) : $(OBJS)
+		                       	gcc -o $@ $(LIB_OBJS) $(OBJS) $(EXTRA_DEFINE) -lpthread -ldl -lrt -lc -lcurses -lsocket -lnsl -lbfd -liberty -lstdc++ -lmd5 -R /usr/lib/lwp
+              					else
+                         $(PRODUCT_NAME) : $(OBJS)
+		                       	gcc -o $@ $(LIB_OBJS) $(OBJS) $(EXTRA_DEFINE) -lpthread -ldl -lrt -lc -lcurses -lsocket -lnsl -lstdc++ -lmd5 -R /usr/lib/lwp
+              					endif
+       else
+            ifeq ($(suffix $(PRODUCT_NAME) hacks), .so)
+	                $(PRODUCT_NAME) : $(OBJS)
+							    gcc -fPIC -shared -o $@ $(LIB_OBJS) $(OBJS) -lpthread -lrt -lc -lcurses -lsocket -lnsl -R /usr/lib/lwp
+            else
+                ifeq ($(suffix $(PRODUCT_NAME) hacks), .a) ###
+                    	$(PRODUCT_NAME) : $(OBJS)
+			              	$(LD) -r -o $@ $(LIB_OBJS) $(OBJS)
+                else
+                    ifeq ($(suffix $(PRODUCT_NAME) hacks), .o) ###
+                        $(PRODUCT_NAME) : $(OBJS)
+			                  $(LD) -r -o $@ $(LIB_OBJS) $(OBJS)
+                    else
+              	     		ifeq ($(XOS_MDLMGT), 1)
+                         $(PRODUCT_NAME) : $(OBJS)
+		                       gcc -o $@ $(LIB_OBJS) $(OBJS) $(EXTRA_DEFINE) -lpthread -ldl -lrt -lc -lcurses -lsocket -lnsl -lbfd -liberty -lstdc++ -lmd5 -R /usr/lib/lwp
+              					else
+                         $(PRODUCT_NAME) : $(OBJS)
+		                       gcc -o $@ $(LIB_OBJS) $(OBJS) $(EXTRA_DEFINE) -lpthread -ldl -lrt -lc -lcurses -lsocket -lnsl -lstdc++ -lmd5 -R /usr/lib/lwp
+              					endif
+                    endif
+                endif
+                
+            endif
+       endif
+   endif
+else
+     $(PRODUCT_NAME) : $(OBJS)
+			@echo OBJS not define,and not link each module to a single object!!!?????
+endif
+endif
+
+#是否支持GPROF
+ifeq ($(MAKE_PLATFORM), LINUX)
+	ifeq ($(XOS_ENABLE_GPROF),1)
+	  EXTRA_DEFINE += -DXOS_ENABLE_GPROF -pg
+	endif
+	ifeq ($(XOS_ENABLE_GCOV),1)
+	EXTRA_DEFINE += -lgcov
+	endif
+endif
+
+ifeq ("$(MAKE_PLATFORM)", "LINUX")	#####
+ifneq "$(OBJS)" ""
+       ifeq ($(suffix $(PRODUCT_NAME) hacks), .exe)
+
+            ifeq ("$(MAKE_JRTP)", "1")
+
+                  ifeq ($(XOS_MDLMGT), 1)
+                        $(PRODUCT_NAME) : $(OBJS)
+		                gcc -o $@ $(LIB_OBJS) $(OBJS) $(EXTRA_DEFINE) -lpthread -lrt -ldl -rdynamic -lc -lcurses -lnsl -lbfd -liberty -lstdc++ -lmd5 -ljrtp 
+                  else
+                        $(PRODUCT_NAME) : $(OBJS)
+		                gcc -o $@ $(LIB_OBJS) $(OBJS) $(EXTRA_DEFINE) -lpthread -lrt -ldl -rdynamic -lc -lcurses -lnsl -lstdc++ -lmd5
+                  endif
+
+            else
+
+                 ifeq ($(XOS_MDLMGT), 1)
+                        $(PRODUCT_NAME) : $(OBJS)
+		                gcc -o $@ $(LIB_OBJS) $(OBJS) $(EXTRA_DEFINE) -lpthread -lrt -ldl -rdynamic -lc -lcurses -lnsl -lbfd -liberty -lstdc++ -lmd5  
+                 else
+                        $(PRODUCT_NAME) : $(OBJS)
+		                gcc -o $@ $(LIB_OBJS) $(OBJS) $(EXTRA_DEFINE) -lpthread -lrt -ldl -rdynamic -lc -lcurses -lnsl -lstdc++ -lmd5
+                 endif
+
+             endif
+ 
+      else
+            ifeq ($(suffix $(PRODUCT_NAME) hacks), .so)
+                $(PRODUCT_NAME) : $(OBJS)
+			        gcc -fPIC -shared -o $@ $(OBJS) $(LIB_OBJS) -lpthread -lrt -lc -lcurses -lnsl -rdynamic 
+            else
+                ifeq ($(suffix $(PRODUCT_NAME) hacks), .a) ###
+                    $(PRODUCT_NAME) : $(OBJS)
+			              $(LD) -r -o $@ $(OBJS) $(LIB_OBJS)
+                else
+                    ifeq ($(suffix $(PRODUCT_NAME) hacks), .o) ###
+                        $(PRODUCT_NAME) : $(OBJS)
+			                  $(LD) -r -o $@ $(OBJS) $(LIB_OBJS)
+                    else
+              	     		ifeq ($(XOS_MDLMGT), 1)
+# remove md5, and swap $(OBJS) $(LIB_OBJS)
+                            $(PRODUCT_NAME) : $(OBJS)
+		                          gcc -o $@ $(OBJS) $(LIB_OBJS) $(EXTRA_DEFINE) $(SYS_LIBS) -lpthread -ldl -rdynamic -lstdc++ -lrt -lc -lcurses -lnsl -lbfd -liberty
+              		   		else
+                           $(PRODUCT_NAME) : $(OBJS)
+		                          gcc -o $@ $(OBJS) $(LIB_OBJS) $(EXTRA_DEFINE) $(SYS_LIBS) -lstdc++  -rdynamic -lpthread -ldl -lrt -lc -lcurses -lnsl
+              		   		endif
+                    endif
+                endif
+            endif
+       endif
+else
+     $(PRODUCT_NAME) : $(OBJS)
+			@echo OBJS not define,and not link each module to a single object!!!?????
+endif
+endif
+
+ifeq ("$(MAKE_PLATFORM)", "SOLARIS")
+local:
+	@-mkdir -m 700 -p $(subst \,/,$(OBJ_DIR))
+	@$(MAKE) -C $(subst \,/,$(OBJ_DIR)) -f $(MAKEFILE_NAME) output
+else
+ifeq ("$(MAKE_PLATFORM)", "LINUX")	#####
+local:
+	@-mkdir -m 700 -p $(subst \,/,$(OBJ_DIR))
+	@$(MAKE) -C $(subst \,/,$(OBJ_DIR)) -f $(MAKEFILE_NAME) output
+else
+local:
+	@IF NOT EXIST $(subst /,\,$(OBJ_DIR)) (mkdir $(subst /,\,$(OBJ_DIR)))
+	@$(MAKE) -C $(OBJ_DIR) -f $(MAKEFILE_NAME) output
+endif
+endif
+
+ifneq "$(MAKES_LIST)" ""
+
+ifneq ("$(MAKE_PLATFORM)", "SOLARIS")
+ifneq ("$(MAKE_PLATFORM)", "LINUX")
+#忽略错误的编译命令定义
+ifeq ("$(IGNORE_CC_ERR)","YES")                                                
+     CC_CMD_LINE=@($(MAKE) -f %i)                                              
+     CL_CMD_LINE=@($(MAKE) -f %i clean)                                        
+     CLOBJ_CMD_LINE=@($(MAKE) -f %i cleanobj)
+     MAKE=make -i
+else                                                                           
+     CC_CMD_LINE=@(@IF NOT ERRORLEVEL 1 ($(MAKE) -f %i) else break)            
+     CL_CMD_LINE=@(@IF NOT ERRORLEVEL 1 ($(MAKE) -f %i clean) else break)      
+     CLOBJ_CMD_LINE=@(@IF NOT ERRORLEVEL 1 ($(MAKE) -f %i cleanobj) else break)
+endif        
+#对MAKES_LIST中包含的所有makefile进行make           
+recursion :
+	@for %i in ($(MAKES_LIST)) do $(CC_CMD_LINE)
+# add recursion to make to sub modules
+clean :
+# add recursion to clean sub directory,the clean target will be clean
+	@for %i in ($(MAKES_LIST)) do $(CL_CMD_LINE)
+	-$(RM) $(OBJ_DIR)/$(PRODUCT_NAME)
+cleanobj :
+# add recursion to clean sub directory, the clean target will be cleanobj
+	@for %i in ($(MAKES_LIST)) do $(CLOBJ_CMD_LINE)
+	-$(RM) $(OBJ_DIR)/$(PRODUCT_NAME)
+else	#####ifneq ("$(MAKE_PLATFORM)", "LINUX")
+recursion :
+	@for each_make in $(MAKES_LIST); do $(MAKE) -f $$each_make || exit "$$?"; done
+# add recursion to make to sub modules
+clean :
+# add recursion to clean sub directory,the clean target will be clean
+	@for each_make in $(MAKES_LIST); do $(MAKE) -f $$each_make clean; done
+	-$(RM) $(OBJ_DIR)/$(PRODUCT_NAME)
+cleanobj :
+# add recursion to clean sub directory, the clean target will be cleanobj
+	@for each_make in $(MAKES_LIST); do $(MAKE) -f $$each_make cleanobj; done
+	-$(RM) $(OBJ_DIR)/$(PRODUCT_NAME)
+endif
+else
+recursion :
+	@for each_make in $(MAKES_LIST); do $(MAKE) -f $$each_make; done
+# add recursion to make to sub modules
+clean :
+# add recursion to clean sub directory,the clean target will be clean
+	@for each_make in $(MAKES_LIST); do $(MAKE) -f $$each_make clean; done
+	-$(RM) $(OBJ_DIR)/$(PRODUCT_NAME)
+cleanobj :
+# add recursion to clean sub directory, the clean target will be cleanobj
+	@for each_make in $(MAKES_LIST); do $(MAKE) -f $$each_make cleanobj; done
+	-$(RM) $(OBJ_DIR)/$(PRODUCT_NAME)
+endif
+else 
+recursion :
+	@echo Nothing to link,exit normal!
+clean :
+	@echo Nothing to clean,exit normal!
+	-$(RM) $(OBJ_DIR)/$(PRODUCT_NAME)
+cleanobj :
+	@echo No object files to Clean ,exit normal!
+	-$(RM) $(OBJ_DIR)/$(PRODUCT_NAME)
+endif

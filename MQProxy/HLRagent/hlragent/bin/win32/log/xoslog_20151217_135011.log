@@ -1,0 +1,4 @@
+PL_LOG:{2015-12-17 13:50:12,agentdbtask,(null),218}FID_Tsk_AgDB: init All Db connection succefully.
+
+PL_LOG:{2015-12-17 13:50:12,mqttcomfun,(null),424}FID_Tsk_MQTT: parse mqttcfg.xml file End
+

@@ -1,0 +1,26 @@
+ifeq ($(OAM_MSG_FROM_FILE), 1)
+  XOS_FUNCTION      += -D_OAM_MSG_FROM_FILE_
+  XOS_FUNCTION      += -DUSE_FM
+  XOS_FUNCTION      += -DUSE_SA
+  XOS_FUNCTION      += -DUSE_APP
+else
+  XOS_FUNCTION      += -DUSE_SA
+  XOS_FUNCTION      += -DUSE_PM
+  XOS_FUNCTION      += -DUSE_APP
+  XOS_FUNCTION      += -DUSE_FM
+endif
+
+ifeq ($(NEED_SA),1)
+  XOS_FUNCTION      += -DNEED_SA
+endif
+
+ifeq ($(SAG_STG),1)
+  XOS_FUNCTION      += -DSAG_STG
+endif
+
+ifeq ("$(MAKE_PLATFORM)", "LINUX")
+  XOS_FUNCTION               += -DUNIXBASE
+endif
+ifeq ("$(MAKE_PLATFORM)", "SOLARIS")
+  XOS_FUNCTION               += -DUNIXBASE
+endif

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "../config/dictionary.dtd">
+<dictionary protocol="0">
+  <!-- ************************* Vendors **************************** -->
+  <vendor id="61" name="Xinwei Co.Ltd"/>
+  <!-- *********************** End Vendors ************************** -->
+  <base uri="ftp://ftp.ietf.org/internet-drafts/draft-ietf-aaa-diameter-08.txt">
+    <!--*****************define BWT AVP name and code****************** -->
+    <avp name="User-Name" code="1" mandatory="must" may-encrypt="yes">
+      <type type-name="UTF8String" max-size="129"/>
+    </avp>
+    <avp name="MSISDN" code="701" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString" max-size="32"/>
+    </avp>
+   <avp name="Public-Identity" code="601" mandatory="must" may-encrypt="yes">
+    	<type type-name="UTF8String" max-size="128"/>
+    </avp>   
+    <avp name="BandWidth-Profile" code="8089" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned64"/>
+    </avp>
+  </base>
+  <!--**************define BWT command and avp*************-->
+    <application id="20001" name="sp" >
+        <command name="Profile" code="860" pbit="1" >
+          <requestrules>
+            <fixed>
+              <avprule name="Session-Id" maximum="1"/>
+            </fixed>
+            <required>
+    	        <avprule name="Auth-Session-State" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+    	        <avprule name="Destination-Realm" maximum="1" minimum="1"/>
+               <avprule name="Destination-Host" maximum="1"/>
+
+               <avprule name="User-Name" maximum="1" />
+    	    </required>
+            <optional>
+    	        
+            </optional>
+          </requestrules>
+          <answerrules>
+            <fixed>
+              <avprule name="Session-Id" maximum="1"/>
+            </fixed>
+            <required>
+    	        <avprule name="Auth-Session-State" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+							<avprule name="Result-Code" maximum="1"/>
+    	         <avprule name="Experimental-Result" maximum="1"/>
+    	    </required>
+    	     <optional>
+    	         
+    	         <avprule name="Public-Identity" maximum="1" />
+    	        <avprule name="BandWidth-Profile" maximum="1"  />
+            </optional>
+          </answerrules> 
+      </command>
+      
+    </application>
+</dictionary>

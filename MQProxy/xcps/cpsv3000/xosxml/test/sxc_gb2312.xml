@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="GB2312" ?>
+<MODULES>
+    <ToneFileCfg> 
+        <ToneFileItem>   
+            <LanguageFileNum>你好</LanguageFileNum> 
+            <ToneFileNum>45</ToneFileNum>                   
+            <F1>48 dialtone.pcm</F1> 
+            <F2>49 ringtone.pcm</F2>
+            <F3>64 special dialtone.pcm</F3>
+            <F4>65 outcentrex dialtone.pcm</F4>
+            <F5>4001 du.pcm</F5> 
+            <F6>4004 waittone.pcm</F6>
+            <F7>4007 callee turned off.pcm</F7>
+            <F8>4010 callee not available.pcm</F8> 
+            <F9>4019 do not disturb.pcm</F9>
+            <F10>4025 number not existed.pcm</F10>
+            <F11>4028 callee is busy now.pcm</F11> 
+            <F12>4037 callee owe fee.pcm</F12>
+            <F13>4040 callee stop.pcm</F13> 
+            <F14>4043 caller owe fee.pcm</F14>
+            <F15>4046 caller balan no enough.pcm</F15>
+            <F16>4049 callee balan no enough.pcm</F16>
+            <F17>4052 call only one minute.pcm</F17>
+            <F18>4055 not enough one minute.pcm</F18> 
+            <F19>4058 service is accepted.pcm</F19>
+            <F20>4061 service reg failed.pcm</F20>
+            <F21>4064 service is logged out.pcm</F21> 
+            <F22>4067 service log out failed.pcm</F22>
+            <F23>4076 password input.pcm</F23>
+            <F24>4088 system out of service.pcm</F24> 
+            <F25>4091 caller no rights.pcm</F25>
+            <F26>4094 callee no right accept.pcm</F26>
+            <F27>4100 no rights in this area.pcm</F27>
+            <F28>4115 services conficted.pcm</F28>  
+            <F29>4124 callee rejected .pcm</F29>
+            <F30>4127 call transfer.pcm</F30>
+            <F31>4130 CFU is accepted.pcm</F31>
+            <F32>4133 CFNRC is accepted.pcm</F32>              
+            <F33>4136 CFNRY is accepted.pcm</F33>
+            <F34>4139 CFB is accepted.pcm</F34>
+            <F35>4148 no one answer.pcm</F35>
+            <F36>4151 supplement service obd.pcm</F36>  
+            <F37>4208 caller stop.pcm</F37>
+            <F38>4211 callee out of service.pcm</F38>
+            <F39>4801 3party operate prompt.pcm</F39>
+            <F40>4802 CW operate prompt.pcm</F40>
+            <F41>4803 new call incoming.pcm</F41>
+            <F42>4804 conf request accepted.pcm</F42>
+            <F43>4805 no SS right.pcm</F43>                           
+            <F44>4806 dial number error.pcm</F44>
+            <F45>4807 answer inconveniently.pcm</F45>                            
+        </ToneFileItem>
+    </ToneFileCfg>
+    
+    <PINGCFG>
+        <PINGPARA>
+            <PACKET_CNT_RESET>20</PACKET_CNT_RESET>
+            <PING_INTERNAL>5</PING_INTERNAL>
+            <PING_ISENABLE>1</PING_ISENABLE>            
+        </PINGPARA>
+    </PINGCFG>
+    
+    <APPCFG>
+                <!--BCP begin-->      
+        
+        <Sub1N2T>0</Sub1N2T>   
+        
+        <R2InPlayRing>1</R2InPlayRing>         
+        
+        <R2OutPlayRing>0</R2OutPlayRing> 
+        
+        <GlobalCallUser>0</GlobalCallUser>
+        
+        <BcpSendSipInfoToGts>0</BcpSendSipInfoToGts>           
+        
+        <PttReqStr>#*1*</PttReqStr>          
+        
+        <PttRelStr>#*2*</PttRelStr> 
+        
+        <!--BCP end -->
+        
+                <!--sab1 global settings begin-->
+        
+        <g_sab1PlayAnnFlag>0</g_sab1PlayAnnFlag>
+        
+        <g_Sab1DefaultPgTmr>16</g_Sab1DefaultPgTmr>
+        
+        <g_Sab1GrpLaPgTmr>5</g_Sab1GrpLaPgTmr> 
+        
+        <g_bV52Plus>1</g_bV52Plus> 
+        
+        <g_sab1BTSFaultReduceSwitch>1</g_sab1BTSFaultReduceSwitch> 
+        
+        <ucIsSysHaveSmc>0</ucIsSysHaveSmc> 
+        
+        <!--sab1 global settings end-->  
+        
+        <!--sipstack global settings begin-->
+        
+        <soSimpleEncode>0</soSimpleEncode>
+
+        <soDvDecSIPA>0</soDvDecSIPA>
+
+        <soDvDecSIPT>0</soDvDecSIPT>        
+        
+        <!--sipstack global settings end-->   
+        
+        
+        <!--sipua begin-->
+        
+        <SiptPttHbSwitch>0</SiptPttHbSwitch>                 <!--ptt hb switch. 1:on 0:off-->
+        
+        <SiptPttHbMaxNoRspNum>1</SiptPttHbMaxNoRspNum>       <!--ptt hb no rsp max num-->
+        
+        <SiptPttHbDecTime>15</SiptPttHbDecTime>              <!--ptt hb detect time-->
+        
+        <SipDscHbSwitch>0</SipDscHbSwitch>                   <!--dcs hb switch. 1:on 0:off-->
+        
+        <SipDcsHaNotiDelayTime>15</SipDcsHaNotiDelayTime>    <!--dcs ha notify delay time-->       
+        
+        <SipDscMediaType>1</SipDscMediaType>                 <!--dcs media type. 0:G711 1:G729 2:G711&G729-->
+        
+        <SipStkTraceSwitch>0</SipStkTraceSwitch> <!--sip stk trace switch. 1:on 0:off-->
+        
+            <!--sipua end -->     
+            
+            <!--isup begin-->
+            <InbandSet>0</InbandSet>
+            <!--isup end -->
+    </APPCFG>
+    
+    <STAT_TABLES>
+      <CHANPIN name="SXC"> 
+        <MODULE_ID num = "1611" name="BCP">
+            <TAB_ID num = "1" name="个呼呼叫综合类统计"> 
+                <TABLE_SIZE>你好</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "2" name="个呼呼叫局内类统计"> 
+                <TABLE_SIZE>10</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "3" name="个呼呼叫出局类统计">
+                <TABLE_SIZE>10</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "4" name="个呼呼叫入局类统计"> 
+                <TABLE_SIZE>10</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "5" name="个呼呼叫McWiLL网内呼出类统计">
+                <TABLE_SIZE>10</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "6" name="个呼呼叫McWiLL网内呼入类统计"> 
+                <TABLE_SIZE>10</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "7" name="个呼呼叫市话呼出类统计">
+                <TABLE_SIZE>10</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "8" name="个呼呼叫市话呼入类统计"> 
+                <TABLE_SIZE>10</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "9" name="个呼呼叫本地呼出类统计">
+                <TABLE_SIZE>10</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "10" name="个呼呼叫本地呼入类统计"> 
+                <TABLE_SIZE>10</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "11" name="个呼呼叫国内长途呼出类统计">
+                <TABLE_SIZE>10</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "12" name="个呼呼叫国内长途呼入类统计"> 
+                <TABLE_SIZE>10</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "13" name="个呼呼叫国际长途呼出类统计">
+                <TABLE_SIZE>10</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "14" name="个呼呼叫国际长途呼入类统计"> 
+                <TABLE_SIZE>10</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "15" name="个呼呼叫特服呼出类统计">
+                <TABLE_SIZE>10</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "16" name="个呼呼叫指定局向类统计"> 
+                <TABLE_SIZE>13</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "17" name="个呼呼叫指定基站类统计">
+                <TABLE_SIZE>13</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "18" name="个呼补充业务类统计">
+                <TABLE_SIZE>21</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "20" name="无线集群终端发起的组呼类统计">
+                <TABLE_SIZE>8</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "21" name="调度台发起的组呼类统计">
+                <TABLE_SIZE>8</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "22" name="非集群终端发起的组呼类统计">
+                <TABLE_SIZE>8</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "23" name="SXC间的组呼类统计">
+                <TABLE_SIZE>8</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "24" name="集群补充业务类统计">
+                <TABLE_SIZE>4</TABLE_SIZE>
+            </TAB_ID>
+        </MODULE_ID>
+            
+        <MODULE_ID num = "1608" name="SMS">
+            <TAB_ID num = "19" name="短信类统计"> 
+                <TABLE_SIZE>19</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "30" name="短信类统计"> 
+                <TABLE_SIZE>9</TABLE_SIZE>
+            </TAB_ID>
+        </MODULE_ID>
+        
+        <MODULE_ID num = "1609" name="VLR">
+            <TAB_ID num = "25" name="语音注册类统计"> 
+                <TABLE_SIZE>14</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "26" name="非语音注册类统计"> 
+                <TABLE_SIZE>21</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "27" name="鉴权类统计">
+                <TABLE_SIZE>10</TABLE_SIZE>
+            </TAB_ID>         
+            <TAB_ID num = "48" name="VLR类统计">
+                <TABLE_SIZE>10</TABLE_SIZE>
+            </TAB_ID>
+        </MODULE_ID>
+        
+        <MODULE_ID num = "1623" name="SAB">
+            <TAB_ID num = "1" name="个呼呼叫综合类统计"> 
+                <TABLE_SIZE>17</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "28" name="同一SXC内不同McBTS之间的通话态切换类统计">
+                <TABLE_SIZE>9</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "29" name="同一SXC内不同McBTS之间的非通话态切换类统计">
+                <TABLE_SIZE>9</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "30" name="通话态切入SXC类统计">
+                <TABLE_SIZE>9</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "31" name="非通话态切入SXC类统计">
+                <TABLE_SIZE>9</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "32" name="通话态切出SXC类统计">
+                <TABLE_SIZE>3</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "33" name="非通话态切出SXC类统计"> 
+                <TABLE_SIZE>3</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "35" name="NSP板CPU占用类统计"> 
+                <TABLE_SIZE>3</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "41" name="NSP板内存占用类统计"> 
+                <TABLE_SIZE>3</TABLE_SIZE>
+            </TAB_ID>
+        </MODULE_ID>
+        
+        <MODULE_ID num = "1620" name="HMA">
+            <TAB_ID num = "36" name="AMP1板CPU占用类统计"> 
+                <TABLE_SIZE>3</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "37" name="AMP2板CPU占用类统计"> 
+                <TABLE_SIZE>3</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "42" name="AMP1板内存占用类统计"> 
+                <TABLE_SIZE>3</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "43" name="AMP2板内存占用类统计"> 
+                <TABLE_SIZE>3</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "46" name="AMP通道类统计"> 
+                <TABLE_SIZE>3</TABLE_SIZE>
+            </TAB_ID>           
+        </MODULE_ID>
+        
+        <MODULE_ID num = "1621" name="DM">
+            <TAB_ID num = "38" name="EPI1板CPU占用类统计"> 
+                <TABLE_SIZE>3</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "39" name="EPI2板CPU占用类统计"> 
+                <TABLE_SIZE>3</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "44" name="EPI1板内存占用类统计"> 
+                <TABLE_SIZE>3</TABLE_SIZE>
+            </TAB_ID>
+            <TAB_ID num = "45" name="EPI2板内存占用类统计"> 
+                <TABLE_SIZE>3</TABLE_SIZE>
+            </TAB_ID>
+        </MODULE_ID>
+        
+        <MODULE_ID num = "1622" name="MC">
+            <TAB_ID num = "46" name="AMP通道类统计"> 
+                <TABLE_SIZE>2</TABLE_SIZE>
+            </TAB_ID>
+        </MODULE_ID>
+            
+    </CHANPIN>           
+   </STAT_TABLES>
+</MODULES>

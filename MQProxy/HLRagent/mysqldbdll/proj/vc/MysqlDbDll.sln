@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MysqlDbDll", "MysqlDbDll.vcproj", "{11C531A4-C8BA-40EE-8711-78C43A4A0B02}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dbtest", "dbtest\dbtest.vcproj", "{1CDE694B-E7C5-475C-A33E-CD3E5931B794}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11C531A4-C8BA-40EE-8711-78C43A4A0B02}.Debug|Win32.ActiveCfg = Debug|Win32
+		{11C531A4-C8BA-40EE-8711-78C43A4A0B02}.Debug|Win32.Build.0 = Debug|Win32
+		{11C531A4-C8BA-40EE-8711-78C43A4A0B02}.Release|Win32.ActiveCfg = Release|Win32
+		{11C531A4-C8BA-40EE-8711-78C43A4A0B02}.Release|Win32.Build.0 = Release|Win32
+		{1CDE694B-E7C5-475C-A33E-CD3E5931B794}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1CDE694B-E7C5-475C-A33E-CD3E5931B794}.Debug|Win32.Build.0 = Debug|Win32
+		{1CDE694B-E7C5-475C-A33E-CD3E5931B794}.Release|Win32.ActiveCfg = Release|Win32
+		{1CDE694B-E7C5-475C-A33E-CD3E5931B794}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

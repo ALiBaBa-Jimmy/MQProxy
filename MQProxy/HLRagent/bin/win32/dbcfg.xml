@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<MODULES> 
+
+  <DB_CFG>
+  	<!--readme1>database name</readme1-->
+  	<DATABASE>udc</DATABASE>  	
+  	<!--readme2>user</readme2-->
+  	<USER_NAME>root</USER_NAME>  	
+  	<!--readme3>password</readme3-->
+    	<PASSWORD>xinwei</PASSWORD>
+    	<!--readme4>server ipaddr</readme4-->
+ 	<SERVERNAME>172.16.8.252</SERVERNAME>
+  </DB_CFG>
+
+</MODULES>

@@ -1,0 +1,34 @@
+PL_ERR:{2015-09-02 09:03:16,sprhdboam,(null),89}FID_Tsk_AgDB: DbInitConnection error,nRet=-1,user=hlr3000_udc,connstring=ora11g_172.16.10.215
+
+PL_ERR:{2015-09-02 09:03:16,agentdbtask,(null),173}FID_Tsk_AgDB: DbInitDataHandler error.
+
+PL_EXP:{2015-09-02 09:03:16,agentdbtask,(null),52}FID_Tsk_AgDB: DbInitData return XERROR.
+
+PL_EXP:{2015-09-02 09:03:16,mqttcomfun,(null),420}FID_Tsk_MQTT: parse dbscfg file failed
+
+PL_ERR:{2015-09-02 09:03:16,mqttcomfun,(null),260}FID_Tsk_MQTT:  Read ./mqttcfg.xml Err!.
+
+PL_ERR:{2015-09-02 09:03:27,mqtttask,(null),399}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-09-02 09:03:37,mqtttask,(null),399}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-09-02 09:03:47,mqtttask,(null),399}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-09-02 09:03:57,mqtttask,(null),399}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-09-02 09:04:07,mqtttask,(null),399}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-09-02 09:04:17,mqtttask,(null),399}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-09-02 09:04:27,mqtttask,(null),399}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-09-02 09:04:37,mqtttask,(null),399}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-09-02 09:04:47,mqtttask,(null),399}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-09-02 09:04:57,mqtttask,(null),399}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-09-02 09:05:07,mqtttask,(null),399}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+
+PL_ERR:{2015-09-02 09:05:17,mqtttask,(null),399}FID_Tsk_MQTT: Agent try to connect to MQTT Server
+

@@ -1,0 +1,54 @@
+#!/bin/bash
+
+export MAKE_PLATFORM=LINUX
+export PRODUCT=xos_test
+
+if [ "$HOSTTYPE" = "x86_64" ];
+then
+   echo "x86_64"
+   export CPU=x86_64
+else
+   echo "i686"
+   export CPU=i686
+fi
+
+export MICR_BASE=/usr
+export XOSTEST_ROOT=$PWD/..
+export SRC_ROOT=$(cd ../../..; pwd)
+echo $SRC_ROOT
+export TEST_SRC_ROOT=$XOSTEST_ROOT/src
+
+export XCPS_ROOT=$XOSTEST_ROOT/../..
+export APP_COMMON=$XCPS_ROOT/app_common
+export V3000_ROOT=$XCPS_ROOT/cpsv3000
+export RULES_ROOT=$XCPS_ROOT/cpsrules
+export OBJS_DIR=$XOSTEST_ROOT/obj/linux
+
+export ENABLE_PR_XOS_OUT=xoslin
+
+export WARNING=1
+export DEBUG=1
+export OBJTYPE=o
+export XOS_NEED_MAIN=1
+export XOS_MDLMGT=1
+export XOS_TELNETD=1
+export XOS_ModMem_Check=1
+export XOS_HASH_DEBUG=1
+export XOS_ARRAY_DEBUG=1
+export INPUT_PAR_CHECK=1
+#export NEED_OAM=1
+#export NEED_CPPFRM=1
+#export XOS_NEED_OLDTIMER=1
+export OAM_MSG_FROM_FILE=1
+export XOS_ENABLE_GPROF=0
+export XOS_NEED_NFS=1
+export XOS_ENABLE_GCOV=0
+export XOS_TRACE_AGENT=0
+
+export XOS_FTP_CLIENT=1
+export BIG_POLLING_FD_SETSIZE=1
+
+export XOS_EW_START=1
+export XOS_SCTP=1
+export XOS_LONG_SLEEP=0
+

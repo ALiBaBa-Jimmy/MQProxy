@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="SSL">
+</Property><Property Name="Solution File" Value="F:\SVN\eHSS\11.code\import\ACE_wrappers\include\ace\SSL\SSL.sln">
+</Property><Property Name="Date" Value="2014年8月23日">
+</Property><Property Name="Time" Value="16:48:27">
+</Property></Properties><Event ErrorLevel="2" Project="SSL" Source="SSL.vcproj" Description="The project file 'F:\SVN\eHSS\11.code\import\ACE_wrappers\include\ace\SSL\SSL.vcproj' cannot be updated to this Visual Studio 2008 version format because it is read-only on disk. Please set the permissions on the project file and re-open it to migrate the project.">
+</Event></UpgradeLog>

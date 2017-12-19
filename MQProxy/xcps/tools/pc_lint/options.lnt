@@ -1,0 +1,32 @@
+// Please note -- this is a representative set of error suppression
+//                options.  Please adjust to suit your own policies
+//                See PC-lint for C/C++ manual (chapter LIVING WITH LINT)
+//                for further details.
+
+
+-d_WCHAR_T_DEFINED
+
+-dXOS_WIN32
+-dXOS_MDLMGT
+
+-esym(18,fd_set,__WSAFDIsSet,FD_SET,PFD_SET,LPFD_SET,t_FDSET,select,time_t,std,_TYPE_time_t,XINET_Select)
+-esym(39,fd_set)
+-esym(40,std)
+-esym(1001,std)
+
+-esym(123,PUB_ASSERT)
+
+-emacro(506,PUB_ASSERT_RN) //允许在代码中出现SS_ASSERT_RN(false)语句
+
+//-esym(613,SS_ASSERT)   
+
+-e46			// Field type should be int            
+-e537     // Repeated include file 'FileName' 
+-e641     // Converting enum to int
+-e801     // 使用了goto语句  
+-e830     // Location cited in prior message        
+-e831     // Reference cited in prior message 
+-e1704    // Constructor 'Symbol' has private access specification       
+-e1736    // Info -- Redundant access specifier  
+-e534
+-e1536    // Exposing low access member          

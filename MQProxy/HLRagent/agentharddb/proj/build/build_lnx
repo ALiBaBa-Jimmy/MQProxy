@@ -1,0 +1,56 @@
+#!/bin/bash
+
+echo "*******build_lnx BUILD_MODULE_NAME=${BUILD_MODULE_NAME}********"
+export LIB_MODULE_NAME=${BUILD_MODULE_NAME}
+export BUILD_DLL_OUTPUT=$PRG_ROOT/bin/linux/lib/lib$LIB_MODULE_NAME.so
+export INCLUDE_DIR=$PRG_ROOT/include/$LIB_MODULE_NAME
+
+#============ 工程相关目录和参数 =============
+echo PRG_ROOT=$PRG_ROOT
+echo SRC_ROOT=$SRC_ROOT
+echo OBJS_DIR=$OBJS_DIR
+echo BIN_DIR=$BIN_DIR
+echo BIN_LINUX_DIR=$BIN_LINUX_DIR
+echo BUILD_DIR=$BUILD_DIR
+echo LIB_MODULE_NAME=$LIB_MODULE_NAME
+
+
+echo $MAKE_PLATFORM
+echo PRG_ROOT = $PRG_ROOT
+echo COMMON_DIR = $COMMON_DIR
+echo INCLUDE_DIR = $INCLUDE_DIR
+
+
+#============ copy common to local proj=============
+#cp -rf $COMMON_DIR/common/ $SRC_ROOT 
+
+#============ 编译$LIB_MODULE_NAME=============
+
+if [ "$OBJS_DIR" != "" ];then	
+  rm -rf $OBJS_DIR/$LIB_MODULE_NAME/*
+fi
+
+if [ "$BIN_LINUX_DIR" != "" ];then	
+  rm -rf $BIN_LINUX_DIR/lib/*
+ fi
+
+if [ "$PUBLISTH_ROOT" != "" ];then	
+  rm -rf $PUBLISTH_ROOT/$LIB_MODULE_NAME
+fi
+
+echo MAK_FILE=$SRC_ROOT/$LIB_MODULE_NAME.mak
+
+echo ===========PRINT MAKEFILE==========
+echo SRC_ROOT=$SRC_ROOT
+echo BUILD_MODULE_NAME_MAK_FILE=$SRC_ROOT/$BUILD_MODULE_NAME/makefile
+echo RULES_ROOT=$RULES_ROOT 
+echo ACE_INCLUDE_ROOT=$ACE_INCLUDE_ROOT
+echo INCLUDE_DIR=$INCLUDE_DIR
+echo XCPS_INCLUDE_ROOT=$XCPS_INCLUDE_ROOT
+echo BUILD_EHSSFEBES6A_MAK_FILE=$SRC_ROOT/ehssfebeS6a/makefile
+echo ===========PRINT MAKEFILE==========
+make -C $OBJS_DIR -f $SRC_ROOT/$LIB_MODULE_NAME.mak
+
+
+
+echo ===========Build $LIB_MODULE_NAME over==========

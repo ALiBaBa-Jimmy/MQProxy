@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration SYSTEM "../config/diameter.dtd">
+<configuration>
+   <general>
+      <product>Xinwei Diameter</product>
+      <version>10</version>
+      <vendor_id>880</vendor_id>
+      <supported_vendor_id>8</supported_vendor_id>
+      <auth_application_id>16777251</auth_application_id>
+	  <auth_application_id>16777252</auth_application_id>
+      <vendor_specific_application_id>
+          <vendor_id>39</vendor_id>
+          <auth_application_id>8</auth_application_id>
+      </vendor_specific_application_id>
+      <vendor_specific_application_id>
+          <vendor_id>49</vendor_id>
+          <acct_application_id>15</acct_application_id>
+      </vendor_specific_application_id>
+   </general>
+   <parser> 
+      <dictionary></dictionary>
+   </parser>
+   <transport_mngt>
+      <!--TLS begin-->
+      <!--certificate file path-->
+      <certificate>D:\project\diameter\ca\sslclient.crt</certificate>
+      <!--private_key file path-->
+      <private_key>D:\project\diameter\ca\sslclient.key</private_key>
+      <!--private_key file password-->
+      <password>xinwei</password>
+      <!--TLS end-->
+      <runmode>0</runmode>
+      <watchdog_timeout>20</watchdog_timeout>
+      <reconnect_interval>10</reconnect_interval>
+      <reconnect_max>0</reconnect_max>
+      <request_retransmission_interval>10</request_retransmission_interval>
+      <max_request_retransmission_count>0</max_request_retransmission_count>
+      <receive_buffer_size>4096</receive_buffer_size>
+      <!--uip-->
+      <multi_response>1</multi_response>
+      <route_table>
+          <expire_time>0</expire_time>
+          <route>
+             <realm>169.0.199.236</realm>
+             <!-- The role that this diameter entity will play in
+                  resolving messages matching this realm. Valid 
+                  values for this elements are:
+                   0 (local)    - application acting as local servers
+                   1 (relay)    - application acting as relay agent
+                   2 (proxy)    - application acting as proxy server
+                   3 (redirect) - application acting as redirect agent -->
+             <role>0</role>
+             <redirect_usage>0</redirect_usage>
+             <application>
+                <application_id>8</application_id>
+                <vendor_id>0</vendor_id>
+                <peer_entry>
+                    <server>169.0.199.236</server>
+                    <metric>2</metric>
+                </peer_entry>
+             </application>
+          </route>
+          <default_route>
+             <realm>169.0.199.236</realm>
+             <role>0</role> 
+             <redirect_usage>0</redirect_usage>
+             <application>
+                <application_id>8</application_id>
+                <vendor_id>0</vendor_id>
+                <peer_entry>
+                    <server>169.0.199.236</server>
+                    <metric>4</metric>
+                </peer_entry>
+             </application>
+          </default_route>
+      </route_table>
+   </transport_mngt>
+   <session_mngt>
+      <max_sessions>10000</max_sessions>
+      <auth_sessions>
+         <stateful>1</stateful>
+         <session_timeout>30</session_timeout>
+         <lifetime_timeout>360</lifetime_timeout>
+         <grace_period_timeout>30</grace_period_timeout>
+         <abort_retry_timeout>20</abort_retry_timeout>
+      </auth_sessions>
+      <acct_sessions>
+         <session_timeout>30</session_timeout>
+         <interim_interval>5</interim_interval>
+         <realtime>1</realtime>
+      </acct_sessions>
+      <trans_sessions>
+         <response_timeout>30</response_timeout>
+         <max_responsequeue>200</max_responsequeue>
+      </trans_sessions>
+   </session_mngt>
+   <log>
+      <flags>
+         <level>trace</level>
+      </flags>
+      <target>
+         <console>enabled</console>
+      </target>
+   </log>
+</configuration>

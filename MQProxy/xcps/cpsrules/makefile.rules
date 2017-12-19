@@ -1,0 +1,55 @@
+########################################################################
+#                                                                      #
+#      Makefile rules file                                             #
+#                                                                      #
+#      All the makefiles in sub directories must include this file     #
+#      to get rules to make.                                           #
+#																	                                     #
+########################################################################
+ifndef SRC_ROOT
+exit_to_setenv:
+	@echo Must define SRC_ROOT!
+endif
+
+ifeq ($(SRC_ROOT),$(OBJS_DIR))
+exit_to_setenv:
+	@echo OBJS_DIR can't equal SRC_ROOT!
+endif
+
+#更新SRC_ROOT：将“\”替换成“/”；将“//”替换成“/”；去掉最后一个"/"；去掉*
+override SRC_ROOT:=$(subst *,,$(subst /*,,$(subst //,/,$(subst \,/,$(SRC_ROOT)))*))
+
+#选择OS相关的规则
+ifeq ($(MAKE_PLATFORM),SOLARIS)
+  include $(RULES_ROOT)/make_sol.rule
+else
+ifeq ($(MAKE_PLATFORM),WIN32)
+	include $(RULES_ROOT)/make_win32.rule
+else
+ifeq ($(MAKE_PLATFORM),LINUX)
+   include $(RULES_ROOT)/make_linux.rule
+else
+   include $(RULES_ROOT)/make_vx.rule
+   override MAKE_PLATFORM = VXWORKS
+   export MAKE_PLATFORM
+endif
+endif
+endif
+
+#包含SSI相关规则
+ifeq ($(NEED_TRI_SSI),YES)
+	  CC_DEFINES += -DNEED_TRI_SSI
+	  include $(RULES_ROOT)/tri_ssi.rule
+endif
+
+ifneq ($(NEED_XOS),NO)
+	  include $(RULES_ROOT)/make_xos.rule
+endif
+
+ifeq ($(NEED_OAM),1)
+  include $(RULES_ROOT)/agent.rules
+endif
+
+ifeq ($(CM_OAM_SUPPORT),1)
+	  include $(RULES_ROOT)/make_oam.rule
+endif

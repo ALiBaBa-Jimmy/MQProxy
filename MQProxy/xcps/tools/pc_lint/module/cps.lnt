@@ -1,0 +1,5 @@
+
+..\..\..\cpsv3000\bdy\src\trace_agent.c
+..\..\..\cpsv3000\bdy\src\xosenc.c
+..\..\..\cpsv3000\bdy\src\xosipmi.c
+..\..\..\cpsv3000\bdy\src\xosnetinf.c

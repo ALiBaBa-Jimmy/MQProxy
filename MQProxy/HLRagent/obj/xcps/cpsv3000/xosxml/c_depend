@@ -1,0 +1,73 @@
+xmlencoding.o: \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/xmlencoding.c \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlstring.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/common/xostype.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlencoding.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlstring.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmltree.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlIO.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlencoding.h
+xmlentities.o: \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/xmlentities.c \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlentities.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmltree.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/common/xostype.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlIO.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlencoding.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlstring.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlparser.h
+xmlIO.o: \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/xmlIO.c \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlparser.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/common/xostype.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmltree.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlIO.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlencoding.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlstring.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlIO.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlstring.h
+xmlparser.o: \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/xmlparser.c \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlparser.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/common/xostype.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmltree.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlIO.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlencoding.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlstring.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlerror.h
+xmlsave.o: \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/xmlsave.c \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlstring.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/common/xostype.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmltree.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlIO.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmltree.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlencoding.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlstring.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlsave.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlIO.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlentities.h
+xmlstring.o: \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/xmlstring.c \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/inc/xmlstring.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/common/xostype.h
+xmltree.o: \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/xmltree.c \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmltree.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/common/xostype.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlIO.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmltree.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlencoding.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlstring.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlparser.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlentities.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/../inc/xmlerror.h
+xwriter.o: \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/src/xwriter.c \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/inc/xwriter.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/common/xostype.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/inc/xmltree.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/inc/xmlIO.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/inc/xmlencoding.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/inc/xmlstring.h \
+ /opt/buildforHLRAGENT/B16D31SP05/HLRagent/proj/build/../../../xcps/cpsv3000/xosxml/inc/xmlsave.h

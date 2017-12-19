@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "../config/dictionary.dtd">
+<dictionary protocol="0">
+  <!-- ************************* Vendors **************************** -->
+  <vendor id="61" name="Xinwei Co.Ltd"/>
+  <!-- *********************** End Vendors ************************** -->
+  <base uri="ftp://ftp.ietf.org/internet-drafts/draft-ietf-aaa-diameter-08.txt">
+    <!--*****************define BWT AVP name and code****************** -->
+  
+    <avp name="Pre-emption-Vulnerability" code="1048" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+            <enum name="PRE-EMPTION_VULNERABILITY_ENABLED" code="0" /> 
+            <enum name="PRE-EMPTION_VULNERABILITY_DISABLED" code="1" /> 
+    </avp>
+    <avp name="Pre-emption-Capability" code="1047" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+            <enum name="PRE-EMPTION_CAPABILITY_ENABLED" code="0" /> 
+            <enum name="PRE-EMPTION_CAPABILITY_DISABLED" code="1" /> 
+    </avp>
+    <avp name="Priority-Level" code="1046" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="QoS-Class-Identifier" code="1028" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+          <enum name="QCI_1" code="1" /> 
+          <enum name="QCI_2" code="2" /> 
+          <enum name="QCI_3" code="3" /> 
+          <enum name="QCI_4" code="4" /> 
+          <enum name="QCI_5" code="5" /> 
+          <enum name="QCI_6" code="6" /> 
+          <enum name="QCI_7" code="7" /> 
+          <enum name="QCI_8" code="8" /> 
+          <enum name="QCI_9" code="9" /> 
+    </avp>
+    <avp name="ULA-Flags" code="1406" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Served-Party-IP-Address" code="848" mandatory="must" may-encrypt="yes">
+      <type type-name="Address"/>
+    </avp>
+    <avp name="Service-Selection" code="493" mandatory="must" may-encrypt="yes">
+      <type type-name="UTF8String" max-size="32"/>
+    </avp>
+    <avp name="User-Name" code="1" mandatory="must" may-encrypt="yes">
+      <type type-name="UTF8String" max-size="16"/>
+    </avp>
+    <avp name="Max-Requested-Bandwidth-UL" code="516" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Max-Requested-Bandwidth-DL" code="515" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="MSISDN" code="701" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString" max-size="32"/>
+    </avp>
+    <avp name="RAT-Type" code="1032" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+          <enum name="WLAN" code="0" /> 
+	    <enum name=" UTRA" code=" 100" /> 
+	    <enum name="GERAN" code="1001" /> 
+	    <enum name="GAN" code="1002" /> 
+	    <enum name="HSPA_EVOLUTION" code="1003" /> 
+	    <enum name="EUTRAN" code="1004" /> 
+	    <enum name=" CDM" code=" 200" /> 
+	    <enum name="HRPD" code="2001" /> 
+	    <enum name="UMB" code="2002" /> 
+	    <enum name="EHRPD" code="2003" /> 
+    </avp>
+    
+    <avp name="Terminal-Information" code="1401" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="IMEI" code="1402" mandatory="must" may-encrypt="yes">
+      <type type-name="UTF8String"/>
+    </avp>
+    <avp name="Software-Version" code="1403" mandatory="must" may-encrypt="yes">
+      <type type-name="UTF8String"/>
+    </avp>
+    <avp name="QoS-Subscribed" code="1404" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="ULR-Flags" code="1405" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Visited-PLMN-Id" code="1407" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString" max-size="3"/>
+    </avp>
+    <avp name="Number-Of-Requested-Vectors" code="1410" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Re-Synchronization-Info" code="1411" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"  max-size="36"/>
+    </avp>
+    <avp name="Immediate-Response-Preferred" code="1412" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="UTRAN-Vector" code="1415" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="GERAN-Vector" code="1416" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="Network-Access-Mode" code="1417" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+          <enum name="PACKET_AND_CIRCUIT" code="0" /> 
+          <enum name="Reserved" code="1" /> 
+          <enum name="ONLY_PACKET" code="2" />       
+    </avp>
+    <avp name="HPLMN-ODB" code="1418" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Item-Number" code="1419" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Cancellation-Type" code="1420" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+           <enum name="MME_UPDATE_PROCEDURE" code="0" /> 
+          <enum name="SGSN_UPDATE_PROCEDURE" code="1" /> 
+          <enum name="SUBSCRIPTION_WITHDRAWAL" code="2" /> 
+          <enum name="UPDATE_PROCEDURE_IWF" code="3" /> 
+          <enum name="INITIAL_ATTACH_PROCEDURE" code="4" /> 
+    </avp>
+    <avp name="DSR-Flags" code="1421" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="DSA-Flags" code="1422" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Context-Identifier" code="1423" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Subscriber-Status" code="1424" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+          <enum name="SERVICE_GRANTED" code="0" /> 
+          <enum name="OPERATOR_DETERMINED_BARRING" code="1" /> 
+    </avp>
+    <avp name="Operator-Determined-Barring" code="1425" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Access-Restriction-Data" code="1426" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="APN-OI-Replacement" code="1427" mandatory="must" may-encrypt="yes">
+      <type type-name="UTF8String"/>
+    </avp>
+    <avp name="All-APN-Configurations-Included-Indicator" code="1428" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+            <enum name="All_APN_CONFIGURATIONS_INCLUDED" code="0" /> 
+            <enum name="MODIFIED" code="1" /> 
+    </avp>
+    <avp name="3GPP-Charging-Characteristics" code="13" mandatory="must" may-encrypt="yes">
+      <type type-name="UTF8String" max-size="2"/>
+    </avp>
+    <avp name="VPLMN-Dynamic-Address-Allowed" code="1432" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+    </avp>
+    <avp name="STN-SR" code="1433" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Alert-Reason" code="1434" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+    </avp>
+    <avp name="AMBR" code="1435" mandatory="must" may-encrypt="yes">
+          <grouped>
+                <required>
+         	        <avprule name="Max-Requested-Bandwidth-UL" maximum="1" minimum="1"/>
+        	        <avprule name="Max-Requested-Bandwidth-DL" maximum="1" minimum="1"/>
+                </required>        
+        </grouped>
+    </avp> 
+    <avp name="CSG-Subscription-Data" code="1436" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="CSG-Id" code="1437" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="PDN-GW-Allocation-Type" code="1438" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+    </avp>
+    <avp name="Expiration-Date" code="1439" mandatory="must" may-encrypt="yes">
+      <type type-name="Time"/>
+    </avp>
+    <avp name="RAT-Frequency-Selection-Priority-ID" code="1440" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="IDA-Flags" code="1441" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="PUA-Flags" code="1442" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="NOR-Flags" code="1443" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="User-Id" code="1444" mandatory="must" may-encrypt="yes">
+      <type type-name="UTF8String" max-size="64"/>
+    </avp>
+    <avp name="Equipment-Status" code="1445" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+    </avp>
+    <avp name="Regional-Subscription-Zone-Code" code="1446" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="RAND" code="1447" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString" max-size="16"/>
+    </avp>
+    <avp name="XRES" code="1448" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString" max-size="16"/>
+    </avp>
+    <avp name="AUTN" code="1449" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString" max-size="16"/>
+    </avp>
+    <avp name="KASME" code="1450" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString" max-size="32"/>
+    </avp>
+    <avp name="Trace-Collection-Entity" code="1452" mandatory="must" may-encrypt="yes">
+      <type type-name="Address"/>
+    </avp>
+    <avp name="Kc" code="1453" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="SRES" code="1454" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="PDN-Type" code="1456" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+    </avp>
+    <avp name="Roaming-Restricted-Due-To-Unsupported-Feature" code="1457" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+    </avp>
+    <avp name="Trace-Data" code="1458" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="Trace-Reference" code="1459" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Trace-Depth" code="1462" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+    </avp>
+    <avp name="Trace-NE-Type-List" code="1463" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Trace-Interface-List" code="1464" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Trace-Event-List" code="1465" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="OMC-Id" code="1466" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="GPRS-Subscription-Data" code="1467" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="Complete-Data-List-Included-Indicator" code="1468" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+    </avp>
+    <avp name="PDP-Context" code="1469" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="PDP-Type" code="1470" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="3GPP2-MEID" code="1471" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Specific-APN-Info" code="1472" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="LCS-Info" code="1473" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="GMLC-Number" code="1474" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="LCS-PrivacyException" code="1475" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="SS-Code" code="1476" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="SS-Status" code="1477" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="Notification-To-UE-User" code="1478" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+    </avp>
+    <avp name="External-Client" code="1479" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="Client-Identity" code="1480" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="GMLC-Restriction" code="1481" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+    </avp>
+    <avp name="PLMN-Client" code="1482" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+    </avp>
+    <avp name="Service-Type" code="1483" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="ServiceTypeIdentity" code="1484" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="MO-LR" code="1485" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="Teleservice-List" code="1486" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="TS-Code" code="1487" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Call-Barring-Infor-List" code="1488" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="SGSN-Number" code="1489" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="IDR-Flags" code="1490" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="ICS-Indicator" code="1491" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+    </avp>
+    <avp name="IMS-Voice-Over-PS-Sessions-Supported" code="1492" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+          <enum name="NOT_SUPPORTED" code="0" /> 
+          <enum name="SUPPORTED" code="1" /> 
+    </avp>
+    <avp name="Homogeneous-Support-of-IMS-Voice-Over-PS-Sessions" code="1493" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+          <enum name="NOT_SUPPORTED" code="0" /> 
+          <enum name="SUPPORTED" code="1" /> 
+    </avp>
+    <avp name="Last-UE-Activity-Time" code="1494" mandatory="must" may-encrypt="yes">
+      <type type-name="Time"/>
+    </avp>
+    <avp name="EPS-Location-Information" code="1496" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="SGSN-User-State" code="1498" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="User-State" code="1499" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+          <enum name="DETACHED" code="0" /> 
+          <enum name="ATTACHED_NOT_REACHABLE_FOR_PAGING" code="1" /> 
+          <enum name="ATTACHED_REACHABLE_FOR_PAGING" code="2" /> 
+          <enum name="CONNECTED_NOT_REACHABLE_FOR_PAGING" code="3" /> 
+          <enum name="CONNECTED_REACHABLE_FOR_PAGING" code="4" /> 
+          <enum name="NETWORK_DETERMINED_NOT_REACHABLE" code="5" /> 
+    </avp>
+    <avp name="MME-Location-Information" code="1600" mandatory="must" may-encrypt="yes">
+        <grouped>
+        </grouped>
+    </avp>
+    <avp name="SGSN-Location-Information" code="1601" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="E-UTRAN-Cell-Global-Identity" code="1602" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Tracking-Area-Identity" code="1603" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Cell-Global-Identity" code="1604" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Routing-Area-Identity" code="1605" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Location-Area-Identity" code="1606" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Service-Area-Identity" code="1607" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Geographical-Information" code="1608" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Geodetic-Information" code="1609" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Current-Location-Retrieved" code="1610" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+    </avp>
+    <avp name="Age-Of-Location-Information" code="1611" mandatory="must" may-encrypt="yes">
+      <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="Active-APN" code="1612" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="Error-Diagnostic" code="1614" mandatory="must" may-encrypt="yes">
+      <type type-name="Enumerated"/>
+    </avp>
+    <avp name="Ext-PDP-Type" code="1620" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="Ext-PDP-Address" code="1621" mandatory="must" may-encrypt="yes">
+      <type type-name="Address"/>
+    </avp>
+    <avp name="Visited-Network-Identifier" code="600" mandatory="must" may-encrypt="yes">
+      <type type-name="OctetString"/>
+    </avp>
+    <avp name="MIP-Home-Agent-Address" code="334" mandatory="must" may-encrypt="yes">
+      <type type-name="Address"/>
+    </avp>
+    
+    <avp name="MIP-Home-Agent-Host" code="348" mandatory="must" may-encrypt="yes">
+      <grouped>
+        <required>
+    	    <avprule name="Destination-Host" maximum="1" />
+	    <avprule name="Destination-Realm" maximum="1" />
+        </required>
+      </grouped>
+    </avp>
+    <avp name="MIP6-Agent-Info" code="486" mandatory="must" may-encrypt="yes">
+      <grouped>
+        <optional>
+    	    <avprule name="MIP-Home-Agent-Address" maximum="2"/>
+           <avprule name="MIP-Home-Agent-Host" maximum="1"/>
+        </optional>
+      </grouped>
+    </avp>
+    <avp name="Allocation-Retention-Priority" code="1034" mandatory="must" may-encrypt="yes">
+          <grouped>
+                <required>
+                    <avprule name="Priority-Level" maximum="1" minimum="1"/>
+                </required>
+                <optional>
+        	        <avprule name="Pre-emption-Capability" maximum="1"/>
+        	        <avprule name="Pre-emption-Vulnerability" maximum="1" />
+	          </optional>
+        </grouped>
+    </avp>
+    <avp name="EPS-Subscribed-QoS-Profile" code="1431" mandatory="must" may-encrypt="yes">
+          <grouped>
+                <required>
+          	          <avprule name="QoS-Class-Identifier" maximum="1" minimum="1"/>
+	                <avprule name="Allocation-Retention-Priority" maximum="1" minimum="1"/>
+                </required>
+        </grouped>
+    </avp>
+    <avp name="APN-Configuration" code="1430" mandatory="must" may-encrypt="yes">
+          <grouped>
+            <required>
+                     <avprule name="Context-Identifier" maximum="1" />
+        	        <avprule name="Served-Party-IP-Address" maximum="2" />
+        	        <avprule name="PDN-Type" maximum="1"/>
+        	        <avprule name="Service-Selection" maximum="1" />
+	        </required>
+	        <optional>
+        	        <avprule name="EPS-Subscribed-QoS-Profile" maximum="1" />
+        	        <avprule name="AMBR" maximum="1"/>
+        	        <avprule name="3GPP-Charging-Characteristics" maximum="1" />
+<!--
+	               <avprule name="VPLMN-Dynamic-Address-Allowed" maximum="1" />
+        	        <avprule name="MIP6-Agent-Info" maximum="1" />
+        	        <avprule name="Visited-Network-Identifier" maximum="1"/>
+        	        <avprule name="PDN-GW-Allocation-Type" maximum="1"/>
+        	        <avprule name="APN-OI-Replacement" maximum="1" />
+-->
+	        </optional>
+        </grouped>
+    </avp>
+    <avp name="APN-Configuration-Profile" code="1429" mandatory="must" may-encrypt="yes">
+          <grouped>
+               <required>
+                      <avprule name="Context-Identifier" maximum="1" minimum="1"/>
+        	        <avprule name="All-APN-Configurations-Included-Indicator" maximum="1" minimum="1"/>
+        	        <avprule name="APN-Configuration" maximum="16" minimum="1"/>
+	        </required>
+        </grouped>
+    </avp>
+    <avp name="Subscription-Data" code="1400" mandatory="must" may-encrypt="yes">
+          <grouped>
+               <optional>
+         	        <avprule name="Subscriber-Status" maximum="1" />
+        	        <avprule name="MSISDN" maximum="1"/>
+        	        <avprule name="Network-Access-Mode" maximum="1"/>
+        	        <avprule name="Operator-Determined-Barring" maximum="1"/>
+        	        <avprule name="AMBR" maximum="1"/>
+        	        <avprule name="APN-Configuration-Profile" maximum="1" />    
+	        </optional>
+        </grouped>
+    </avp>
+    <avp name="Requested-EUTRAN-Authentication-Info" code="1408" mandatory="must" may-encrypt="yes">
+          <grouped>
+                <optional>
+          	        <avprule name="Number-Of-Requested-Vectors" maximum="1" />
+	               <avprule name="Immediate-Response-Preferred" maximum="1"/>
+	               <avprule name="Re-Synchronization-Info"  maximum="1"/>
+	          </optional>
+        </grouped>
+    </avp>
+    <avp name="Requested-UTRAN-GERAN-Authentication-Info" code="1409" mandatory="must" may-encrypt="yes">
+          <grouped>
+        </grouped>
+    </avp>
+    <avp name="E-UTRAN-Vector" code="1414" mandatory="must" may-encrypt="yes">
+          <grouped>     
+          	   <required>
+                  	<avprule name="RAND" maximum="1" />
+        	        <avprule name="XRES" maximum="1" />
+        	        <avprule name="AUTN" maximum="1" />
+        	        <avprule name="KASME" maximum="1"/>
+          	   </required>
+                <optional>
+                        <avprule name="Item-Number" maximum="1" />
+                </optional>
+        </grouped>
+    </avp>
+    <avp name="Authentication-Info" code="1413" mandatory="must" may-encrypt="yes">
+          <grouped>
+                <optional>
+          	        <avprule name="E-UTRAN-Vector" maximum="5" />
+	          </optional>
+        </grouped>
+    </avp>
+    <avp name="MME-User-State" code="1497" mandatory="must" may-encrypt="yes">
+          <grouped>
+                <optional>
+          	        <avprule name="User-State" maximum="1" />
+	          </optional>  
+        </grouped>
+    </avp>
+    <avp name="EPS-User-State" code="1495" mandatory="must" may-encrypt="yes">
+          <grouped>
+                <optional>
+          	        <avprule name="MME-User-State" maximum="1" />
+	          </optional>          
+        </grouped>
+    </avp>
+  </base>
+  <!--**************define BWT command and avp*************-->
+    <application id="16777251" name="s6a" >
+        <command name="Update-Location" code="316" pbit="1" >
+          <requestrules>
+            <fixed>
+              <avprule name="Session-Id" maximum="1"/>
+            </fixed>
+            <required>
+    	        <avprule name="Auth-Session-State" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+    	        <avprule name="Destination-Realm" maximum="1" minimum="1"/>
+               <avprule name="Destination-Host" maximum="1"/>
+
+               <avprule name="User-Name" maximum="1" />
+    	        <avprule name="RAT-Type" maximum="1"  />
+    	        <avprule name="ULR-Flags" maximum="1" />
+    	        <avprule name="Visited-PLMN-Id" maximum="1" />
+    	    </required>
+            <optional>
+    	        <avprule name="Homogeneous-Support-of-IMS-Voice-Over-PS-Sessions" maximum="1" minimum="1"/>
+            </optional>
+          </requestrules>
+          <answerrules>
+            <fixed>
+              <avprule name="Session-Id" maximum="1"/>
+            </fixed>
+            <required>
+    	        <avprule name="Auth-Session-State" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+
+    	    </required>
+    	     <optional>
+    	         <avprule name="Result-Code" maximum="1"/>
+    	         <avprule name="Experimental-Result" maximum="1"/>
+    	         <avprule name="ULA-Flags" maximum="1" />
+    	        <avprule name="Subscription-Data" maximum="1"  />
+            </optional>
+          </answerrules> 
+      </command>
+      <command name="Cancel-Location" code="317" pbit="1">
+          <requestrules>
+            <fixed>
+              <avprule name="Session-Id" maximum="1"/>
+            </fixed>
+            <required>
+    	        <avprule name="Auth-Session-State" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+    	        <avprule name="Destination-Realm" maximum="1" minimum="1"/>
+               <avprule name="Destination-Host" maximum="1"/>
+               
+               <avprule name="User-Name" maximum="1"/>
+    	        <avprule name="Cancellation-Type" maximum="1"/>
+    	    </required>
+            <optional>
+    	        
+            </optional>
+          </requestrules>
+          <answerrules>
+            <fixed>
+              <avprule name="Session-Id" maximum="1"/>
+            </fixed>
+            <required>
+    	        <avprule name="Auth-Session-State" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+        
+    	    </required>
+    	     <optional>
+                <avprule name="Result-Code" maximum="1"/>
+    	         <avprule name="Experimental-Result" maximum="1"/>
+            </optional>
+          </answerrules> 
+      </command>
+      <command name="Authentication-Information" code="318" pbit="1">
+          <requestrules>
+            <fixed>
+              <avprule name="Session-Id" maximum="1"/>
+            </fixed>
+            <required>
+    	        <avprule name="Auth-Session-State" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+    	        <avprule name="Destination-Realm" maximum="1" minimum="1"/>
+                <avprule name="Destination-Host" maximum="1"/>
+                <avprule name="User-Name" maximum="1"/>
+    	        <avprule name="Visited-PLMN-Id" maximum="1"/>
+    	    </required>
+            <optional>
+                <avprule name="Requested-EUTRAN-Authentication-Info" maximum="1"/>
+            </optional>
+          </requestrules>
+          <answerrules>
+            <fixed>
+              <avprule name="Session-Id" maximum="1"/>
+            </fixed>
+            <required>
+    	        <avprule name="Auth-Session-State" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+
+    	    </required>
+    	     <optional>
+    	         <avprule name="Result-Code" maximum="1"/>
+    	         <avprule name="Experimental-Result" maximum="1"/>
+    	         <avprule name="Authentication-Info" maximum="1"/>
+            </optional>
+          </answerrules> 
+      </command>
+      <command name="Insert-Subscriber-Data" code="319" pbit="1">
+          <requestrules>
+            <fixed>
+              <avprule name="Session-Id" maximum="1"/>
+            </fixed>
+            <required>
+    	        <avprule name="Auth-Session-State" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+    	        <avprule name="Destination-Realm" maximum="1" minimum="1"/>
+               <avprule name="Destination-Host" maximum="1"/>
+               
+               <avprule name="User-Name" maximum="1"/>
+    	        <avprule name="Subscription-Data" maximum="1"/>
+    	    </required>
+            <optional>
+                <avprule name="IDR-Flags" maximum="1"/>
+            </optional>
+          </requestrules>
+          <answerrules>
+            <fixed>
+              <avprule name="Session-Id" maximum="1"/>
+            </fixed>
+            <required>
+    	        <avprule name="Auth-Session-State" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+
+    	    </required>
+    	     <optional>
+    	        <avprule name="Result-Code" maximum="1"/>
+    	        <avprule name="Experimental-Result" maximum="1"/>
+               <avprule name="IMS-Voice-Over-PS-Sessions-Supported" maximum="1" />
+	        <avprule name="Last-UE-Activity-Time" maximum="1" />
+	        <avprule name="RAT-Type" maximum="1" />
+	        <avprule name="EPS-User-State" maximum="1" />
+	     </optional>
+          </answerrules> 
+      </command>
+      <command name="Delete-Subscriber-Data" code="320" pbit="1">
+          <requestrules>
+            <fixed>
+              <avprule name="Session-Id" maximum="1"/>
+            </fixed>
+            <required>
+    	        <avprule name="Auth-Session-State" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+    	        <avprule name="Destination-Realm" maximum="1" minimum="1"/>
+               <avprule name="Destination-Host" maximum="1"/>
+               
+               <avprule name="User-Name" maximum="1"/>
+    	        <avprule name="DSR-Flags" maximum="1"/>
+    	    </required>
+            <optional>
+    	        <avprule name="Context-Identifier" maximum="1"/>
+            </optional>
+          </requestrules>
+          <answerrules>
+            <fixed>
+              <avprule name="Session-Id" maximum="1"/>
+            </fixed>
+            <required>
+    	        <avprule name="Auth-Session-State" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+    	        
+    	    </required>
+    	     <optional>
+    	        <avprule name="Result-Code" maximum="1"/>
+    	        <avprule name="Experimental-Result" maximum="1"/>
+    	        <avprule name="DSA-Flags" maximum="1"/>
+            </optional>
+          </answerrules> 
+      </command>
+      <command name="Purge-UE" code="321" pbit="1">
+          <requestrules>
+            <fixed>
+              <avprule name="Session-Id" maximum="1"/>
+            </fixed>
+            <required>
+    	        <avprule name="Auth-Session-State" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+    	        <avprule name="Destination-Realm" maximum="1" minimum="1"/>
+               <avprule name="Destination-Host" maximum="1"/>
+               
+               <avprule name="User-Name" maximum="1"/>
+    	    </required>
+            <optional>
+    	        
+            </optional>
+          </requestrules>
+          <answerrules>
+            <fixed>
+              <avprule name="Session-Id" maximum="1"/>
+            </fixed>
+            <required>
+    	        <avprule name="Auth-Session-State" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+                
+    	    </required>
+    	     <optional>
+    	         <avprule name="Result-Code" maximum="1"/>
+    	         <avprule name="Experimental-Result" maximum="1"/>
+    	         <avprule name="PUA-Flags" maximum="1"/>
+            </optional>
+          </answerrules> 
+      </command>
+      <command name="Reset" code="322" pbit="1">
+          <requestrules>
+            <fixed>
+              <avprule name="Session-Id" maximum="1"/>
+            </fixed>
+            <required>
+    	        <avprule name="Auth-Session-State" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+    	        <avprule name="Destination-Realm" maximum="1" minimum="1"/>
+               <avprule name="Destination-Host" maximum="1"/>
+               
+               <avprule name="User-Id" maximum="1"/>
+    	    </required>
+            <optional>
+            </optional>
+          </requestrules>
+          <answerrules>
+            <fixed>
+              <avprule name="Session-Id" maximum="1"/>
+            </fixed>
+            <required>
+    	        <avprule name="Auth-Session-State" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Host" maximum="1" minimum="1"/>
+    	        <avprule name="Origin-Realm" maximum="1" minimum="1"/>
+    	    </required>
+    	     <optional>
+                <avprule name="Result-Code" maximum="1"/>
+    	        <avprule name="Experimental-Result" maximum="1"/>
+            </optional>
+          </answerrules> 
+      </command>
+      
+    </application>
+</dictionary>

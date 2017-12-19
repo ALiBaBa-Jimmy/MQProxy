@@ -1,0 +1,128 @@
+#============ Oracle库目录 =============
+export ORACLE_HOME=/opt/oracle/product/ora11g
+export ORACLE_LIB=$ORACLE_HOME/lib/
+export PATH=$ORACLE_HOME/bin:$PATH
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
+
+#============ 目录 =============
+export MAKE_PLATFORM=LINUX
+export OBJTYPE=o
+export DEBUG=1
+#export CPU=PENTIUM
+export CPU=x86_64
+
+
+#============ XOS平台相关目录和文件 =============
+export NEED_OAM=1
+export OAM_MSG_FROM_FILE=1
+export NEED_CPPFRM=0
+
+export ENABLE_PR_XOS_OUT=xoslin
+export WARNING=0
+export DEBUG=1
+export MEM_FID_DEBUG=1
+export XOS_NEED_MAIN=1
+export XOS_MDLMGT=1
+export XOS_TELNETD=1
+export XOS_NOTC_MEM=1
+export XOS_ModMem_Check=1
+export XOS_HASH_DEBUG=1
+export XOS_ARRAY_DEBUG=1
+export XOS_INPUT_PAR_CHECK=1
+export XOS_TIMER_FOURFUNC=1
+export XOS_FTP_CLIENT=1
+export XOS_EW_START=1
+export XOS_TRACE_AGENT=1
+export XOS_SCTP=1
+export XOS_LINUX=1
+export XOS_NEED_HA=1
+export XOS_ATCA=1
+
+
+#===================eHSS特有的参数==================
+export USE_XOS_TRACE_AGENT=1
+export SPR_USE_XOS_OAM=1
+
+export COMMON_DIR=$PARENT_PRG_ROOT/common
+export XCPS_ROOT=$PARENT_PRG_ROOT/../xcps
+export XCPS_ROOT_BUILD_PATH=$PARENT_PRG_ROOT/../xcps/cpsv3000/port
+export XCPS_INCLUDE_ROOT=$XCPS_ROOT/cpsv3000/bdy/inc
+export XCPS_LIB_ROOT=$XCPS_ROOT/cpsv3000/lib
+export XCPS_SCTP_LIB_ROOT=$XCPS_ROOT/cpsv3000/libsctp/linux
+export RULES_ROOT=$XCPS_ROOT/cpsrules
+export PUBLISTH_ROOT=$PARENT_PRG_ROOT/publication
+export IMPORT_ROOT=$PARENT_PRG_ROOT/import
+export BUILD_DIAMETER_ROOT=$PARENT_PRG_ROOT/diameter
+export AGENT_INC=$XCPS_ROOT/app_common/oam/inc
+export APP_COMMON=$XCPS_ROOT/app_common
+export V3000_ROOT=$XCPS_ROOT/cpsv3000
+
+export ACE_ROOT=$IMPORT_ROOT/ACE_wrappers/include
+export ACE_INCLUDE_ROOT=$IMPORT_ROOT/ACE_wrappers/include
+export ACE_LIB_ROOT=$IMPORT_ROOT/ACE_wrappers/bin/linux
+
+export OCI_INCLUDE_ROOT=$IMPORT_ROOT/oci/include/linux/inc
+export OCI_LIB_ROOT=$IMPORT_ROOT/oci/bin/linux
+
+export LOG4CPLUS_INCLUDE_ROOT=$IMPORT_ROOT/log4cplus/include/linux
+export LOG4CPLUS_LIB_ROOT=$IMPORT_ROOT/log4cplus/bin/linux
+
+export LIBXML2_INCLUDE_ROOT=$IMPORT_ROOT/libxml2/include
+export LIBXML2_LIB_ROOT=$IMPORT_ROOT/libxml2/bin/linux
+
+export LIBCURL_INCLUDE_ROOT=$IMPORT_ROOT/libcurl/include
+export LIBCURL_LIB_ROOT=$IMPORT_ROOT/libcurl/bin/linux
+
+export MYSQL_INCLUDE_ROOT=$IMPORT_ROOT/mysql/include/linux/inc
+export MYSQL_LIB_ROOT=$IMPORT_ROOT/mysql/bin/linux
+
+export MYSQLDBDLL_INCLUDE_ROOT=$PUBLISTH_ROOT/mysqldbdll/include/mysqldbdll
+export MYSQLDBDLL_LIB_ROOT=$PARENT_PRG_ROOT/mysqldbdll/bin/linux/lib
+
+export DIAMETER_INCLUDE_ROOT=$IMPORT_ROOT/diameter/include/
+export DIAMETER_LIB_ROOT=$IMPORT_ROOT/diameter/bin/linux
+
+export BOOST_INCLUDE_ROOT=$IMPORT_ROOT/boost/include/
+export BOOST_LIB_ROOT=$IMPORT_ROOT/boost/bin/linux
+
+export DBDLL_INCLUDE_ROOT=$PARENT_PRG_ROOT/mysqldbdll/include/mysqldbdll
+export DBDLL_LIB_ROOT=$PARENT_PRG_ROOT/mysqldbdll/bin/linux
+
+
+export LOGGER4PLUS_INCLUDE_ROOT=$IMPORT_ROOT/logger4plus/include
+export LOGGER4PLUS_LIB_ROOT=$PUBLISTH_ROOT/logger4plus/bin/linux
+
+export AGENTOAM_INCLUDE_ROOT=$PUBLISTH_ROOT/agentoam/include/agentoam
+export AGENTOAM_LIB_ROOT=$PUBLISTH_ROOT/agentoam/bin/linux
+
+export AGENTUA_INCLUDE_ROOT=$PUBLISTH_ROOT/agentua/include/agentua
+export AGENTUA_LIB_ROOT=$PUBLISTH_ROOT/agentua/bin/linux
+
+export AGENTHARDDB_INCLUDE_ROOT=$PUBLISTH_ROOT/agentharddb/include/agentharddb
+export AGENTHARDDB_INCLUDE_ROOT_PATH=$PUBLISTH_ROOT/agentharddb/include/
+export AGENTHARDDB_LIB_ROOT=$PUBLISTH_ROOT/agentharddb/bin/linux
+
+export AGENTDB_INCLUDE_ROOT=$PUBLISTH_ROOT/agentdb/include/agentdb
+export AGNETDB_INCLUDE_ROOT_PATH=$PUBLISTH_ROOT/agentdb/include/
+export AGENTDB_LIB_ROOT=$PUBLISTH_ROOT/agentdb/bin/linux
+
+export MQTT_INCLUDE_ROOT=$PUBLISTH_ROOT/mqtt/include/sprharddb
+export MQTT_INCLUDE_ROOT_PATH=$PUBLISTH_ROOT/mqtt/include/
+export MQTT_LIB_ROOT=$PUBLISTH_ROOT/mqtt/bin/linux
+
+export ORACLE_INCLUDE_ROOT=$IMPORT_ROOT/oci/include/linux/inc
+export ORACLE_LIB_ROOT=$IMPORT_ROOT/oci/bin/linux
+
+export SRC_ROOT=$PRG_ROOT/src
+export OBJS_DIR=$PRG_ROOT/obj
+export BIN_DIR=$PRG_ROOT/bin
+export BIN_LINUX_DIR=$PRG_ROOT/bin/linux
+export BUILD_DIR=$PRG_ROOT/proj/build
+export PRG_INCLUDE_PATH=$PRG_ROOT/include
+
+
+
+
+
+
+

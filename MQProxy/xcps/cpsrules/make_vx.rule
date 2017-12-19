@@ -1,0 +1,405 @@
+########################################################################
+#                                                                      #
+#      Makefile rules file                                             #
+#                                                                      #
+#      All the makefiles in sub directories must include this file     #
+#      to get rules to make.                                           #
+#																	                                     #
+########################################################################
+
+
+########################################################################
+# general definitions
+########################################################################
+
+# CPU should be defined outside of this file
+TOOL            = gnu
+
+########################################################################
+# Option flags definitions
+#	MPC8240 does not need any CC_ARCH_SPEC definitions
+########################################################################
+
+ifeq ($(CPU),I80386)
+  CC_ARCH_SPEC		= -mno-486
+  CPU_FAMILY		= CPU_X86
+else
+ifeq ($(CPU),I80486)
+  CC_ARCH_SPEC		= -m486
+  CPU_FAMILY		= CPU_X86
+else
+ifeq ($(CPU),PPC603)
+  CC_ARCH_SPEC		= -mstrict-align -mlongcall
+  CPU_FAMILY		= CPU_PPC
+else
+ifeq ($(CPU),PPC860)
+  CC_ARCH_SPEC		= -mcpu=860
+  CPU_FAMILY		= CPU_PPC
+else
+ifeq ($(CPU),PPC403)
+  CC_ARCH_SPEC		= -mstrict-align -mcpu=403
+  CPU_FAMILY		= CPU_PPC
+else
+ifeq ($(CPU),PPCEC603)
+  CC_ARCH_SPEC		= -mstrict-align 
+  CPU_FAMILY		= CPU_PPC
+else
+ifeq ($(CPU),PPC604)
+  CC_ARCH_SPEC		= -mstrict-align -mlongcall 
+  CPU_FAMILY		= CPU_PPC
+else
+ifeq ($(CPU),PPC601)
+  CC_ARCH_SPEC		= -mcpu=601 -mstrict-align
+  CPU_FAMILY		= CPU_PPC
+else
+ifeq ($(CPU),MIPS32)
+  CC_ARCH_SPEC		= -mips1 -G 0 -mno-branch-likely -EB -msoft-float -mlong32
+  CPU_FAMILY		= CPU_MIPS
+else
+ifeq ($(CPU),MIPS64)
+  CC_ARCH_SPEC		= -mips3 -G 0 -mno-branch-likely -EB -mlong-calls
+  CPU_FAMILY		= CPU_MIPS
+else
+  CC_ARCH_SPEC		= -mpentium
+  CPU_FAMILY		= CPU_X86
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+
+###########################ARM
+ifeq ($(CPU),XSCALE)
+  CC_ARCH_SPEC		= -mbig-endian -mapcs-32 -mcpu=xscale -DARMEB
+  CPU_FAMILY		= CPU_XSCALE
+endif
+
+
+ifeq ($(CPU),I960JX)
+  CC_ARCH_SPEC	   = -mca -mstrict-align
+  CPU_FAMILY		= CPU_I960
+  LD              = ld960 -ACA -X -r
+  AS              = as960 -ACA
+else
+ifeq ($(CPU),I960CA)
+  CC_ARCH_SPEC	   = -mca -mstrict-align
+  CPU_FAMILY		= CPU_I960
+  LD              = ld960 -ACA -X -r
+  AS              = as960 -ACA
+else
+ifeq ($(CPU),I960KA)
+  CC_ARCH_SPEC	   = -mka -mstrict-align
+  CPU_FAMILY		= CPU_I960
+  LD              = ld960 -AKA -X -r
+  AS              = as960 -AKA
+else
+ifeq ($(CPU),I960KB)
+  CC_ARCH_SPEC	   = -mkb -mstrict-align
+  CPU_FAMILY		= CPU_I960
+  LD              = ld960 -AKB -X -r
+  AS              = as960 -AKB
+endif
+endif
+endif
+endif
+
+CC_COMPILER	 =  -fno-builtin -nostdinc
+
+C++_COMPILER	 =  -fno-builtin -nostdinc -DRW_MULTI_THREAD -D_REENTRANT
+
+ifeq ($(OPTIMIZE), 1)
+  CC_OPTIM      = -O -nostdlib -fno-builtin
+else
+ifeq ($(OPTIMIZE), 2)
+  CC_OPTIM      = -O2 -nostdlib -fno-builtin
+else
+ifeq ($(OPTIMIZE), 3)
+  CC_OPTIM      = -O3 -nostdlib -fno-builtin
+else
+  CC_OPTIM      = -nostdlib -fno-builtin
+endif
+endif
+endif
+
+# Simulation environment particulars
+ifeq ($(CPU),SIMNT)
+  CC_OPTIM += -U__WINNT -UWIN32 -U__WINNT__ -UWINNT -U__MINGW32__ -U_WIN32 \
+			  -U__WIN32 -U__WIN32__ -U__WIN32
+else
+  CC_OPTIM += -fvolatile
+endif
+
+
+###############################################ARM
+ifeq ($(CPU_FAMILY),CPU_XSCALE)
+  CC_OPTIM += -fno-for-scope -fsigned-char -mlong-calls #-funaligned-pointers
+ifeq ($(TORNADO),T22)  
+  CC_INCLUDE = -I$(WIND_BASE)/host/$(WIND_HOST_TYPE)/lib/gcc-lib/arm-wrs-vxworks/2.9-010413/include -I$(WIND_BASE)/target/h/types
+endif  
+endif
+ifeq ($(CPU_FAMILY),CPU_PPC)
+  CC_OPTIM += -fno-for-scope -mbig -mlongcall -fsigned-char
+ifeq ($(TORNADO),T22)  
+  CC_INCLUDE = -I$(WIND_BASE)/host/$(WIND_HOST_TYPE)/lib/gcc-lib/powerpc-wrs-vxworks/gcc-2.96/include -I$(WIND_BASE)/target/h/types -I$(WIND_BASE)/host/x86-win32/include/g++-3 -I$(WIND_BASE)/host/x86-win32/powerpc-wrs-vxworks/include
+endif  
+else
+ifeq ($(CPU_FAMILY),CPU_MIPS)
+  CC_OPTIM += -O2
+  CC_INCLUDE = -I$(WIND_BASE)/host/$(WIND_HOST_TYPE)/lib/gcc-lib/mips-wrs-vxworks/2.96-mips3264-010729/include -I$(WIND_BASE)/target/h/types
+else
+ifeq ($(CPU_FAMILY),CPU_X86)
+  CC_OPTIM += -fno-defer-pop
+endif
+endif
+endif
+
+ifeq ($(WARNING),0)
+  CC_WARNINGS	   = -w
+  C++_WARNINGS    = -w
+else
+  CC_WARNINGS	   = -Wall
+  C++_WARNINGS    = -Wall
+endif
+ifeq ($(WARNING_ALL),1)
+  CC_WARNINGS	   += -W -Wtraditional -Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-qual -Wcast-align \
+                     -Wwrite-strings -Wconversion -Waggregate-return -Wredundant-decls -Wnested-externs
+  C++_WARNINGS    += -W -Wtraditional -Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-qual -Wcast-align \
+                     -Wwrite-strings -Wconversion -Waggregate-return -Wredundant-decls -Wnested-externs \
+                     -Winline -Woverloaded-virtual -Wsynth
+endif
+ifeq ($(USE_WACOS_SSI20), YES)
+  CC_INCLUDE      += -I$(WIND_BASE)/target/h -I$(SRC_ROOT)/common/sys_mng/vxsnmp -I$(SRC_ROOT)/SSI/inc -I$(SRC_ROOT)/common \
+                  $(FAMILY_HEAD_DIR) $(SSI_TRI_SSI_INC) $(TRI_SSI_INC) $(EXTRA_INCLUDE)
+else
+  CC_INCLUDE      += -I$(WIND_BASE)/target/h -I$(WIND_BASE)/target/h/snmp -I$(SRC_ROOT)/common \
+                  $(FAMILY_HEAD_DIR) $(SSI_TRI_SSI_INC) $(TRI_SSI_INC) $(EXTRA_INCLUDE)
+endif
+
+CC_INCLUDE += $(XOS_INC)
+
+
+CC_DEFINES	    = -DCPU=$(CPU) $(XOS_DEFINES) -D$(CPU_FAMILY) -DXOS_VTA -DVXWORKS -DWSSI_VXWORKS $(EXTRA_DEFINE) $(DEFINE_CC) $(TRI_OS_FLAGS) $(GLOBAL_MACRO)
+
+##################################ARM
+ifeq ($(CPU_FAMILY),CPU_XSCALE)
+CC_DEFINES	    += -DTOOL_FAMILY=gnu -DTOOL=gnube
+endif
+
+#CC_DEFINES += $(XOS_INC)
+ifeq ($(CPU_FAMILY),CPU_PPC)
+CC_DEFINES += 
+endif
+
+
+ifeq ("$(RELEASE)","0")
+  CC_DEFINES += -g
+endif
+
+ifneq ("$(PRODUCT)","")
+  CC_DEFINES   += -D$(PRODUCT)
+endif
+ifneq ("$(COUNTRY_CODE)","")
+  CC_DEFINES   += -D$(COUNTRY_CODE)
+endif
+ifneq ("$(FEATURES)","")
+  ALL_FEATURE=$(subst +, ,$(FEATURES))
+  CC_DEFINES   += $(foreach EACH_FEATURE,$(ALL_FEATURE),-D$(EACH_FEATURE))
+endif
+ifneq ("$(PHYSICAL_BRD_TYPE)","")
+  CC_DEFINES   += -D$(PHYSICAL_BRD_TYPE)
+endif
+
+ifeq ($(TEST_DEBUG),1)
+  CC_DEFINES   += -DTEST_DEBUG=$(TEST_DEBUG)
+endif
+
+ifeq ($(DEBUG), 1)
+  CC_DEBUG        = -g
+  CC_DEFINES      += -DDEBUG
+else
+  CC_DEBUG        =
+endif
+
+ifeq ($(CPPFRM_DEBUG), 1)
+  CC_DEFINES      += -DCPPFRM_DEBUG
+endif
+
+CFLAGS          = $(CC_ARCH_SPEC) $(CC_COMPILER) $(CC_OPTIM) $(CC_WARNINGS) \
+                  $(CC_INCLUDE) $(CC_DEFINES) $(CC_DEBUG) $(ADDED_CFLAGS) \
+                  $(CC_SOFT_FLOAT)
+#需要打开C++的支持
+C++FLAGS        = $(CC_ARCH_SPEC) $(C++_COMPILER) $(CC_OPTIM) $(C++_WARNINGS) \
+                  $(CC_INCLUDE) $(CC_DEFINES) $(CC_DEBUG) $(ADDED_C++FLAGS) \
+                  $(CC_SOFT_FLOAT) -fcheck-new
+                  
+GCC_EXEC_PREFIX	= $(WIND_BASE)/host/$(WIND_HOST_TYPE)/lib/gcc-lib/
+
+
+########################################################################
+# toolchain binaries
+########################################################################
+
+ifeq ($(CPU),SIMNT)
+  AR               = arsimpc
+  AS               = ccsimpc 
+  CC               = ccsimpc 
+  CPP              = ccsimpc -E -P -xc
+  LD               = ldsimpc -X -r
+  LDFLAGS          = --subsystem=windows
+  LD_PARTIAL_FLAGS = -r
+  NM               = nmsimpc -g
+  SIZE             = sizesimpc
+else
+ifeq ($(CPU_FAMILY),CPU_XSCALE)
+##############################################ARM
+  AR              = ararm
+  AS              = asarm
+  CC              = ccarm -B$(GCC_EXEC_PREFIX)
+  LD              = ldarm -EB -r -X #-N
+  NM              = nmarm
+#  CPP						= -P -xassembler-with-cpp  #cpp
+else
+ifeq ($(CPU_FAMILY),CPU_PPC)
+  AR              = arppc    ########add
+  AS              = asppc
+  CC              = ccppc -B$(GCC_EXEC_PREFIX)
+  LD              = ldppc -X -r
+  NM              = nmppc
+ifeq ($(HOSTTYPE),REM)
+  VPATH     = $(OBJ_DIR)
+  #LSRCS     = $(wildcard *.c *.cpp *.s)
+  LSRCS     = $(SRCS)
+  LOBJS     = $(addsuffix .o, $(basename $(LSRCS)))
+  BOBJS     = $(addprefix $(OBJ_DIR)/,$(LOBJS))
+  LHDRS     = $(wildcard *.h)
+  PAR-LOBJS = $(LOBJS)
+endif
+  override AMC_TARGET=gnu-ppc-vxworks-pci
+else
+ifeq ($(CPU_FAMILY),CPU_I960)
+  AR              = ar960
+  NM              = nm960
+  BINHEX_NAME     = coffHex960
+  CC              = cc960 -B$(GCC_EXEC_PREFIX)
+  CF              = CC960 -B$(GCC_EXEC_PREFIX)
+  DEFINE_CC       = -DVX_IGNORE_GNU_LIBS
+  override AMC_TARGET=gnu-i960-vxworks-pci
+else
+ifeq ($(CPU_FAMILY),CPU_MIPS)
+  AR              = armips
+  AS              = asmips
+  CC              = ccmips -B$(GCC_EXEC_PREFIX)
+  CPP              = cppmips
+  LD              = ldmips -EB -X -r
+  NM              = nmmips
+  override AMC_TARGET=gnu-i960-vxworks-pci
+else
+  AS              = as386
+  CC              = cc386 -B$(GCC_EXEC_PREFIX)
+  LD              = ld386 -X -r
+  NM              = nm386
+  override AMC_TARGET=gnu-x86-vxworks-pci
+endif
+endif
+endif
+endif
+endif
+ifeq ($(CODETEST),YES)
+	ifeq ($(CT_LEVEL),1)
+	     CT_OPTION       = -CTtag-level=1
+	else
+	     CT_OPTION       = -CTtag-level=SC
+	endif
+	ifneq ($(CT_MEMORY),NO)
+	     CT_OPTION      += -CTtag-allocator=$(AMC_HOME)/lib/rtos/vxworks/ctvxwrap.map 
+	endif
+        CT_OPTION     += -CTsize_t="unsigned int" 
+	CC             = ctcc $(CT_OPTION) -CTidb=$(OBJS_DIR)/codetest.idb -B$(GCC_EXEC_PREFIX)
+endif
+ifndef PC_LINT_LEVEL
+       PC_LINT_LEVEL=1
+endif
+ifeq "$(PC_LINT_CHK)" "YES"
+	CC_LINT =@lint-nt  -v -zero $(SRC_ROOT)\build\tools\lint_cfg\co-gnu$(PC_LINT_LEVEL).lnt $(SRC_ROOT)\build\tools\lint_cfg\options.lnt
+endif
+
+CXX             = $(CC)
+MD		        = md
+RM		        = vxrm
+MV		        = move
+ECHO		    = echo
+CP	    	    = copy
+MAKE            = make
+RMDIR           = rd /S /Q
+RMFILE          = del 
+########################################################################
+# implicit rules definitions
+########################################################################
+
+ifneq ($(HOSTTYPE),MOUSSE)
+..s.o:
+	@ -$(RM) $@
+	$(AS) -o $@ $<
+	
+%.o: %.c
+	@ -$(RM) $@
+	-$(CC) $(CFLAGS)    -c $<
+ifeq ("$(MALFORMED_CHK)","YES")
+	malformed_chk $@ $< $(SRC_ROOT)\build\mswitch\danger_func.txt
+endif
+
+%.o: %.cpp
+	@ -$(RM) $@
+	-$(CXX) $(C++FLAGS) -c $<
+ifeq ("$(MALFORMED_CHK)","YES")
+	malformed_chk $@ $< $(SRC_ROOT)\build\mswitch\danger_func.txt
+endif
+	
+%.o: %.cxx
+	@ -$(RM) $@
+	-$(CXX) $(C++FLAGS) -c $<
+ifeq ("$(MALFORMED_CHK)","YES")
+	malformed_chk $@ $< $(SRC_ROOT)\build\mswitch\danger_func.txt
+endif
+
+%.o: %.cc
+	@ -$(RM) $@
+	-$(CXX) $(C++FLAGS) -c $<
+ifeq ("$(MALFORMED_CHK)","YES")
+	malformed_chk $@ $< $(SRC_ROOT)\build\mswitch\danger_func.txt
+endif
+
+%.d: %.c
+	@ -$(RM) $@
+	-$(CC) -MM $(CC_INCLUDE) $(CC_DEFINES) $< > $@
+
+%.d: %.cpp
+	@ -$(RM) $@
+	-$(CC) -MM $(CC_INCLUDE) $(CC_DEFINES) $< > $@
+	
+%.d: %.cxx
+	@ -$(RM) $@
+	$(CC) -MM $(CC_INCLUDE) $(CC_DEFINES) $< > $@
+
+%.d: %.cc
+	@ -$(RM) $@
+	$(CC) -MM $(CC_INCLUDE) $(CC_DEFINES) $< > $@
+
+endif
+
+ifeq ($(HOSTTYPE),REM)
+.SUFFIXES: .o .cpp .cc .c
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $(OBJ_DIR)/$(notdir $@)
+%.o: %.cpp
+	$(CXX) $(C++FLAGS) -c $< -o $(OBJ_DIR)/$(notdir $@)
+%.o: %.cxx
+	$(CXX) $(C++FLAGS) -c $< -o $(OBJ_DIR)/$(notdir $@)
+%.o: %.cc
+	$(CXX) $(C++FLAGS) -c $< -o $(OBJ_DIR)/$(notdir $@)
+endif

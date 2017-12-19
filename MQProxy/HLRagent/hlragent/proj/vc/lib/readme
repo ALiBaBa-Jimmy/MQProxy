@@ -1,0 +1,12 @@
+
+VC6.0编译环境需要链接sctp_vc.libs gio-2.0.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib
+VS2008编译环境需要链接sctp_vs.lib  gio-2.0.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib
+
+运行时需要使用以下dll
+iconv.dll
+intl.dll
+libgio-2.0-0.dll
+libglib-2.0-0.dll
+libgmodule-2.0-0.dll
+libgobject-2.0-0.dll
+libgthread-2.0-0.dll

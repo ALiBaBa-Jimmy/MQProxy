@@ -1,0 +1,153 @@
+
+--- Module:   ..\..\..\cpsv3000\bdy\src\trace_agent.c (C)
+                                                               _
+#... b[i].traceID) |= (1<< ((mission->idx) % (8 * sizeof(XU32)))))
+                TA_SET_BIT(g_TaCb.taCb[i].traceID, mission->idx);
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#508#Warning#573#Signed-unsigned mix with divide#end#
+                                                              _
+#... le].traceID) |= (1<< ((mission->idx) % (8 * sizeof(XU32)))))
+            TA_SET_BIT(g_TaCb.taCb[idle].traceID, mission->idx);
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#566#Warning#573#Signed-unsigned mix with divide#end#
+                                           _
+            g_TaCb.taIdx[idx].flag = XFALSE;
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#805#Warning#676#Possibly negative subscript (-1) in operator '[' [Reference: file ..\..\..\cpsv3000\bdy\src\trace_agent.c: lines 757, 805]#end#
+                                                      _
+                g_TaCb.taCb[i].mission = mission->next;
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#811#Warning#613#Possible use of null pointer 'mission' in left argument to operator '->' [Reference: file ..\..\..\cpsv3000\bdy\src\trace_agent.c: lines 752, 788]#end#
+                                          _
+                prev->next = mission->next;
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#816#Warning#613#Possible use of null pointer 'mission' in left argument to operator '->' [Reference: file ..\..\..\cpsv3000\bdy\src\trace_agent.c: lines 752, 788]#end#
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#816#Warning#613#Possible use of null pointer 'prev' in left argument to operator '->' [Reference: file ..\..\..\cpsv3000\bdy\src\trace_agent.c: line 753]#end#
+                                                _
+                for(i = 0;i < g_TaCb.regFids.num;i++)
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#831#Warning#574#Signed-unsigned mix with relational#end#
+                                                  _
+#... raceID) &= (~(1<< ((idx) % (8 * sizeof(XU32))))))
+            TA_CLR_BIT(g_TaCb.taCb[i].traceID, idx);
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#841#Warning#573#Signed-unsigned mix with divide#end#
+                                                  _
+            TA_CLR_BIT(g_TaCb.taCb[i].traceID, idx);
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#841#Warning#502#Expected unsigned type#end#
+_
+}
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1326#Warning#529#Symbol 'neType' (line 1175) not subsequently referenced#end#
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1326#Warning#529#Symbol 'neID' (line 1176) not subsequently referenced#end#
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1326#Warning#529#Symbol 'tsIP1' (line 1173) not subsequently referenced#end#
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1326#Warning#529#Symbol 'tsIP2' (line 1174) not subsequently referenced#end#
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1326#Warning#529#Symbol 'slotID' (line 1178) not subsequently referenced#end#
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1326#Warning#529#Symbol 'tsLowSlot' (line 1181) not subsequently referenced#end#
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1326#Warning#529#Symbol 'processID' (line 1177) not subsequently referenced#end#
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1326#Warning#529#Symbol 'taNetask' (line 1169) not subsequently referenced#end#
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1326#Warning#529#Symbol 'tsHighSlot' (line 1180) not subsequently referenced#end#
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1326#Warning#529#Symbol 'shelfID' (line 1179) not subsequently referenced#end#
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1326#Warning#529#Symbol 'linkInit' (line 1170) not subsequently referenced#end#
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1326#Warning#529#Symbol 'taIP1' (line 1171) not subsequently referenced#end#
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1326#Warning#529#Symbol 'taIP2' (line 1172) not subsequently referenced#end#
+                                                                            _
+                    XOS_MAX(XOS_StrLen(userID->id[j]),g_TaCb.taCb[i].telLen))))
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1526#Warning#666#Expression with side effects passed to repeated parameter 1 in macro 'XOS_MAX'#end#
+                                                                               _
+                    XOS_MAX(XOS_StrLen(userID->imsi[j]),g_TaCb.taCb[i].imsiLen))))
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1535#Warning#666#Expression with side effects passed to repeated parameter 1 in macro 'XOS_MAX'#end#
+                                                             _
+#... sg->traceID) & (1<< ((mission->idx) % (8 * sizeof(XU32)))))
+                    if(TA_ISSET_BIT(msg->traceID,mission->idx))
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1613#Warning#573#Signed-unsigned mix with divide#end#
+                                                   _
+        XOS_MemCpy(offset, traceMd5[i], MAX_MD5_LEN);
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1670#Warning#645#Symbol 'traceMd5' (line 1565) may not have been initialized#end#
+                                                                                                     _
+                if(!XOS_StrNcmp(id, g_TaCb.taCb[i].tel, XOS_MAX(XOS_StrLen(id),g_TaCb.taCb[i].telLen)))
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1775#Warning#666#Expression with side effects passed to repeated parameter 1 in macro 'XOS_MAX'#end#
+                                                                                                       _
+                if(!XOS_StrNcmp(id, g_TaCb.taCb[i].imsi, XOS_MAX(XOS_StrLen(id),g_TaCb.taCb[i].imsiLen)))
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1782#Warning#666#Expression with side effects passed to repeated parameter 1 in macro 'XOS_MAX'#end#
+                                                   _
+        XOS_MemCpy(offset, traceMd5[i], MAX_MD5_LEN);
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#1847#Warning#645#Symbol 'traceMd5' (line 1738) may not have been initialized#end#
+                                                   _
+        XOS_MemCpy(offset, traceMd5[i], MAX_MD5_LEN);
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#2081#Warning#645#Symbol 'traceMd5' (line 1983) may not have been initialized#end#
+                                                                                                     _
+                if(!XOS_StrNcmp(id, g_TaCb.taCb[i].tel, XOS_MAX(XOS_StrLen(id),g_TaCb.taCb[i].telLen)))
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#2188#Warning#666#Expression with side effects passed to repeated parameter 1 in macro 'XOS_MAX'#end#
+                                                                                                       _
+                if(!XOS_StrNcmp(id, g_TaCb.taCb[i].imsi, XOS_MAX(XOS_StrLen(id),g_TaCb.taCb[i].imsiLen)))
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#2195#Warning#666#Expression with side effects passed to repeated parameter 1 in macro 'XOS_MAX'#end#
+                                                   _
+        XOS_MemCpy(offset, traceMd5[i], MAX_MD5_LEN);
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#2257#Warning#645#Symbol 'traceMd5' (line 2151) may not have been initialized#end#
+                                                                            _
+                    XOS_MAX(XOS_StrLen(userID->id[j]),g_TaCb.taCb[i].telLen))))
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#2350#Warning#666#Expression with side effects passed to repeated parameter 1 in macro 'XOS_MAX'#end#
+                                                          _
+#... ((logID) |= (1<< ((mission->idx) % (8 * sizeof(XU32)))))
+                            TA_SET_BIT(logID, mission->idx);
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#2357#Warning#573#Signed-unsigned mix with divide#end#
+                                                                               _
+                    XOS_MAX(XOS_StrLen(userID->imsi[j]),g_TaCb.taCb[i].imsiLen))))
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#2366#Warning#666#Expression with side effects passed to repeated parameter 1 in macro 'XOS_MAX'#end#
+                                                          _
+#... ((logID) |= (1<< ((mission->idx) % (8 * sizeof(XU32)))))
+                            TA_SET_BIT(logID, mission->idx);
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#2373#Warning#573#Signed-unsigned mix with divide#end#
+                                                  _
+#... ) & (1<< ((mission->idx) % (8 * sizeof(XU32)))))
+                if(TA_ISSET_BIT(logID,mission->idx))
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#2452#Warning#573#Signed-unsigned mix with divide#end#
+                                                   _
+                    if(mission->logLevel != 0xffff && mission->logLevel <= eLevel)
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#2454#Warning#650#Constant '65535' out of range for operator '!='#end#
+                                                   _
+        XOS_MemCpy(offset, traceMd5[i], MAX_MD5_LEN);
+#begin#..\..\..\cpsv3000\bdy\src\trace_agent.c#2518#Warning#645#Symbol 'traceMd5' (line 2407) may not have been initialized#end#
+
+--- Module:   ..\..\..\cpsv3000\bdy\src\xosenc.c (C)
+                _
+        0, &buff, WIN_IPCFGBUF_LEN, &output, XNULL, XNULL);
+#begin#..\..\..\cpsv3000\bdy\src\xosenc.c#886#Warning#545#Suspicious use of &#end#
+_
+}
+#begin#..\..\..\cpsv3000\bdy\src\xosenc.c#987#Warning#550#Symbol 'errNo' (line 868) not accessed#end#
+_
+}
+#begin#..\..\..\cpsv3000\bdy\src\xosenc.c#1412#Warning#529#Symbol 'cmdl' (line 1281) not subsequently referenced#end#
+#begin#..\..\..\cpsv3000\bdy\src\xosenc.c#1412#Warning#529#Symbol 'tempt' (line 1285) not subsequently referenced#end#
+                _
+        0, &buff, WIN_IPCFGBUF_LEN, &output, XNULL, XNULL);
+#begin#..\..\..\cpsv3000\bdy\src\xosenc.c#1457#Warning#545#Suspicious use of &#end#
+    _
+    return XOS_NOT_SUPPORT;
+#begin#..\..\..\cpsv3000\bdy\src\xosenc.c#1603#Warning#527#Unreachable code at token 'return'#end#
+#begin#..\..\..\cpsv3000\bdy\src\xosenc.c#1603#Warning#569#Loss of information (return) (32 bits to 31 bits)#end#
+_
+}
+#begin#..\..\..\cpsv3000\bdy\src\xosenc.c#1604#Warning#550#Symbol 'errNo' (line 1434) not accessed#end#
+           _
+    return XOS_NOT_SUPPORT;
+#begin#..\..\..\cpsv3000\bdy\src\xosenc.c#1680#Warning#569#Loss of information (return) (32 bits to 31 bits)#end#
+           _
+    return XOS_NOT_SUPPORT;
+#begin#..\..\..\cpsv3000\bdy\src\xosenc.c#1713#Warning#569#Loss of information (return) (32 bits to 31 bits)#end#
+           _
+    return XOS_NOT_SUPPORT;
+#begin#..\..\..\cpsv3000\bdy\src\xosenc.c#1751#Warning#569#Loss of information (return) (32 bits to 31 bits)#end#
+           _
+    return XOS_NOT_SUPPORT;
+#begin#..\..\..\cpsv3000\bdy\src\xosenc.c#1783#Warning#569#Loss of information (return) (32 bits to 31 bits)#end#
+           _
+    return XOS_NOT_SUPPORT;
+#begin#..\..\..\cpsv3000\bdy\src\xosenc.c#1825#Warning#569#Loss of information (return) (32 bits to 31 bits)#end#
+           _
+    return XOS_NOT_SUPPORT;
+#begin#..\..\..\cpsv3000\bdy\src\xosenc.c#1860#Warning#569#Loss of information (return) (32 bits to 31 bits)#end#
+           _
+    return XOS_NOT_SUPPORT;
+#begin#..\..\..\cpsv3000\bdy\src\xosenc.c#1895#Warning#569#Loss of information (return) (32 bits to 31 bits)#end#
+
+--- Module:   ..\..\..\cpsv3000\bdy\src\xosipmi.c (C)
+
+    --- Wrap-up for Module: ..\..\..\cpsv3000\bdy\src\xosipmi.c
+
+#begin#..\..\..\cpsv3000\bdy\src\xosipmi.c#45#Warning#528#Symbol 'g_SlotMap' (line 45, file ..\..\..\cpsv3000\bdy\src\xosipmi.c) not referenced#end#
+#begin#..\..\..\cpsv3000\bdy\src\xosipmi.c#43#Warning#528#Symbol 'g_IpmiAddr' (line 43, file ..\..\..\cpsv3000\bdy\src\xosipmi.c) not referenced#end#
